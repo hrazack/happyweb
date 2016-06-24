@@ -1,0 +1,33 @@
+/* columns */
+.column {min-height: 10px;}
+.columns-container {overflow: hidden;}
+.one .column1 {width: 100%;}
+.one-small .column1 {width: 70%; margin: auto;}
+.two .column1 {width: 49%; float: left;}
+.two .column2 {width: 49%; float: right;}
+.two-small-large .column1 {width: 28%; float: left;}
+.two-small-large .column2 {width: 70%; float: right;}
+.two-large-small .column1 {width: 70%; float: left;}
+.two-large-small .column2 {width: 28%; float: right;}
+.three .column1 {width: 32%; float: left; margin-right: 2%;}
+.three .column2 {width: 32%; float: left;}
+.three .column3 {width: 32%; float: right;}
+
+/* tablet */
+@media (max-width: 820px) {
+}
+
+
+/* mobile */
+@media (max-width: 500px) {
+  .one-small .column1 {width: 100%;}
+  .two .column1 {width: 100%; float: none;}
+  .two .column2 {width: 100%; float: none;}
+  .two-small-large .column1 {width: 100%; float: none;}
+  .two-small-large .column2 {width: 100%; float: none;}
+  .two-large-small .column1 {width: 100%; float: none;}
+  .two-large-small .column2 {width: 100%; float: none;}
+  .three .column1 {width: 100%; float: none;}
+  .three .column2 {width: 100%; float: none;}
+  .three .column3 {width: 100%; float: none;}
+}
