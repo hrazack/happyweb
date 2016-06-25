@@ -10,10 +10,11 @@ if (isset($_POST["action"])) {
   
 } else {
   
-  $head_page_title = "Create a fantastic page";
+  $head_page_title = "Create a formidable page";
   $number_of_rows = 1;
   $page_title = "";
   $page_url = "";
+  $description = "";
   $row = create_new_row(1);
   $rows[] = $row;
   include("inc_form_page.php");

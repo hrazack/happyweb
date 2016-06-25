@@ -79,6 +79,24 @@ function build_page($page) {
 
 
 /**
+ * builds the navigation
+ */
+function build_navigation($current_page) {
+  global $db;
+  $output = "";
+  $pages = $db->get_results("SELECT * FROM page WHERE parent=0");
+  $output .= '<ul>';
+  if ($pages) {
+    foreach($pages as $page) {
+      $output .= '<li><a href="/'.$page->url.'">'.$page->title.'</a></li>';
+    }
+  }
+  $output .= '</ul>';
+  return $output;
+} // build_navigation
+
+
+/**
  * builds the full content of a widget
  */
 function build_widget($widget) {
@@ -105,7 +123,6 @@ function build_widget_overview($widget) {
   ob_end_clean();
   return $output;
 } // build_widget_overview
-
 
 
 /**
@@ -141,14 +158,18 @@ function create_new_col($index) {
  */
 function save_page($var, $page_id = 0) {
   global $db;
+  $title = $db->escape($var["title"]);
+  $url = $db->escape($var["url"]);
+  $description = $db->escape($var["description"]);
+  $parent = $var["parent"];
   if ($page_id == 0) {
     // create new page
-    $db->query("INSERT INTO page (title, url) VALUES ('".$var["title"]."', '".$var['url']."')");
+    $db->query("INSERT INTO page (title, url, description, parent) VALUES ('".$title."', '".$url."', '".$description."', ".$parent.")");
     $page_id = $db->insert_id;
   }
   else {
     // update existing page
-    $db->query("UPDATE page SET (title='".$var["title"]."', url='".$var['url']."') WHERE id=".$page_id);
+    $db->query("UPDATE page SET title='".$title."', url='".$url."', description='".$description."', parent=".$parent." WHERE id=".$page_id);
   }
   // save rows
   foreach($var["rows"] as $row) {
@@ -158,15 +179,12 @@ function save_page($var, $page_id = 0) {
     // delete rows that have been removed
     $deleted_rows = explode(",", $var["deleted_rows"]);
     foreach($deleted_rows as $row_id) {
-      $db->query("DELETE FROM row WHERE id=".$row_id);
-      // TODO: delete columns
+      delete_row($row_id);
     }
     // delete widgets that have been removed
     $deleted_widgets = explode(",", $var["deleted_widgets"]);
     foreach($deleted_widgets as $widget_id) {
-      $type = $db->get_var("SELECT type FROM widget WHERE id=".$widget_id);
-      $db->query("DELETE FROM widget_".$type." WHERE widget_id=".$widget_id);
-      $db->query("DELETE FROM widget WHERE id=".$widget_id);
+      delete_widget($widget_id);
     }
   }
 } // save_page
@@ -221,5 +239,59 @@ function save_widget($widget, $column_id) {
   $widget_id = $widget["id"];
   $db->query("UPDATE widget SET display_order=".$widget["display_order"].",  col_id=".$column_id." WHERE id=".$widget["id"]);
 } // save_widget
+
+
+/**
+ * deletes a page
+ */
+function delete_page($page_id) {
+  global $db;
+  $db->query("DELETE FROM page WHERE id=".$page_id);
+  if ($rows = $db->get_results("SELECT * FROM row WHERE page_id=".$page_id)) {
+    foreach($rows as $row) {
+      delete_row($row->id);
+    }
+  }
+} // delete_page
+
+
+/**
+ * deletes a row
+ */
+function delete_row($row_id) {
+  global $db;
+  $db->query("DELETE FROM row WHERE id=".$row_id);
+  if ($columns = $db->get_results("SELECT * FROM col WHERE row_id=".$row_id)) {
+    foreach($columns as $col) {
+      delete_column($col->id);
+    }
+  }
+} // delete_row
+
+
+/**
+ * deletes a column
+ */
+function delete_column($column_id) {
+  global $db;
+  $db->query("DELETE FROM col WHERE id=".$col->id);
+  if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id)) {
+    foreach($widgets as $widget) {
+      delete_widget($widget->id);
+    }
+  }
+} // delete_column
+
+
+/**
+ * deletes a widget
+ */
+function delete_widget($widget_id) {
+  global $db;
+  $type = $db->get_var("SELECT type FROM widget WHERE id=".$widget_id);
+  $db->query("DELETE FROM widget_".$type." WHERE widget_id=".$widget_id);
+  $db->query("DELETE FROM widget WHERE id=".$widget_id);
+} // delete_widget
+
 
 ?>

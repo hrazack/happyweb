@@ -4,8 +4,17 @@ $(document).ready(function() {
   var current_widget;
   
   // form validation
-  $("form").validate();
+  $("form").validate({
+    invalidHandler: function(event, validator) {
+      $("#loader").hide();
+    }
+  });
   
+  // page submit
+  $(".submit.page").click(function() {
+    $("#loader").show();
+    $("#loader-anim").position({my: 'center', at: 'center', of: window, collision: 'fit'});
+  });
   
   /************/
   /* rows     */
@@ -72,10 +81,19 @@ $(document).ready(function() {
   });
   
   // sortable rows
+  $(document).on("mousedown", ".row-drag", function() {
+    row = $(this).parents("section");
+    row.find(".row-content").hide();
+  });
+  $(document).on("mouseup", ".row-drag", function() {
+    row = $(this).parents("section");
+    row.find(".row-content").show();
+  });
   $("#rows-container").sortable({
     handle: ".row-drag",
     axis: "y",
-    update: function(event, ui) {
+    beforeStop: function(event, ui) {
+      ui.helper.find(".row-content").show();
       $("#rows-container").children().each(function(i) {
         display_order = i+1;
         $(this).find(".row-display-order").val(display_order);
@@ -121,19 +139,19 @@ $(document).ready(function() {
   
   // show list of widgets
   $(document).on("click", ".add-widget", function() {
-    $(".widget-list").hide();
-    $(this).next().slideToggle();
+    current_column = $(this).parents(".column");
+    widget_list_dialog.dialog("open");
   });
   
-  // hide list of widgets
-  $(document).on("click", function(event) {
-    if (event.target.className != "add-widget icon grey") {
-      $(".widget-list").hide();
-    }
+  // widget list dialog
+  var widget_list_dialog = $("#widget-list").dialog({
+    autoOpen: false,
+    modal: true,
+    width: 560
   });
   
-  // widget dialog
-  var widget_dialog = $('<div id="widget_dialog"></div>').dialog({
+  // widget form dialog
+  var widget_form_dialog = $('<div id="widget_form_dialog"></div>').dialog({
     autoOpen: false,
     modal: true,
     width: 500,
@@ -143,7 +161,6 @@ $(document).ready(function() {
         click: function() {
           // submit the widget form
           $("form[name='widget']").submit();
-          //$(this).dialog("destroy");
         }
       },
       {
@@ -156,13 +173,11 @@ $(document).ready(function() {
   });
   
   // adding a widget
-  $(document).on("click", ".widget-link", function() {
+  $(document).on("click", ".widget-list a", function() {
     widget_type = $(this).attr("data-widget-type");
-    current_column = $(this).parents(".column");
     row = current_column.parents("section");
-    // update the number of widgets for the current column
     col_id = current_column.find(".col-id").val();
-    number_of_widgets = parseInt(current_column.find(".col-number-of-widgets").val());
+    number_of_widgets = current_column.find(".col-number-of-widgets").val();
     display_order = number_of_widgets + 1;
     index_row = row.find(".row-index").val();
     index_col = current_column.find(".col-display-order").val();
@@ -173,14 +188,17 @@ $(document).ready(function() {
       data: {action: "create", widget_type: widget_type, col_id: col_id, display_order: display_order, index_row: index_row, index_col: index_col},
       success: function(string) {
         // open the widget form in a dialog
-        $("#widget_dialog").html(string);
-        widget_dialog.dialog("open");
+        $("#widget_form_dialog").html(string);
+        widget_list_dialog.dialog("close");
+        widget_form_dialog.dialog("open");
       }
     });
   });
   
   // editing a widget
   $(document).on("click", ".edit-widget", function() {
+    $("#loader").show();
+    $("#loader-anim").position({my: 'center', at: 'center', of: window, collision: 'fit'});
     current_widget = $(this).parents(".widget");
     widget_id = current_widget.find(".widget-id").val();
     // get the content of the widget form
@@ -188,17 +206,20 @@ $(document).ready(function() {
       url: "/ajax/widget_form",
       data: {action: "edit", widget_id: widget_id},
       success: function(string) {
+        $("#loader").hide();
         // open the widget form in a dialog
-        $("#widget_dialog").html(string);
-        widget_dialog.dialog("open");
+        $("#widget_form_dialog").html(string);
+        widget_form_dialog.dialog("open");
       }
     });
   });
   
-  // submitting widget form (called form the widget dialog) (for adding)
+  // submitting widget form (called from the widget dialog)
   $(document).on("submit", "form[name='widget']", function(event) {
     event.preventDefault();
-    $("form[name='widget']").addClass("loader grey");
+    $("#loader").show();
+    $("#loader-anim").position({my: 'center', at: 'center', of: window, collision: 'fit'});
+    widget_form_dialog.dialog("close");
     $.ajax({
       url: "/ajax/widget_submit",
       data: $("form[name='widget']").serialize(),
@@ -219,15 +240,14 @@ $(document).ready(function() {
           widget_overview = current_widget.find(".widget-overview");// TODO
           widget_overview.html(data.widget_overview);
         }
-        // close dialog
-        widget_dialog.dialog("close");
+        $("#loader").hide();
       }
     });
     return false;
   });
   
   // deleting a widget
-  var delete_widget_dialog = $('<div></div>').html('<p>Shall we get rid of this content?</p>').dialog({
+  var delete_widget_form_dialog = $('<div></div>').html('<p>Shall we get rid of this content?</p>').dialog({
     autoOpen: false,
     modal: true,
     width: 500
@@ -236,7 +256,7 @@ $(document).ready(function() {
     widget = $(this).parents(".widget");
     widget_id = widget.find(".widget-id").val();
     column = widget.parents(".column");
-    delete_widget_dialog.dialog({
+    delete_widget_form_dialog.dialog({
       buttons: [
       {
         text: "Yes, delete it!",
@@ -264,7 +284,7 @@ $(document).ready(function() {
       }
     ]
     });
-    delete_widget_dialog.dialog("open");
+    delete_widget_form_dialog.dialog("open");
   });
   
   // sortable widgets

@@ -5,7 +5,7 @@ global $db;
 
 // load db and various functions
 require("happyweb/includes/ez_sql/ez_sql_core.php");
-require("happyweb/includes/ez_sql/ez_sql_pdo.php");
+require("happyweb/includes/ez_sql/ez_sql_mysql.php");
 require("config.php");
 require("happyweb/includes/functions.php");
 
@@ -18,8 +18,6 @@ if (isset($_SESSION["happyweb"]["messages"])) {
   unset($_SESSION["happyweb"]["messages"]);
 }
 
-// TO DO
-$sso_description = "";
 $scripts = '<script type="text/javascript" src="/happyweb/includes/jquery.min.js"></script>';
 
 // check which page we want to see
@@ -65,6 +63,9 @@ else {
 
 // load the current page
 $page = $db->get_row("SELECT * FROM page WHERE id=".$page_id);
+
+// build the navigation
+$navigation = build_navigation($page);
 
 // build the page content
 $content = build_page($page);

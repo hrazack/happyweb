@@ -18,6 +18,7 @@ else {
   $number_of_rows = $db->get_var("SELECT COUNT(*) FROM row WHERE page_id=".$page->id);
   $page_title = $page->title;
   $page_url = $page->url;
+  $description = $page->description;
   $rows = $db->get_results("SELECT * FROM row WHERE page_id=".$page->id." ORDER BY display_order ASC");
   include("inc_form_page.php");
   

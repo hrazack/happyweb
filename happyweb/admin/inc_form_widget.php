@@ -1,4 +1,4 @@
-<div class="widget">
+<div class="widget <?php print $widget->type; ?>">
   <div class="widget-toolbar toolbar">
     <div class="edit"><a title="Edit this content" class="edit-widget icon"><i class="material-icons">create</i></a></div>
     <div class="delete"><a title="Delete this content" class="delete-widget icon"><i class="material-icons">delete</i></a></div>

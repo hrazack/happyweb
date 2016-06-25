@@ -19,10 +19,5 @@
   </div>
   
   <a class="add-widget icon grey"><i class="material-icons">add_circle</i> Add something</a>
-  <ul class="widget-list">
-    <li><a data-widget-type="text" class="widget-link">Some text</a></li>
-    <li><a data-widget-type="image" class="widget-link">An image</a></li>
-    <li><a data-widget-type="video" class="widget-link">A video</a></li>
-  </ul>
   
 </div>

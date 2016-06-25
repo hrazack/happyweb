@@ -7,7 +7,7 @@ if (!$page) exit();
 $head_page_title = "Delete a page";
 
 if (isset($_POST["action"])) {
-  // TODO
+  delete_page($page->id);
   set_message('The page <em>"'.$page->title.'"</em> has been deleted... So sad...');
   redirect('admin');
 }

@@ -9,11 +9,11 @@
   <link type="text/css" rel="stylesheet" href="/happyweb/includes/happyweb.css" media="all" />
   <link type="text/css" rel="stylesheet" href="/happyweb/themes/<?php print $theme; ?>/styles.css" media="all" />
   <?php print $scripts; ?>
-  <meta name="description" content="<?php print $sso_description; ?>">
+  <meta name="description" content="<?php print $page->description; ?>">
 	<meta property="og:image" content="<?php print $_SERVER['REQUEST_URI']; ?>/images/polymer-cover-small.jpg">
 	<meta property="og:title" content="<?php print $page->title; ?>">
 	<meta property="og:site_name" content="<?php print $page->title; ?>">
-	<meta property="og:description" content="<?php print $sso_description; ?>">
+	<meta property="og:description" content="<?php print $page->description; ?>">
 	<meta property="og:url" content="<?php print $_SERVER['REQUEST_URI']; ?>">
 </head>
 
@@ -24,6 +24,12 @@
       <h1><?php print $page->title; ?></h1>
     </div>
   </header>
+  
+  <nav>
+    <div class="container">
+      <?php print $navigation; ?>
+    </div>
+  </nav>
   
   <div id="content">
     <?php print $content; ?>

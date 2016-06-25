@@ -1,10 +1,10 @@
 body {text-align: center; font-family: Georgia; font-size: 18px; line-height: 28px; color: #000; background: #fff; margin: 0; padding: 0; position: relative; width: 100%; height: 100%;}
 * {box-sizing: border-box;}
-.container {max-width: 1100px; margin: auto; text-align: left; overflow: hidden;}
+.container {max-width: 1100px; margin: auto; text-align: left; overflow: hidden; position: relative;}
 
 /* header */
-header {background: #ddd; padding: 20px 0;}
-header h1 {}
+header {background: #ddd; padding: 20px 0; position: relative;}
+#header-tools {position: absolute; top: 10px; right: 0px;}
 
 /* footer */
 #content {padding: 40px 0; min-height: 400px;}
@@ -21,8 +21,11 @@ img {}
 pre {font-size: 14px; line-height: 18px;}
 i {float: left; margin-right: 5px;}
 .material-icons.big {font-size: 36px;}
+.material-icons.bigger {font-size: 80px;}
 span.disabled {color: #ccc;}
 button {outline: none;}
+#loader {height: 100%; width: 100%; z-index: 10; position: absolute; top: 0; left: 0; background: #666666 url(images/bg-stripes.png) 50% 50% repeat; opacity: .5; display: none;}
+#loader-anim {display: inline-block; background: url(images/loader-grey.gif) no-repeat; width: 36px; height: 36px; position: absolute;}
 .loader {display: block; width: 36px; height: 36px; overflow: hidden; margin: auto;}
 .loader:before {content: ''; display: inline-block; background: url(images/loader.gif) no-repeat; width: 36px; height: 36px;}
 .loader.grey {margin: 0 auto 20px auto;}
@@ -47,25 +50,42 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 .toolbar a, .toolbar div {color: #999; transition: opacity 0.4s;}
 .toolbar a:hover {opacity: 0.7;}
 
-.row-toolbar {padding: 10px; background: #e5e5e5; border-bottom: solid 1px #aaa}
+.row-toolbar {padding: 10px; background: #e5e5e5;}
 .row-toolbar-icons {float: right; overflow: hidden;}
 .row-toolbar-icons div {float: left; margin-right: 10px;}
 .row-toolbar-icons div.row-drag {width: 20px; height: 20px; display: inline-block; cursor: move;}
 
-.row-content {padding: 0;}
+.row-content {padding: 0; background: #f2f2f2; border-top: solid 1px #aaa}
 .row-content > div {overflow: hidden;} /* that's the columns container */
 .row-content textarea {width: 100%; min-height: 200px; margin: 0; min-width: 10px;}
 .row-content .column.disabled {display: none;}
 
-.column {padding: 20px; min-height: 200px;}
+.column {min-height: 200px;}
+#rows-container {margin: 20px 0 0 0;}
+#rows-container .column {padding: 20px;}
 
 .widget {border: dotted 1px #999; background: #fff; padding: 40px 20px 20px 20px; margin: 0 0 20px 0; position: relative; min-height: 100px;}
+/*.widget.text {border-color: #6fc90f;}
+.widget.image {border-color: #ff7777;}
+.widget.video {border-color: #3fabdd;}*/
 .widget-toolbar {position: absolute; right: 5px; top: 10px; color: #999; display: none;}
 .widget:hover .widget-toolbar {display: inline-block;}
 .widget-toolbar div {float: left;}
 .widget-toolbar .widget-drag {cursor: move;}
-.widget-info {position: absolute; top: 0; left: 0; background: #ddd; font-size: 0.8em; padding: 0 10px;}
+.widget-info {position: absolute; top: -1px; left: -1px; background: #bbb; color: #fff; font-size: 0.8em; padding: 0 10px;}
+/*.widget.text .widget-info {background: #6fc90f;}
+.widget.image .widget-info {background: #ff7777;}
+.widget.video .widget-info {background: #3fabdd;}*/
 .icon.add-widget {border: dotted 1px #999; background: #fff; padding: 15px 20px 15px 15px; display: block;}
+
+#widget-list {display: none; margin: 0 0 40px 0;}
+ul.widget-list {overflow: hidden;}
+ul.widget-list li {padding: 0; list-style: none; margin: 0 20px 20px 0; float: left;}
+ul.widget-list li a {display: block; padding: 10px; background: #ccc; color: #fff; width: 130px; height: 130px; text-align: center; border-radius: 5px;}
+ul.widget-list li a.text {background: #6fc90f;}
+ul.widget-list li a.image {background: #ff7777;}
+ul.widget-list li a.video {background: #3fabdd;}
+ul.widget-list li i {float: none; margin: 0 0 5px 0; display: block;}
 
 /* forms */
 .form-item {margin: 0 0 30px 0;}
@@ -87,27 +107,24 @@ input.columns-size.two-large-small:after {background-position: -200px center;}
 input.columns-size.two-small-large:after {background-position: -270px center;}
 input.columns-size.three:after {background-position: -340px center;}
 
-ul.widget-list {margin: 10px 0 0 0; padding: 0; width: 200px; display: none;}
-ul.widget-list li {margin: 0; padding: 0; list-style: none;}
-ul.widget-list li a {display: block; padding: 10px; background: #ddd; margin-bottom: 2px;}
-
 /* messages */
 .messages {display: inline-block; background: #eaf4e7; border: solid 1px #2fbc03; color: #2fbc03; padding: 20px; margin: 0 0 30px 0;}
 
 /* dialog */
-.ui-dialog {background: #ddd; border: solid 1px #aaa; box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.31); border-radius: 5px; outline: none; z-index: 100; text-align: left;}
+.ui-dialog {background: #efefef; border: solid 1px #aaa; box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.31); border-radius: 5px; outline: none; z-index: 100; text-align: left;}
 .ui-dialog-titlebar {text-align: right;}
-.ui-dialog-titlebar button {background: none; padding: 0; }
+.ui-dialog-titlebar button {background: none; padding: 0;}
+.ui-dialog-titlebar .ui-button-text {text-indent: -9999px; background: url(images/icon-close.png) no-repeat; width: 18px; height: 18px; display: inline-block; margin: 10px;}
 .ui-dialog-content {padding: 20px 20px 0 20px;}
 .ui-dialog-content textarea {min-width: 100%; min-height: 200px;}
 .ui-dialog-content input {min-width: 100%;}
 .ui-dialog-buttonpane {padding: 0 20px 20px 20px;}
 .ui-dialog-buttonpane button {margin-right: 20px;}
-.ui-dialog-buttonpane button:last-child {background: none; color: #de5834;}
+.ui-dialog-buttonpane button:last-child {background: #ff7777;}
 
 /* overlay */
 .ui-widget-overlay {position: fixed; top: 0; left: 0; width: 100%; height: 100%;}
-.ui-widget-overlay {background: #666666 url("images/ui-bg_diagonals-thick_20_666666_40x40.png") 50% 50% repeat; opacity: .5;}
+.ui-widget-overlay {background: #666666 url(images/bg-stripes.png) 50% 50% repeat; opacity: .5;}
 .ui-widget-shadow {margin: -5px 0 0 -5px; padding: 5px; background: #000000 url("images/ui-bg_flat_10_000000_40x100.png") 50% 50% repeat-x; opacity: .2; border-radius: 5px;}
 
 

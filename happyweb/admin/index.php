@@ -1,10 +1,7 @@
 <?php
-
 $head_page_title = "Amazing admin dashboard";
-
+$tools = '<a href="/">Go to your site</a>';
 ?>
-
-<p>Here are all the pages on the site:</p>
 
 <p><a href="/admin/create_page"><i class="material-icons md-24">add_circle</i> Create a new awesome page</a></p>
 

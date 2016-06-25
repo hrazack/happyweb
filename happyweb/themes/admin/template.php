@@ -20,6 +20,9 @@
   <header>
     <div class="container">
       <h1><?php print $head_page_title; ?></h1>
+      <div id="header-tools">
+        <?php print isset($tools)?$tools:""; ?>
+      </div>
     </div>
   </header>
   
@@ -38,6 +41,7 @@
     </div>
   </footer>
   
+  <div id="loader"><div id="loader-anim"></div></div>
   
 </body>
 
