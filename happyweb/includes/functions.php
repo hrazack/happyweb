@@ -124,6 +124,9 @@ function build_page($page) {
   foreach($rows as $row) {
     $content .= '<section>';
     $content .= '<div class="container">';
+    if ($row->heading != "") {
+      $content .= '<h2>'.$row->heading.'</h2>';
+    }
     $content .= '<div class="columns-container '.$row->columns_size.'">';
     $columns = $db->get_results("SELECT * FROM col WHERE row_id=".$row->id." ORDER BY display_order ASC");
     $col_index = 0;
@@ -201,8 +204,9 @@ function create_new_row($index) {
   $row = new stdClass();
   $row->id = 0;
   $row->display_order = $index;
-  $row->columns_size = "one";
-  $row->number_of_columns = 1;
+  $row->columns_size = "two-large-small";
+  $row->number_of_columns = 2;
+  $row->heading = "";
   $row->column1 = "";
   $row->column2 = "";
   $row->column3 = "";
@@ -265,12 +269,13 @@ function save_page($var, $page_id = 0) {
 function save_row($row, $page_id) {
   global $db;
   $row_id = $row["id"];
+  $heading = $db->escape($row["heading"]);
   if ($row["id"] == 0) { // this is a new row
-    $db->query("INSERT INTO row (page_id, display_order, columns_size, number_of_columns) VALUES (".$page_id.", ".$row["display_order"].", '".$row["columns_size"]."', ".$row["number_of_columns"].")");
+    $db->query("INSERT INTO row (page_id, display_order, columns_size, number_of_columns, heading) VALUES (".$page_id.", ".$row["display_order"].", '".$row["columns_size"]."', ".$row["number_of_columns"].", '".$heading."')");
     $row_id = $db->insert_id;
   }
   else { // updating an existing row
-    $db->query("UPDATE row SET display_order=".$row["display_order"].", columns_size='".$row["columns_size"]."', number_of_columns=".$row["number_of_columns"]." WHERE id=".$row_id);
+    $db->query("UPDATE row SET display_order=".$row["display_order"].", columns_size='".$row["columns_size"]."', number_of_columns=".$row["number_of_columns"].", heading='".$heading."' WHERE id=".$row_id);
   }
   // save columns
   for ($i=1; $i<=$row["number_of_columns"]; $i++) {

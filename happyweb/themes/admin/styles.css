@@ -106,16 +106,26 @@ ul.widget-list li i {float: none; margin: 0 0 5px 0; display: block;}
 
 /* forms */
 .form-item {margin: 0 0 30px 0; text-align: left;}
+#rows-container .form-item {margin-bottom: 20px;}
 .form-item-radio {margin: 0 0 10px 0;}
 label {display: block; margin: 0 0 5px 0; font-weight: bold;}
-input, textarea, select, button {font-family: Georgia; font-size: 18px; line-height: 28px; color: #555; border-radius: 5px; outline: none;}
+input, textarea, select, button {font-family: Georgia; font-size: 18px; line-height: 28px; color: #333; border-radius: 5px; outline: none;}
 input.text, textarea, select {padding: 10px 20px; min-width: 500px; display: block; margin: 0; border: solid 1px #aaa; background: #fff;}
+input.full-width {width: 100%;}
+input.big {font-size: 24px; line-height: 24px;}
 .ui-dialog-content input.radio {min-width: auto;}
 select {padding-bottom: 15px;}
 input.submit, button {cursor: pointer; border: #ccc; background: #47b725; color: #fff; padding: 10px 20px; border-radius: 5px; transition: opacity 0.4s;}
 input.submit:hover, button:hover {opacity: 0.7;}
 input.error {border-color: #f00;}
 label.error {display: none !important;}
+
+/*
+::-webkit-input-placeholder {font-size: 18px; line-height: 28px;}
+::-moz-placeholder {font-size: 18px;}
+:-ms-input-placeholder {font-size: 18px;}
+input:-moz-placeholder {font-size: 18px;}
+*/
 
 #page-options {display: none;}
 #page-options-button i {margin-right: 0px;}

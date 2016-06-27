@@ -41,6 +41,7 @@
   </footer>
   
   <script type="text/javascript" src="/happyweb/includes/jquery.min.js"></script>
+  <script type="text/javascript" src="/happyweb/includes/scripts.js"></script>
   
 </body>
 

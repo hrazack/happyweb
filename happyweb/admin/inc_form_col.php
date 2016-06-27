@@ -18,6 +18,7 @@
   ?>
   </div>
   
-  <a class="add-widget icon grey" title="Add something here">Add something</a>
+  <!--<a class="add-widget icon grey" title="Add something here">Add something</a>-->
+  <a class="add-widget grey" title="Add something here"><i class="material-icons">add_circle</i>Add some content here</a>
   
 </div>

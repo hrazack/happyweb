@@ -9,7 +9,7 @@
     <label>Page address:</label>
     <input type="text" name="url" class="text" value="<?php print $page_url; ?>" placeholder="Something like 'about-us', or 'news/a-cool-news'" required />
   </div>
-  
+      
   <p><a id="page-options-button"><i class="material-icons icon-open">arrow_right</i><i class="material-icons icon-close">arrow_drop_down</i> More amazing options for this page</a></p>
 
   <div id="page-options">
@@ -65,7 +65,7 @@
     ?>
   </div>
   
-  <p class="add-row"><a id="add-row" class="grey"><i class="material-icons">add_circle</i> Add another row</a></p>
+  <p class="add-row"><a id="add-row" class="grey"><i class="material-icons md-24">add_circle</i> Add another row</a></p>
   
   <input type="submit" value="Save this page" class="submit page" />
   <a href="/admin" class="cancel">Cancel</a>
