@@ -6,18 +6,21 @@
   <input type="hidden" name="rows[<?php print $index_row; ?>][id]" class="row-id" value="<?php print $row->id; ?>" />
   
   <div class="row-toolbar toolbar">
-    <?php 
-    // display each column size button
-    foreach($columns_sizes as $columns_size => $number_of_columns) { 
-      $checked = ($row->columns_size == $columns_size)?"checked":"";
-      ?>
-      <input type="radio" name="rows[<?php print $index_row; ?>][columns_size]" class="columns-size <?php print $columns_size; ?>" <?php print $checked; ?> value="<?php print $columns_size; ?>" data-number-col="<?php print $number_of_columns; ?>" />
+    <div class="row-toolbar-columns">
       <?php 
-    }?>
+      // display each column size button
+      foreach($columns_sizes as $columns_size => $number_of_columns) { 
+        $checked = ($row->columns_size == $columns_size)?"checked":"";
+        ?>
+        <input type="radio" name="rows[<?php print $index_row; ?>][columns_size]" class="columns-size <?php print $columns_size; ?>" <?php print $checked; ?> value="<?php print $columns_size; ?>" data-number-col="<?php print $number_of_columns; ?>" />
+        <?php 
+      }?>
+    </div>
     <div class="row-toolbar-icons">
-      <!--<div class="settings"><a title="Row settings"><i class="material-icons">settings</i></a></div>-->
-      <div class="delete"><a title="Delete this row" class="icon delete-row"><i class="material-icons">delete</i></a></div>
-      <div class="row-drag"><i class="material-icons">open_with</i></div>
+      <!--<div class="toolbar-item settings"><a title="Row settings"><i class="material-icons">settings</i></a></div>-->
+      <!--<div class="toolbar-item columns"><a title="Columns" class="icon row-columns"><i class="material-icons">view_week</i></a></div>-->
+      <div class="toolbar-item delete"><a title="Delete this row" class="icon delete-row"><i class="material-icons">delete</i></a></div>
+      <div class="toolbar-item row-drag"><i class="material-icons">open_with</i></div>
     </div>
   </div>
   

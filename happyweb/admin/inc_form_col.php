@@ -18,6 +18,6 @@
   ?>
   </div>
   
-  <a class="add-widget icon grey"><i class="material-icons">add_circle</i> Add something</a>
+  <a class="add-widget icon grey" title="Add something here">Add something</a>
   
 </div>

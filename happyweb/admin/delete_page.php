@@ -19,7 +19,7 @@ if (isset($_POST["action"])) {
 <p>Err... Are you sure you want to delete that page?<br />It's a pretty cool page and you won't be able to recover it once you do so</p>
 
 <form action="<?php print $url_info["path"];?>" method="post">
-  <input type="submit" value="Oh yes, let's delete it!" class="submit with-cancel" />
-  <a href="/admin" class="cancel"><i class="material-icons big">clear</i> What? No, please take me back!</a>
+  <input type="submit" value="Oh yes, let's delete it!" class="submit" />
+  <a href="/admin" class="cancel">Cancel</a>
   <input type="hidden" name="action" value="delete_page" />
 </form>

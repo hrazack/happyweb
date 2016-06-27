@@ -46,6 +46,75 @@ function redirect($path) {
 
 
 /**
+ * checks if a file already exists. If so, rename it with incremental number
+ */
+function file_newname($path, $filename) {
+  if ($pos = strrpos($filename, '.')) {
+    $name = substr($filename, 0, $pos);
+    $ext = substr($filename, $pos);
+  } else {
+    $name = $filename;
+  }
+  $newpath = $path.'/'.$filename;
+  $newname = $filename;
+  $counter = 0;
+  while (file_exists($newpath)) {
+    $newname = $name .'_'. $counter . $ext;
+    $newpath = $path.'/'.$newname;
+    $counter++;
+   }
+  return $newname;
+} // file_newname
+
+
+/**
+ * uploads an image
+ */
+function upload_image($file, $path) {
+  $result = new stdClass();
+  $result->status = "success";
+  $validExtensions = array('.jpg', '.jpeg', '.gif', '.png');
+  $fileExtension = strrchr($file['name'], ".");
+  if (in_array($fileExtension, $validExtensions)) {
+    $file_name = file_newname($path, $file['name']);
+    $destination = $path.$file_name;
+    if (move_uploaded_file($file['tmp_name'], $destination)) {
+      $result->file_name = $file_name;
+    }
+    else {
+      $result->status = "error";
+      $result->errorMessage = "Mmm, something went wrong with the file upload...";
+    }
+  } else {
+    $result->status = "error";
+    $result->errorMessage = "The file must be an image";
+  }
+  return $result;
+} // upload_image
+
+
+/**
+ * resizes an image
+ */
+function resize_image($file_name, $path, $size) {
+  $full_path = $_SERVER["DOCUMENT_ROOT"]."/".$path.$file_name;
+  $manipulator = new ImageManipulator($full_path);
+  switch($size) {
+    case "large":
+      $newImage = $manipulator->resample(1200, 1200);
+      break;
+    case "medium":
+      $newImage = $manipulator->resample(800, 800);
+      break;
+    case "small":
+      $newImage = $manipulator->resample(400, 400);
+      break;
+  }
+  $manipulator->save('uploaded_files/'.$size."/".$file_name);
+} // resize_image
+
+
+/**
  * builds the page content
  */
 function build_page($page) {
@@ -289,6 +358,13 @@ function delete_column($column_id) {
 function delete_widget($widget_id) {
   global $db;
   $type = $db->get_var("SELECT type FROM widget WHERE id=".$widget_id);
+  $data = $db->get_row("SELECT * FROM widget_".$type." WHERE widget_id=".$widget_id);
+  // if required run additional delete function for the widget
+  $delete_function_path = $_SERVER["DOCUMENT_ROOT"]."/happyweb/admin/widgets/".$type."/delete.php";
+  if (file_exists($delete_function_path)) {
+    include($delete_function_path);
+  }
+  // delete data
   $db->query("DELETE FROM widget_".$type." WHERE widget_id=".$widget_id);
   $db->query("DELETE FROM widget WHERE id=".$widget_id);
 } // delete_widget

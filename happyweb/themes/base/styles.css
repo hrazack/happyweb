@@ -29,6 +29,13 @@ p:last-child {margin-bottom: 0;}
 iframe {display: block; width: 100%;}
 img {}
 
+.one img {width: 400px;}
+.one-small img {width: 400px;}
+.two img {width: 400px;}
+.two-small-large .column1 img {width: 400px;}
+.two-large-small .column2 img {width: 100%;}
+.three img {width: 100%;}
+
 /* links */
 a {color: #f77; transition: opacity 0.3s;}
 a:hover {opacity: 0.7;}

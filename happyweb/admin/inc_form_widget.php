@@ -1,8 +1,8 @@
 <div class="widget <?php print $widget->type; ?>">
   <div class="widget-toolbar toolbar">
-    <div class="edit"><a title="Edit this content" class="edit-widget icon"><i class="material-icons">create</i></a></div>
-    <div class="delete"><a title="Delete this content" class="delete-widget icon"><i class="material-icons">delete</i></a></div>
-    <div class="widget-drag"><i class="material-icons">open_with</i></div>
+    <div class="toolbar-item edit"><a title="Edit this content" class="edit-widget icon"><i class="material-icons">create</i></a></div>
+    <div class="toolbar-item delete"><a title="Delete this content" class="delete-widget icon"><i class="material-icons">delete</i></a></div>
+    <div class="toolbar-item widget-drag"><i class="material-icons">open_with</i></div>
   </div>
   <div class="widget-info">
     <?php print $widget->type; ?>

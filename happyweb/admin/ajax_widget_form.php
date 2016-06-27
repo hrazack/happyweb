@@ -1,23 +1,23 @@
 <?php
-$action = $_GET["action"];
+$action = $_POST["action"];
 if ($action == "edit") {
   // editing a widget
-  $widget_id = $_GET["widget_id"];
+  $widget_id = $_POST["widget_id"];
   $widget = $db->get_row("SELECT * FROM widget WHERE id=".$widget_id);
   $widget_type = $widget->type;
   $data = $db->get_row("SELECT * FROM widget_".$widget->type." WHERE widget_id=".$widget->id);
 }
 else {
   // creating a new widget
-  $widget_type = $_GET["widget_type"];
-  $col_id = $_GET["col_id"];
-  $display_order = $_GET["display_order"];
-  $index_row = $_GET["index_row"];
-  $index_col = $_GET["index_col"];
+  $widget_type = $_POST["widget_type"];
+  $col_id = $_POST["col_id"];
+  $display_order = $_POST["display_order"];
+  $index_row = $_POST["index_row"];
+  $index_col = $_POST["index_col"];
 }
 ?>
 
-<form name="widget" enctype="multipart/form-data">
+<form name="widget" enctype="multipart/form-data" method="post">
 
 <?php
 include($_SERVER["DOCUMENT_ROOT"]."/happyweb/admin/widgets/".$widget_type."/form.php");

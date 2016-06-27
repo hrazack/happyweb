@@ -18,8 +18,6 @@ if (isset($_SESSION["happyweb"]["messages"])) {
   unset($_SESSION["happyweb"]["messages"]);
 }
 
-$scripts = '<script type="text/javascript" src="/happyweb/includes/jquery.min.js"></script>';
-
 // check which page we want to see
 $url_info = parse_url($_SERVER['REQUEST_URI']);
 $path = ltrim($url_info["path"], "/");

@@ -3,6 +3,13 @@ $(document).ready(function() {
   var current_column;
   var current_widget;
   
+  // wysiwyg editor options
+  editor_options = {
+    btns: [['formatting'], ['strong', 'em', 'underline', 'strikethrough'], ['justifyLeft', 'justifyCenter', 'justifyRight'], ['unorderedList', 'orderedList'], 'link', 'viewHTML'],
+    removeformatPasted: true,
+    //autogrow: true
+  };
+  
   // form validation
   $("form").validate({
     invalidHandler: function(event, validator) {
@@ -16,10 +23,17 @@ $(document).ready(function() {
     $("#loader-anim").position({my: 'center', at: 'center', of: window, collision: 'fit'});
   });
   
+  // page options
+  $(document).on("click", "#page-options-button", function() {
+    $(this).toggleClass("opened");
+    $("#page-options").slideToggle();
+  });
+  
+  
   /************/
   /* rows     */
   /************/
-  
+
   // adding a row
   $("#add-row").click(function() {
     $(this).addClass("loader");
@@ -101,7 +115,7 @@ $(document).ready(function() {
     }
   });
   $("#rows-container").disableSelection();
-  
+
   
   /************/
   /* columns  */
@@ -112,7 +126,7 @@ $(document).ready(function() {
     // first, we set the proper class to the column container
     columns_class = $(this).val();
     columns_amount = $(this).attr("data-number-col");
-    columns_container = $(this).parent().next().find("[data-find='columns-container']").first();
+    columns_container = $(this).parent().parent().next().find("[data-find='columns-container']").first();
     columns_container.removeClass();
     columns_container.addClass(columns_class);
     // update the number of columns for that row
@@ -154,7 +168,7 @@ $(document).ready(function() {
   var widget_form_dialog = $('<div id="widget_form_dialog"></div>').dialog({
     autoOpen: false,
     modal: true,
-    width: 500,
+    width: 800,
     buttons: [
       {
         text: "Save",
@@ -184,11 +198,12 @@ $(document).ready(function() {
     // get the content of the widget form
     $.ajax({
       url: "/ajax/widget_form",
-      context: current_column,
+      method: "post",
       data: {action: "create", widget_type: widget_type, col_id: col_id, display_order: display_order, index_row: index_row, index_col: index_col},
       success: function(string) {
         // open the widget form in a dialog
         $("#widget_form_dialog").html(string);
+        $('.ui-dialog textarea').trumbowyg(editor_options);
         widget_list_dialog.dialog("close");
         widget_form_dialog.dialog("open");
       }
@@ -204,11 +219,13 @@ $(document).ready(function() {
     // get the content of the widget form
     $.ajax({
       url: "/ajax/widget_form",
+      method: "post",
       data: {action: "edit", widget_id: widget_id},
       success: function(string) {
         $("#loader").hide();
         // open the widget form in a dialog
         $("#widget_form_dialog").html(string);
+        $('.ui-dialog textarea').trumbowyg(editor_options);
         widget_form_dialog.dialog("open");
       }
     });
@@ -222,23 +239,37 @@ $(document).ready(function() {
     widget_form_dialog.dialog("close");
     $.ajax({
       url: "/ajax/widget_submit",
-      data: $("form[name='widget']").serialize(),
+      type: "post",
+      data: new FormData(this), //$("form[name='widget']").serialize(),
       dataType: "json",
-      success: function(data) {
-        if (data.action == "create") {
-          // update the number of widgets for that column
-          number_of_widgets = parseInt(current_column.find(".col-number-of-widgets").val());
-          widget_display_order = number_of_widgets + 1;
-          current_column.find(".col-number-of-widgets").val(widget_display_order);
-          // insert the widget
-          widget_container = current_column.find(".widgets-container");
-          new_widget = $('<div/>').html(data.widget_box).contents();
-          new_widget.hide().appendTo(widget_container).slideDown();
+      processData: false,
+      contentType: false,
+      cache: false,
+      success: function(data, status) {
+        if (data.status != "error") {
+          if (data.action == "create") {
+            // update the number of widgets for that column
+            number_of_widgets = parseInt(current_column.find(".col-number-of-widgets").val());
+            widget_display_order = number_of_widgets + 1;
+            current_column.find(".col-number-of-widgets").val(widget_display_order);
+            // insert the widget
+            widget_container = current_column.find(".widgets-container");
+            new_widget = $('<div/>').html(data.widget_box).contents();
+            new_widget.hide().appendTo(widget_container).slideDown();
+          }
+          else {
+            // update the widget
+            widget_overview = current_widget.find(".widget-overview");
+            widget_overview.html(data.widget_overview);
+          }
         }
         else {
-          // update the widget
-          widget_overview = current_widget.find(".widget-overview");// TODO
-          widget_overview.html(data.widget_overview);
+          // display error message
+          $('<div></div>').html(data.errorMessage).dialog({
+            modal: true,
+            width: 500,
+            close: function(event, ui) {$(this).dialog("destroy");}
+          });
         }
         $("#loader").hide();
       }
