@@ -374,5 +374,4 @@ function delete_widget($widget_id) {
   $db->query("DELETE FROM widget WHERE id=".$widget_id);
 } // delete_widget
 
-
 ?>

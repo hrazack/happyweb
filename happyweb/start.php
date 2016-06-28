@@ -25,6 +25,12 @@ $path = ltrim($url_info["path"], "/");
 // first, let's check if it's an admin page
 $parts = explode("/", $path);
 if ($parts[0] == "admin") {
+  // make sure we are logged in
+  if (!isset($_SESSION["happyweb"]["user"]) && $parts[1] != "login") {
+    // go to log in page
+    redirect("admin/login");
+    exit();
+  }
   // get the filename to display (that's the bit after /admin in the URL);
   $admin_filename = isset($parts[1])?$parts[1]:"index";
   // get the output of the script
@@ -36,6 +42,7 @@ if ($parts[0] == "admin") {
   include("happyweb/themes/admin/template.php");
   exit();
 }
+
 
 // check if it's an AJAX request
 if ($parts[0] == "ajax") {

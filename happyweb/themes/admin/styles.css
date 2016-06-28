@@ -4,10 +4,10 @@ body {text-align: center; font-family: Georgia; font-size: 18px; line-height: 28
 
 /* header */
 header {background: #ddd; padding: 20px 0; position: relative;}
-#header-tools {position: absolute; top: 10px; right: 0px;}
 
 /* footer */
-#content {padding: 40px 0; min-height: 400px;}
+#content {padding: 40px 0;}
+#content .container {min-height: 400px;}
 footer {background: #ddd; padding: 30px;}
 
 /* general */ 
@@ -19,7 +19,7 @@ p {margin: 0 0 30px 0;}
 p.add-row {margin: 0 0 50px 0;}
 iframe {display: block;}
 pre {font-size: 14px; line-height: 18px;}
-i {float: left; margin-right: 5px;}
+i {float: left; margin-right: 5px; position: relative; top: 2px;}
 .material-icons.big {font-size: 36px;}
 .material-icons.bigger {font-size: 80px;}
 span.disabled {color: #ccc;}
@@ -40,6 +40,11 @@ a.cancel {display: inline-block; border: #ccc; background: #ff7777; color: #fff;
 a.cancel i {position: relative; top: -5px;}
 a.grey {color: #777;}
 a.icon {display: inline-block;}
+
+/* side navigation */
+.side-navigation {margin: 0; padding: 0; position: absolute; right: 50px; top: 55px;}
+.side-navigation li {margin: 0 0 15px 0; padding: 0; list-style: none;}
+.side-navigation li a {margin: 0; padding: 0;}
 
 /* table */
 table {width: auto; border-collapse: collapse;}
@@ -119,6 +124,7 @@ input.submit, button {cursor: pointer; border: #ccc; background: #47b725; color:
 input.submit:hover, button:hover {opacity: 0.7;}
 input.error {border-color: #f00;}
 label.error {display: none !important;}
+.error {color: #f00;}
 
 /*
 ::-webkit-input-placeholder {font-size: 18px; line-height: 28px;}

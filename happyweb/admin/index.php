@@ -1,9 +1,9 @@
 <?php
 $head_page_title = "Amazing admin dashboard";
-$tools = '<a href="/"><i class="material-icons">exit_to_app</i> Go to your site</a>';
+$display_navigation = true;
 ?>
 
-<p><a href="/admin/create_page"><i class="material-icons md-24">add_circle</i> Create a new awesome page</a></p>
+<p><a href="/admin/page_create"><i class="material-icons md-24">add_circle</i> Create a new awesome page</a></p>
 
 <table>
 <thead>
@@ -21,12 +21,12 @@ foreach($pages as $page) {
     $link_delete = '<span class="disabled"><i class="material-icons md-24">clear</i> delete</span>';
   }
   else {
-      $link_delete = '<a href="/admin/delete_page/'.$page->id.'"><i class="material-icons md-24">clear</i> delete</a>';
+      $link_delete = '<a href="/admin/page_delete/'.$page->id.'"><i class="material-icons md-24">clear</i> delete</a>';
   }
   print '<tr>';
   print '<td><a href="/'.$page->url.'">'.$page->title.'</a></td>';
   print '<td>/'.$page->url.'</td>';
-  print '<td><a href="/admin/edit_page/'.$page->id.'"><i class="material-icons md-24">edit</i> edit</a></td>';
+  print '<td><a href="/admin/page_edit/'.$page->id.'"><i class="material-icons md-24">edit</i> edit</a></td>';
   print '<td>'.$link_delete.'</td>';
   print '</tr>';
 }

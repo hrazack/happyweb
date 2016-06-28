@@ -17,26 +17,30 @@
   <header>
     <div class="container">
       <h1><?php print $head_page_title; ?></h1>
-      <div id="header-tools">
-        <?php print isset($tools)?$tools:""; ?>
-      </div>
     </div>
   </header>
   
   <div id="content">
     <div class="container">
+      
       <?php if ($messages != "") { ?>
       <div class="messages"><i class="material-icons">info_outline</i><?php print $messages; ?></div>
       <?php } ?>
+      
       <?php print $content; ?>
+      
+      <?php if (isset($display_navigation) && $display_navigation) { ?>
+      <ul class="side-navigation">
+        <li><a href="/admin"><i class="material-icons">library_books</i> Pages</a></li>
+        <li><a href="/admin/users"><i class="material-icons">account_circle</i> Users</a></li>
+        <li><a href="/admin/settings"><i class="material-icons">settings</i>Settings</a></li>
+        <li><a href="/admin/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
+        <li><a href="/"><i class="material-icons">forward</i> Go to your site</a></li>
+      </ul>
+      <?php } ?>
+      
     </div>
   </div>
-  
-  <footer>
-    <div class="container">
-      Super admin footer
-    </div>
-  </footer>
   
   <div id="loader"><div id="loader-anim"></div></div>
   
