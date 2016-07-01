@@ -20,6 +20,7 @@
   <header>
     <div class="container">
       <h1><?php print $site_name; ?></h1>
+      <a id="mobile-nav-button">Menu</a>
     </div>
   </header>
   
@@ -42,6 +43,7 @@
   
   <script type="text/javascript" src="/happyweb/includes/jquery.min.js"></script>
   <script type="text/javascript" src="/happyweb/includes/scripts.js"></script>
+  <?php print $admin_tools; ?>
   
 </body>
 

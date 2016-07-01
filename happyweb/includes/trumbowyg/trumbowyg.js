@@ -125,17 +125,9 @@ jQuery.trumbowyg = {
                 p: {
                     fn: "formatBlock"
                 },
-                h1: {
-                    fn: "formatBlock",
-                    title: g + " 1"
-                },
                 h2: {
                     fn: "formatBlock",
-                    title: g + " 2"
-                },
-                h3: {
-                    fn: "formatBlock",
-                    title: g + " 3"
+                    title: "Heading"
                 },
                 subscript: {
                     tag: "sub"

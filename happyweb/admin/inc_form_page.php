@@ -73,6 +73,7 @@
   <input type="hidden" name="deleted_rows" value="" />
   <input type="hidden" name="deleted_widgets" value="" />
   <input type="hidden" name="number_of_rows" value="<?php print $number_of_rows; ?>" />
+  <input type="hidden" name="return" value="<?php print isset($_GET["return-to-page"])?"page":"admin"; ?>" />
   <input type="hidden" name="action" value="form_page" />
   
 </form>

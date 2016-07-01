@@ -5,6 +5,15 @@ global $columns_sizes;
 $columns_sizes = array("one" => 1, "one-small" => 1, "two" => 2, "two-large-small" => 2, "two-small-large" => 2, "three" => 3);
 
 
+/**
+ * redirects to an internal URL
+ */
+function redirect($path) {
+  header('Location: /'.$path);
+  exit();
+} // set_message
+
+
 function get_current_page() {
   global $db;
   $url_info = parse_url($_SERVER['REQUEST_URI']);
@@ -83,6 +92,20 @@ function get_messages() {
 } // get_messages
 
 
+function get_admin_tools($page) {
+  $output = "";
+  if (isset($_SESSION["happyweb"]["user"])) {
+    $output .= '<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">';
+    $output .= '<ul id="admin-tools">';
+    $output .= '<li><a href="/admin/page_edit/'.$page->id.'?return-to-page" title="Edit this page"><i class="material-icons">edit</i></a></li>';
+    $output .= '<li><a href="/admin" title="go to admin"><i class="material-icons">settings</i></a></li>';
+    $output .= '<li><a href="/admin/logout" title="Logout"><i class="material-icons">exit_to_app</i></a></li>';
+    $output .= '</ul>';
+  }
+  return $output;
+}
+
+
 /**
  * returns part of a URL
  */
@@ -117,7 +140,7 @@ function build_page($page) {
       $content .= '<section>';
       $content .= '<div class="container">';
       if ($row->heading != "") {
-        $content .= '<h2>'.$row->heading.'</h2>';
+        $content .= '<h1>'.$row->heading.'</h1>';
       }
       $content .= '<div class="columns-container '.$row->columns_size.'">';
       $columns = $db->get_results("SELECT * FROM col WHERE row_id=".$row->id." ORDER BY display_order ASC");
@@ -153,10 +176,12 @@ function build_navigation($current_page) {
   $output .= '<ul>';
   if ($pages) {
     foreach($pages as $page) {
-      $output .= '<li><a href="/'.$page->url.'">'.$page->title.'</a></li>';
+      $selected = ($page->id == $current_page->id || $page->parent == $current_page->id)?"selected":"";
+      $output .= '<li class="'.$selected.'"><a href="/'.$page->url.'">'.$page->title.'</a></li>';
     }
   }
   $output .= '</ul>';
+  $output .= '<a id="mobile-nav-close">Close</a>';
   return $output;
 } // build_navigation
 

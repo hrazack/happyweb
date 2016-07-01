@@ -1,15 +1,5 @@
 <?php
 
-
-/**
- * redirects to an internal URL
- */
-function redirect($path) {
-  header('Location: /'.$path);
-  exit();
-} // set_message
-
-
 /**
  * checks if a file already exists. If so, rename it with incremental number
  */
@@ -240,8 +230,8 @@ function delete_row($row_id) {
  */
 function delete_column($column_id) {
   global $db;
-  $db->query("DELETE FROM col WHERE id=".$col->id);
-  if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id)) {
+  $db->query("DELETE FROM col WHERE id=".$column_id);
+  if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$column_id)) {
     foreach($widgets as $widget) {
       delete_widget($widget->id);
     }

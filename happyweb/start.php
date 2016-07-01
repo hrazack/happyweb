@@ -9,6 +9,9 @@ require("happyweb/includes/ez_sql/ez_sql_pdo.php");
 require("config.php");
 require("happyweb/includes/functions.php");
 
+// set up database
+$db = new ezSQL_pdo('mysql:host='.$host.';dbname='.$db_name.';', $user, $password);
+
 // catch errors
 set_error_handler("set_error");
 
@@ -69,7 +72,11 @@ switch(arg(0)) {
     // get the current theme
     $theme = $db->get_var("SELECT value FROM settings WHERE name='theme'");
     
+    // get the site name
     $site_name = $db->get_var("SELECT value FROM settings WHERE name='site_name'");
+    
+    // get admin tools
+    $admin_tools = get_admin_tools($page);
 
     // display the template
     $path_theme = ($theme == "basic" || $theme == "admin")?"happyweb/themes/":"custom_themes/";

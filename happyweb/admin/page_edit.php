@@ -9,7 +9,12 @@ if (isset($_POST["action"])) {
   //print "<pre>".print_r($_POST, 1)."</pre>";
   save_page($_POST, $page_id);
   set_message('The page <em>"'.$_POST["title"].'"</em> has been saved successfully, phew!');
-  redirect('admin');
+  if ($_POST["return"] == "page") {
+    redirect($page->url);
+  } 
+  else {
+    redirect('admin');
+  }
   
 }
 else {

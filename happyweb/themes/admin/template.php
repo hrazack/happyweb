@@ -16,7 +16,7 @@
   <script src="/happyweb/includes/trumbowyg/trumbowyg.js"></script>
 </head>
 
-<body>
+<body class="admin">
 
   <header>
     <div class="container">

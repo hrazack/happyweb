@@ -4,6 +4,7 @@ body {text-align: center; font-family: Georgia; font-size: 18px; line-height: 28
 
 /* header */
 header {background: #ddd; padding: 20px 0; position: relative;}
+header h1 {font-size: 40px; line-height: 40px; font-weight: 400; margin: 0 0 20px 0; padding: 0;}
 
 /* footer */
 #content {padding: 40px 0;}
@@ -12,8 +13,8 @@ footer {background: #ddd; padding: 30px;}
 
 /* general */ 
 h1, h2, h3 {font-family: Georgia;}
-h1 {font-size: 40px; line-height: 40px; font-weight: 400; margin: 0 0 20px 0; padding: 0;}
-h2 {font-size: 30px; line-height: 40px; font-weight: 400; margin: 0 0 30px 0; padding: 0;}
+h1 {font-size: 32px; line-height: 40px; font-weight: 400; margin: 0 0 30px 0; padding: 0;}
+h2 {font-size: 20px; line-height: 40px; font-weight: 400; margin: 0 0 30px 0; padding: 0;}
 h3 {font-size: 20px; line-height: 30px; font-weight: 400; margin: 0 0 10px 0; padding: 0;}
 p {margin: 0 0 30px 0;}
 p.add-row {margin: 0 0 50px 0;}
@@ -76,7 +77,7 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 .widget {margin: 0 0 20px 0; position: relative;}
 .widget.text {border: dotted 1px #999; background: #fff; padding: 40px 20px 20px 20px; min-height: 100px;}
 .widget.navigation {border: dotted 1px #999; background: #eee; padding: 40px 20px 20px 20px; min-height: 100px;}
-.widget img {display: block; width: 100%;}
+.widget img {display: block; max-width: 100%;}
 .widget-toolbar {position: absolute; right: 5px; top: 10px; color: #999; display: none; z-index: 5;}
 .widget:hover .widget-toolbar {display: inline-block;}
 .widget-toolbar div {float: left;}
@@ -115,7 +116,7 @@ label {display: block; margin: 0 0 5px 0; font-weight: bold;}
 input, textarea, select, button {font-family: Georgia; font-size: 18px; line-height: 28px; color: #333; border-radius: 5px; outline: none;}
 input.text, textarea, select {padding: 10px 20px; min-width: 500px; display: block; margin: 0; border: solid 1px #aaa; background: #fff;}
 input.full-width {width: 100%;}
-input.big {font-size: 24px; line-height: 24px; border: none; background: none; padding: 0;}
+input.big {font-size: 24px; line-height: 24px;}
 .ui-dialog-content input.radio {min-width: auto;}
 select {padding-bottom: 15px;}
 input.submit, button {cursor: pointer; border: #ccc; background: #47b725; color: #fff; padding: 10px 20px; border-radius: 5px; transition: opacity 0.4s;}
