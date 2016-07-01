@@ -23,6 +23,7 @@ i {float: left; margin-right: 5px; position: relative; top: 2px;}
 .material-icons.big {font-size: 36px;}
 .material-icons.bigger {font-size: 80px;}
 span.disabled {color: #ccc;}
+span.comment {color: #999; font-size: 0.9em; font-weight: normal;}
 button {outline: none;}
 
 /* ajax loader */
@@ -45,6 +46,7 @@ a.icon {display: inline-block;}
 .side-navigation {margin: 0; padding: 0; position: absolute; right: 50px; top: 55px;}
 .side-navigation li {margin: 0 0 15px 0; padding: 0; list-style: none;}
 .side-navigation li a {margin: 0; padding: 0;}
+.side-navigation li.selected a {color: #999;}
 
 /* table */
 table {width: auto; border-collapse: collapse;}
@@ -150,7 +152,10 @@ input.columns-size.two-small-large:after {background-position: -270px center;}
 input.columns-size.three:after {background-position: -340px center;}
 
 /* messages */
-.messages {display: inline-block; background: #eaf4e7; border: solid 1px #2fbc03; color: #2fbc03; padding: 20px; margin: 0 0 30px 0;}
+.messages {display: block; background: #eaf4e7; border: solid 1px #2fbc03; color: #2fbc03; padding: 20px; margin: 0 0 30px 0; max-width: 700px;}
+.messages ul {margin: 0 0 0 10px;}
+.errors {display: block; background: #ffd4d4; border: solid 1px #f00; color: #f00; padding: 20px; margin: 0 0 30px 0; max-width: 700px;}
+.errors ul {margin: 0 0 0 10px;}
 
 /* dialog */
 .ui-dialog {background: #efefef; border: solid 1px #aaa; box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.31); border-radius: 5px; outline: none; z-index: 100; text-align: left;}

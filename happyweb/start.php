@@ -5,18 +5,15 @@ global $db;
 
 // load db and various functions
 require("happyweb/includes/ez_sql/ez_sql_core.php");
-require("happyweb/includes/ez_sql/ez_sql_mysql.php");
+require("happyweb/includes/ez_sql/ez_sql_pdo.php");
 require("config.php");
 require("happyweb/includes/functions.php");
 
+// catch errors
+set_error_handler("set_error");
+
 // check if we have any messages to display
-$messages = "";
-if (isset($_SESSION["happyweb"]["messages"])) {
-  foreach($_SESSION["happyweb"]["messages"] as $message) {
-    $messages .= $message;
-  }
-  unset($_SESSION["happyweb"]["messages"]);
-}
+$messages = get_messages();
 
 // check which page we want to see
 $url_info = parse_url($_SERVER['REQUEST_URI']);
@@ -31,6 +28,7 @@ if ($parts[0] == "admin") {
     redirect("admin/login");
     exit();
   }
+  require("happyweb/includes/functions_admin.php");
   // get the filename to display (that's the bit after /admin in the URL);
   $admin_filename = isset($parts[1])?$parts[1]:"index";
   // get the output of the script
@@ -46,6 +44,7 @@ if ($parts[0] == "admin") {
 
 // check if it's an AJAX request
 if ($parts[0] == "ajax") {
+  require("happyweb/includes/functions_admin.php");
   // get the filename to display (that's the bit after /ajax in the URL);
   $ajax_filename = isset($parts[1])?$parts[1]:"";
   // display the raw output of the script

@@ -9,7 +9,6 @@ $display_navigation = true;
 <thead>
   <tr>
     <th>Name</th>
-    <th class="url">Email</th>
     <th></th>
     <th></th>
 </thead>
@@ -25,7 +24,6 @@ foreach($users as $user) {
   }
   print '<tr>';
   print '<td>'.$user->username.'</td>';
-  print '<td>'.$user->email.'</td>';
   print '<td><a href="/admin/user_edit/'.$user->id.'"><i class="material-icons md-24">edit</i> edit</a></td>';
   print '<td>'.$link_delete.'</td>';
   print '</tr>';

@@ -104,6 +104,10 @@ class ImageManipulator
         if (!is_resource($this->image)) {
             throw new RuntimeException('No image set');
         }
+        if ($this->width < $width) { // HACK: avoid upsampling
+          $width = $this->width;
+          $height = $this->height;
+        }
         if ($constrainProportions) {
             if ($this->height >= $this->width) {
                 $width  = round($height / $this->height * $this->width);

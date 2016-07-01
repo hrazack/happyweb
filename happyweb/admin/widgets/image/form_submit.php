@@ -10,7 +10,8 @@ if ($action == "create") {
   if ($_FILES['image_file']['error'] > 0) {
     $data->status = "error";
     $data->errorMessage = $_FILES['image_file']['error'];
-  } else {
+  } 
+  else {
     // upload the original image
     $result = upload_image($_FILES['image_file'], $path);
     if ($result->status == "success") {

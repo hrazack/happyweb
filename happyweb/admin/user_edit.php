@@ -31,7 +31,7 @@ if (isset($_POST["action"])) {
   
   <div class="form-item">
     <label>Password:</label>
-    <input type="password" class="text" name="password" placeholder="Leave empty if you don't want to change the password" required />
+    <input type="password" class="text" name="password" placeholder="Leave empty if you don't want to change the password" />
   </div>
   
   <input type="submit" class="submit" value="Save" />

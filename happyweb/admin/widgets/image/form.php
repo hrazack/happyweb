@@ -6,8 +6,8 @@ if ($action == "edit") {
   $checked_small = ($data->size == "small")?"checked":"";
 }
 else {
-  $checked_large = "checked";
-  $checked_medium = "";
+  $checked_large = "";
+  $checked_medium = "checked";
   $checked_small = "";
 }
 ?>
@@ -31,7 +31,7 @@ if ($action == "edit") {
 
 <div class="form-item">
   <label>Choose a size</label>
-  <div class="form-item-radio"><input type="radio" class="radio" name="size" value="large" <?php print $checked_large; ?> /> Large</div>
-  <div class="form-item-radio"><input type="radio" class="radio" name="size" value="medium" <?php print $checked_medium; ?> /> Medium</div>
-  <div class="form-item-radio"><input type="radio" class="radio" name="size" value="small" <?php print $checked_small; ?> /> Small</div>
+  <div class="form-item-radio"><input type="radio" class="radio" name="size" value="large" <?php print $checked_large; ?> /> Large <span class="comment">(if you've put the image in a very wide column)</span></div>
+  <div class="form-item-radio"><input type="radio" class="radio" name="size" value="medium" <?php print $checked_medium; ?> /> Medium  <span class="comment">(for all other cases)</span></div>
+  <!--<div class="form-item-radio"><input type="radio" class="radio" name="size" value="small" <?php print $checked_small; ?> /> Small</div>-->
 </div>

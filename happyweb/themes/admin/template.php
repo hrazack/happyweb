@@ -23,17 +23,20 @@
   <div id="content">
     <div class="container">
       
-      <?php if ($messages != "") { ?>
-      <div class="messages"><i class="material-icons">info_outline</i><?php print $messages; ?></div>
-      <?php } ?>
-      
+      <?php if ($messages != "") print $messages; ?>
+
       <?php print $content; ?>
       
       <?php if (isset($display_navigation) && $display_navigation) { ?>
+      <?php
+      $selected_pages = (arg(1) == "")?"selected":"";
+      $selected_users = (arg(1) == "users")?"selected":"";
+      $selected_settings = (arg(1) == "settings")?"selected":"";
+      ?>
       <ul class="side-navigation">
-        <li><a href="/admin"><i class="material-icons">library_books</i> Pages</a></li>
-        <li><a href="/admin/users"><i class="material-icons">account_circle</i> Users</a></li>
-        <li><a href="/admin/settings"><i class="material-icons">settings</i>Settings</a></li>
+        <li class="<?php print $selected_pages; ?>"><a href="/admin"><i class="material-icons">library_books</i> Pages</a></li>
+        <li class="<?php print $selected_users; ?>"><a href="/admin/users"><i class="material-icons">account_circle</i> Users</a></li>
+        <li class="<?php print $selected_settings; ?>"><a href="/admin/settings"><i class="material-icons">settings</i>Settings</a></li>
         <li><a href="/admin/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
         <li><a href="/"><i class="material-icons">forward</i> Go to your site</a></li>
       </ul>
