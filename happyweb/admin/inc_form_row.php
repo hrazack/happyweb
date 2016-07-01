@@ -29,7 +29,7 @@
     <div class="<?php print $row->columns_size; ?>" data-find="columns-container">
       
       <div class="form-item">
-        <input type="text" class="text full-width big" name="rows[<?php print $index_row; ?>][heading]" value="<?php print $row->heading; ?>" placeholder="Optional heading" />
+        <input type="text" class="text full-width big" name="rows[<?php print $index_row; ?>][heading]" value="<?php print $row->heading; ?>" placeholder="You can type an optional heading here" />
       </div>
       
       <?php

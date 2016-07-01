@@ -115,7 +115,7 @@ label {display: block; margin: 0 0 5px 0; font-weight: bold;}
 input, textarea, select, button {font-family: Georgia; font-size: 18px; line-height: 28px; color: #333; border-radius: 5px; outline: none;}
 input.text, textarea, select {padding: 10px 20px; min-width: 500px; display: block; margin: 0; border: solid 1px #aaa; background: #fff;}
 input.full-width {width: 100%;}
-input.big {font-size: 24px; line-height: 24px;}
+input.big {font-size: 24px; line-height: 24px; border: none; background: none; padding: 0;}
 .ui-dialog-content input.radio {min-width: auto;}
 select {padding-bottom: 15px;}
 input.submit, button {cursor: pointer; border: #ccc; background: #47b725; color: #fff; padding: 10px 20px; border-radius: 5px; transition: opacity 0.4s;}
