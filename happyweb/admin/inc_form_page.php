@@ -10,7 +10,7 @@
     <input type="text" name="url" class="text" value="<?php print $page_url; ?>" placeholder="Something like 'about-us', or 'news/a-cool-news'" required />
   </div>
       
-  <p><a id="page-options-button"><i class="material-icons icon-open">arrow_right</i><i class="material-icons icon-close">arrow_drop_down</i> More amazing options for this page</a></p>
+  <p><a class="more"><i class="material-icons icon-open">arrow_right</i><i class="material-icons icon-close">arrow_drop_down</i> More amazing options for this page</a></p>
 
   <div id="page-options">
   
@@ -27,10 +27,10 @@
           $selected_top = ($page->parent == 0)?"selected":"";
         }
         ?>
-        <option value="-1" <?php print $selected_nowhere; ?>>Nowhere</option>
+        <option value="-1" <?php print $selected_nowhere; ?>>Nowhere, it's a standalone page</option>
         <option value="0" <?php print $selected_top; ?>>In the top navigation</option>
         <?php
-        if ($pages = $db->get_results("SELECT * FROM page WHERE parent!=-1 AND id!=1")) {
+        if ($pages = $db->get_results("SELECT * FROM page WHERE parent=0 AND id!=1 ORDER BY display_order ASC")) {
           foreach($pages as $p) {
             if (!isset($page)) {
               $selected = "";
@@ -39,7 +39,7 @@
               $selected = ($page->parent == $p->id)?"selected":"";
             }
             ?>
-            <option value="<?php print $p->id; ?>" <?php print $selected; ?>>Below "<?php print $p->title; ?>"</option>
+            <option value="<?php print $p->id; ?>" <?php print $selected; ?>>Under "<?php print $p->title; ?>"</option>
             <?php
           }
         }
@@ -83,5 +83,9 @@
     <li><a data-widget-type="text" class="text"><i class="material-icons bigger">subject</i>Some text</a></li>
     <li><a data-widget-type="image" class="image"><i class="material-icons bigger">image</i>An image</a></li>
     <li><a data-widget-type="video" class="video"><i class="material-icons bigger">video_label</i>A video</a></li>
+  </ul>
+  <p><a class="more"><i class="material-icons icon-open">arrow_right</i><i class="material-icons icon-close">arrow_drop_down</i> More things you can add</a></p>
+  <ul class="widget-list extra">
+    <li><a data-widget-type="navigation" class="navigation"><i class="material-icons bigger">featured_play_list</i>Navigation</a></li>
   </ul>
 </div>

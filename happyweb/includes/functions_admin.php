@@ -132,14 +132,22 @@ function save_page($var, $page_id = 0) {
   }
   if ($page_id != 0) {
     // delete rows that have been removed
-    $deleted_rows = explode(",", $var["deleted_rows"]);
-    foreach($deleted_rows as $row_id) {
-      delete_row($row_id);
+    if ($var["deleted_rows"] != "") {
+      $deleted_rows = explode(",", $var["deleted_rows"]);
+      foreach($deleted_rows as $row_id) {
+        if ($row_id != "") {
+          delete_row($row_id);
+        }
+      }
     }
     // delete widgets that have been removed
-    $deleted_widgets = explode(",", $var["deleted_widgets"]);
-    foreach($deleted_widgets as $widget_id) {
-      delete_widget($widget_id);
+    if ($var["deleted_widgets"] != "") {
+      $deleted_widgets = explode(",", $var["deleted_widgets"]);
+      foreach($deleted_widgets as $widget_id) {
+        if ($widget_id != "") {
+          delete_widget($widget_id);
+        }
+      }
     }
   }
 } // save_page
@@ -181,8 +189,10 @@ function save_column($column, $row_id) {
     $db->query("UPDATE col SET display_order=".$column["display_order"].", row_id=".$row_id.", number_of_widgets=".$column["number_of_widgets"]." WHERE id=".$column["id"]);
   }
   // save widgets
-  foreach($column["widgets"] as $widget) {
-    save_widget($widget, $column_id);
+  if (isset($column["widgets"])) {
+    foreach($column["widgets"] as $widget) {
+      save_widget($widget, $column_id);
+    }
   }
 } // save_column
 

@@ -26,15 +26,15 @@ if (isset($_POST["action"])) {
     <select name="theme">
       <?php
       $current_theme = $db->get_var("SELECT value FROM settings WHERE name='theme'");
-      $selected = ($current_theme == "base")?"selected":"";
+      $selected = ($current_theme == "basic")?"selected":"";
       ?>
-      <option name="base" <?php print $selected; ?>>Basic</option>
+      <option value="basic" <?php print $selected; ?>>Basic</option>
       <?php
       $themes = array_diff(scandir("custom_themes"), array('..', '.', 'readme.txt'));
       foreach($themes as $theme) {
         $selected = ($current_theme == $theme)?"selected":"";
         ?>
-        <option name="<?php print $theme; ?>" <?php print $selected; ?>><?php print $theme; ?></option>
+        <option value="<?php print $theme; ?>" <?php print $selected; ?>><?php print $theme; ?></option>
       <?php } ?>
     </select>
   </div>

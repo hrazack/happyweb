@@ -25,3 +25,5 @@ else {
 }
 
 ?>
+
+<script src="/happyweb/admin/page_build.js"></script>

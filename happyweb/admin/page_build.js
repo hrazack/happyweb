@@ -24,9 +24,9 @@ $(document).ready(function() {
   });
   
   // page options
-  $(document).on("click", "#page-options-button", function() {
+  $(document).on("click", ".more", function() {
     $(this).toggleClass("opened");
-    $("#page-options").slideToggle();
+    $(this).parent().next().slideToggle();
   });
   
   
@@ -130,7 +130,7 @@ $(document).ready(function() {
     columns_container.removeClass();
     columns_container.addClass(columns_class);
     // update the number of columns for that row
-    $(this).parent().parent().find(".row-number-of-columns").first().val(columns_amount);
+    $(this).parents("section").find(".row-number-of-columns").first().val(columns_amount);
     // then we show or hide the columns
     if (columns_amount == 1) {
       columns_container.find(".column2").addClass("disabled");
@@ -188,6 +188,9 @@ $(document).ready(function() {
   
   // adding a widget
   $(document).on("click", ".widget-list a", function() {
+    $("#loader").show();
+    $("#loader-anim").position({my: 'center', at: 'center', of: window, collision: 'fit'});
+    widget_list_dialog.dialog("close");
     widget_type = $(this).attr("data-widget-type");
     row = current_column.parents("section");
     col_id = current_column.find(".col-id").val();
@@ -201,6 +204,7 @@ $(document).ready(function() {
       method: "post",
       data: {action: "create", widget_type: widget_type, col_id: col_id, display_order: display_order, index_row: index_row, index_col: index_col},
       success: function(string) {
+        $("#loader").hide();
         // open the widget form in a dialog
         $("#widget_form_dialog").html(string);
         $('.ui-dialog textarea').trumbowyg(editor_options);
@@ -255,7 +259,7 @@ $(document).ready(function() {
             // insert the widget
             widget_container = current_column.find(".widgets-container");
             new_widget = $('<div/>').html(data.widget_box).contents();
-            new_widget.hide().appendTo(widget_container).slideDown();
+            new_widget.hide().appendTo(widget_container).fadeIn();
           }
           else {
             // update the widget

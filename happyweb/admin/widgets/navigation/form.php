@@ -1,0 +1,1 @@
+<p>Woo-hoo, there's nothing else to do!<br />This will automatically insert the page navigation where you place it.</p>

@@ -5,6 +5,27 @@ global $columns_sizes;
 $columns_sizes = array("one" => 1, "one-small" => 1, "two" => 2, "two-large-small" => 2, "two-small-large" => 2, "three" => 3);
 
 
+function get_current_page() {
+  global $db;
+  $url_info = parse_url($_SERVER['REQUEST_URI']);
+  $path = ltrim($url_info["path"], "/");
+  // is it the homepage?
+  if ($path == "") {
+    $page_id = $db->get_var("SELECT value FROM settings WHERE name='home_page_id'");
+  }
+  else {
+    // if not find out if there is a page with that path
+    $page_id = $db->get_var("SELECT id FROM page WHERE url='".$path."'");
+    // if not display the page not found
+    if (!$page_id) {
+      $page_id = $db->get_var("SELECT value FROM settings WHERE name='404_page_id'");
+    }
+  }
+  $page = $db->get_row("SELECT * FROM page WHERE id=".$page_id);
+  return $page;
+} // get_current_page
+
+
 /**
  * sets a system message to be displayed
  */
@@ -91,31 +112,32 @@ function get_page($page_id) {
 function build_page($page) {
   global $db;
   $content = "";
-  $rows = $db->get_results("SELECT * FROM row WHERE page_id=".$page->id." ORDER BY display_order ASC");
-  foreach($rows as $row) {
-    $content .= '<section>';
-    $content .= '<div class="container">';
-    if ($row->heading != "") {
-      $content .= '<h2>'.$row->heading.'</h2>';
-    }
-    $content .= '<div class="columns-container '.$row->columns_size.'">';
-    $columns = $db->get_results("SELECT * FROM col WHERE row_id=".$row->id." ORDER BY display_order ASC");
-    $col_index = 0;
-    foreach($columns as $col) {
-      $col_index++;
-      $content .= '<div class="column column'.$col_index.'">';
-      if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id." ORDER BY display_order ASC")) {
-        foreach($widgets as $widget) {          
-          $content .= '<div class="widget">';
-          $content .= build_widget($widget);
-          $content .= '</div>';
+  if ($rows = $db->get_results("SELECT * FROM row WHERE page_id=".$page->id." ORDER BY display_order ASC")) {
+    foreach($rows as $row) {
+      $content .= '<section>';
+      $content .= '<div class="container">';
+      if ($row->heading != "") {
+        $content .= '<h2>'.$row->heading.'</h2>';
+      }
+      $content .= '<div class="columns-container '.$row->columns_size.'">';
+      $columns = $db->get_results("SELECT * FROM col WHERE row_id=".$row->id." ORDER BY display_order ASC");
+      $col_index = 0;
+      foreach($columns as $col) {
+        $col_index++;
+        $content .= '<div class="column column'.$col_index.'">';
+        if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id." ORDER BY display_order ASC")) {
+          foreach($widgets as $widget) {          
+            $content .= '<div class="widget '.$widget->type.'">';
+            $content .= build_widget($widget);
+            $content .= '</div>';
+          }
         }
+        $content .= '</div>';
       }
       $content .= '</div>';
+      $content .= '</div>';
+      $content .= '</section>';
     }
-    $content .= '</div>';
-    $content .= '</div>';
-    $content .= '</section>';
   }
   return $content;
 } // build page
@@ -127,7 +149,7 @@ function build_page($page) {
 function build_navigation($current_page) {
   global $db;
   $output = "";
-  $pages = $db->get_results("SELECT * FROM page WHERE parent=0");
+  $pages = $db->get_results("SELECT * FROM page WHERE parent=0 ORDER BY display_order");
   $output .= '<ul>';
   if ($pages) {
     foreach($pages as $page) {
