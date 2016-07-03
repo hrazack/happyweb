@@ -13,6 +13,8 @@ if (isset($_POST["action"])) {
 }   
 ?>
 
+<p class="help"><i class="material-icons">info_outline</i>Some settings for your website.<br />Most of the time you can safely ignore this page, it's already been set up for you!</p>
+
 <form action="<?php print $url_info["path"];?>" method="post">
   
   <div class="form-item">

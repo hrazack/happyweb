@@ -2,7 +2,14 @@
 
 // let's define all the column sizes
 global $columns_sizes;
-$columns_sizes = array("one" => 1, "one-small" => 1, "two" => 2, "two-large-small" => 2, "two-small-large" => 2, "three" => 3);
+$columns_sizes = array(
+  "one"               =>  array("size" => 1, "description" => "one column"),
+  "one-small"         =>  array("size" => 1, "description" => "one small column"),
+  "two"               =>  array("size" => 2, "description" => "two equal columns"),
+  "two-large-small"   =>  array("size" => 2, "description" => "two columns (large and small)"), 
+  "two-small-large"   =>  array("size" => 2, "description" => "two columns (small and large)"), 
+  "three"             =>  array("size" => 3, "description" => "three equal columns"), 
+);
 
 
 /**
@@ -57,7 +64,7 @@ function set_error($errno, $errstr) {
 function get_messages() {
   $messages = "";
   if (isset($_SESSION["happyweb"]["messages"])) {
-    $messages .= '<div class="messages"><i class="material-icons">info_outline</i>';
+    $messages .= '<div class="messages"><i class="material-icons">check_circle</i>';
     if (count($_SESSION["happyweb"]["messages"]) > 1) {
       $messages .= '<ul>';
       foreach($_SESSION["happyweb"]["messages"] as $message) {
@@ -73,7 +80,7 @@ function get_messages() {
   }
   $errors = "";
   if (isset($_SESSION["happyweb"]["errors"])) {
-    $errors .= '<div class="errors"><i class="material-icons">info_outline</i>';
+    $errors .= '<div class="errors"><i class="material-icons">check_circle</i>';
     if (count($_SESSION["happyweb"]["errors"]) > 1) {
       $errors .= '<ul>';
       foreach($_SESSION["happyweb"]["errors"] as $error) {
@@ -96,10 +103,13 @@ function get_admin_tools($page) {
   $output = "";
   if (isset($_SESSION["happyweb"]["user"])) {
     $output .= '<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">';
+    $output .= '<link rel="stylesheet" href="/happyweb/includes/tooltipster/tooltipster.min.css" media="all" />';
+    $output .= '<script src="/happyweb/includes/tooltipster/tooltipster.min.js"></script>';
+    $output .= '<script>$(document).ready(function() { $(".tooltip").tooltipster({animation: "grow", theme: "tooltipster-borderless", delay: 0 });});</script>';
     $output .= '<ul id="admin-tools">';
-    $output .= '<li><a href="/admin/page_edit/'.$page->id.'?return-to-page" title="Edit this page"><i class="material-icons">edit</i></a></li>';
-    $output .= '<li><a href="/admin" title="go to admin"><i class="material-icons">settings</i></a></li>';
-    $output .= '<li><a href="/admin/logout" title="Logout"><i class="material-icons">exit_to_app</i></a></li>';
+    $output .= '<li><a class="tooltip" href="/admin/page_edit/'.$page->id.'?return-to-page" title="Edit this page"><i class="material-icons">edit</i></a></li>';
+    $output .= '<li><a class="tooltip" href="/admin" title="Go to admin"><i class="material-icons">settings</i></a></li>';
+    $output .= '<li><a class="tooltip" href="/admin/logout" title="Logout"><i class="material-icons">exit_to_app</i></a></li>';
     $output .= '</ul>';
   }
   return $output;

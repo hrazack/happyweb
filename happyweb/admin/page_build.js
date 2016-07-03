@@ -17,6 +17,13 @@ $(document).ready(function() {
     }
   });
   
+  // tooltips
+  $('.tooltip').tooltipster({
+    animation: 'grow',
+    theme: 'tooltipster-borderless',
+    delay: 0
+  });
+  
   // page submit
   $(".submit.page").click(function() {
     $("#loader").show();
@@ -115,7 +122,7 @@ $(document).ready(function() {
     }
   });
   $("#rows-container").disableSelection();
-
+  
   
   /************/
   /* columns  */
@@ -207,7 +214,7 @@ $(document).ready(function() {
         $("#loader").hide();
         // open the widget form in a dialog
         $("#widget_form_dialog").html(string);
-        $('.ui-dialog textarea').trumbowyg(editor_options);
+        $('.ui-dialog textarea.formatted').trumbowyg(editor_options);
         widget_list_dialog.dialog("close");
         widget_form_dialog.dialog("open");
       }

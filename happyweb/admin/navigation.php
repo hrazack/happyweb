@@ -19,7 +19,7 @@ if (isset($_POST["action"])) {
 }   
 ?>
 
-<p>Here you can reorder the pages in the site:</p>
+<p class="help"><i class="material-icons">info_outline</i>Here you can re-order the pages in the site.<br />Simply click on a page and move it around to where you'd like it to go.</p>
 
 <form action="<?php print $url_info["path"];?>" method="post">
   
@@ -30,7 +30,7 @@ if (isset($_POST["action"])) {
       foreach($pages as $page) {
         ?>
         <li class="dd-item" data-id="<?php print $page->id; ?>">
-        <div class="dd-handle"><?php print $page->title; ?></div>
+        <div class="dd-handle"><i class="material-icons">open_with</i> <?php print $page->title; ?></div>
           <?php
           if ($sub_pages = $db->get_results("SELECT * FROM page WHERE parent=".$page->id." ORDER BY display_order ASC")) {
             ?>
@@ -39,7 +39,7 @@ if (isset($_POST["action"])) {
             foreach($sub_pages as $sub_page) {
               ?>
               <li class="dd-item" data-id="<?php print $sub_page->id; ?>">
-                <div class="dd-handle"><?php print $sub_page->title; ?></div>
+                <div class="dd-handle"><i class="material-icons">open_with</i> <?php print $sub_page->title; ?></div>
               </li>
               <?php
             }

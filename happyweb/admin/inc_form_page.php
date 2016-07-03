@@ -10,7 +10,7 @@
     <input type="text" name="url" class="text" value="<?php print $page_url; ?>" placeholder="Something like 'about-us', or 'news/a-cool-news'" required />
   </div>
       
-  <p><a class="more"><i class="material-icons icon-open">arrow_right</i><i class="material-icons icon-close">arrow_drop_down</i> More amazing options for this page</a></p>
+  <p><a class="more"><i class="material-icons icon-open">arrow_right</i><i class="material-icons icon-close">arrow_drop_down</i> More mind-blasting options for this page</a></p>
 
   <div id="page-options">
   
@@ -55,6 +55,13 @@
   </div>
       
   <label>Page content:</label>
+  <p class="help full">
+    <i class="material-icons">info_outline</i>
+    This is where you build the content of your page.<br />
+    You can have one or several rows, and each row can have one or several columns (each row also has an optional heading)<br />
+    Then each column has some content inside it.
+  </p>
+
   <div id="rows-container">
     <?php    
     $index_row = 1;

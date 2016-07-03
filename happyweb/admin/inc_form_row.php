@@ -9,17 +9,17 @@
     <div class="row-toolbar-columns">
       <?php 
       // display each column size button
-      foreach($columns_sizes as $columns_size => $number_of_columns) { 
+      foreach($columns_sizes as $columns_size => $column_info) { 
         $checked = ($row->columns_size == $columns_size)?"checked":"";
         ?>
-        <input type="radio" name="rows[<?php print $index_row; ?>][columns_size]" class="columns-size <?php print $columns_size; ?>" <?php print $checked; ?> value="<?php print $columns_size; ?>" data-number-col="<?php print $number_of_columns; ?>" />
+        <input type="radio" name="rows[<?php print $index_row; ?>][columns_size]" class="tooltip columns-size <?php print $columns_size; ?>" <?php print $checked; ?> title="Change to <?php print $column_info["description"]; ?>" value="<?php print $columns_size; ?>" data-number-col="<?php print $column_info["size"]; ?>" />
         <?php 
       }?>
     </div>
     <div class="row-toolbar-icons">
       <!--<div class="toolbar-item settings"><a title="Row settings"><i class="material-icons">settings</i></a></div>-->
-      <!--<div class="toolbar-item columns"><a title="Columns" class="icon row-columns"><i class="material-icons">view_week</i></a></div>-->
-      <div class="toolbar-item delete"><a title="Delete this row" class="icon delete-row"><i class="material-icons">delete</i></a></div>
+      <!--<div class="toolbar-item columns"><a title="Change the columns for this row" class="tooltip icon row-columns"><i class="material-icons">view_week</i></a></div>-->
+      <div class="toolbar-item delete"><a title="Delete this row" class="tooltip icon delete-row"><i class="material-icons">delete</i></a></div>
       <div class="toolbar-item row-drag"><i class="material-icons">open_with</i></div>
     </div>
   </div>

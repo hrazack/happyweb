@@ -8,12 +8,14 @@
   <title><?php print $head_page_title; ?></title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="/happyweb/includes/happyweb.css" media="all" />
-  <link rel="stylesheet" href="/happyweb/includes/trumbowyg/trumbowyg.css">
+  <link rel="stylesheet" href="/happyweb/includes/trumbowyg/trumbowyg.css" media="all" />
+  <link rel="stylesheet" href="/happyweb/includes/tooltipster/tooltipster.min.css" media="all" />
   <link rel="stylesheet" href="/happyweb/themes/admin/styles.css" media="all" />
   <script src="/happyweb/includes/jquery.min.js"></script>
   <script src="/happyweb/includes/jquery.validate.min.js"></script>
   <script src="/happyweb/includes/jquery-ui.min.js"></script>
   <script src="/happyweb/includes/trumbowyg/trumbowyg.js"></script>
+  <script src="/happyweb/includes/tooltipster/tooltipster.min.js"></script>
 </head>
 
 <body class="admin">
@@ -43,7 +45,7 @@
         <li class="<?php print $selected_navigation; ?>"><a href="/admin/navigation"><i class="material-icons">featured_play_list</i> Navigation</a></li>
         <li class="<?php print $selected_users; ?>"><a href="/admin/users"><i class="material-icons">account_circle</i> Users</a></li>
         <li class="<?php print $selected_settings; ?>"><a href="/admin/settings"><i class="material-icons">settings</i>Settings</a></li>
-        <li><a href="/admin/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
+        <li class="new-section"><a href="/admin/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
         <li><a href="/"><i class="material-icons">forward</i> Go to your site</a></li>
       </ul>
       <?php } ?>

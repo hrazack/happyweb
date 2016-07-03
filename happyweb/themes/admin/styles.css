@@ -1,9 +1,9 @@
 body {text-align: center; font-family: Georgia; font-size: 18px; line-height: 28px; color: #000; background: #fff; margin: 0; padding: 0; position: relative; width: 100%; height: 100%;}
 * {box-sizing: border-box;}
-.container {max-width: 1100px; margin: auto; text-align: left; overflow: hidden; position: relative;}
+.container {max-width: 1140px; padding: 0 20px; margin: auto; text-align: left; overflow: hidden; position: relative;}
 
 /* header */
-header {background: #ddd; padding: 20px 0; position: relative;}
+header {background: #ddd; padding: 30px 0 20px 0; position: relative;}
 header h1 {font-size: 40px; line-height: 40px; font-weight: 400; margin: 0 0 20px 0; padding: 0;}
 
 /* footer */
@@ -26,6 +26,9 @@ i {float: left; margin-right: 5px; position: relative; top: 2px;}
 span.disabled {color: #ccc;}
 span.comment {color: #999; font-size: 0.9em; font-weight: normal;}
 button {outline: none;}
+p.help {border: solid 1px #ff9229; background: #fcf2e9; color: #ff9229; padding: 10px 10px 10px 40px; max-width: 800px; position: relative; overflow: hidden; border-radius: 5px;}
+p.help.full {max-width: 100%;}
+p.help i {position: absolute; top: 12px; left: 10px;}
 
 /* ajax loader */
 #loader {height: 100%; width: 100%; z-index: 10; position: absolute; top: 0; left: 0; background: #666666 url(images/bg-stripes.png) 50% 50% repeat; opacity: .5; display: none;}
@@ -44,13 +47,15 @@ a.grey {color: #777;}
 a.icon {display: inline-block;}
 
 /* side navigation */
-.side-navigation {margin: 0; padding: 0; position: absolute; right: 50px; top: 55px;}
-.side-navigation li {margin: 0 0 15px 0; padding: 0; list-style: none;}
+.side-navigation {margin: 0; padding: 0; position: absolute; right: 50px; top: 0px;}
+.side-navigation li {margin: 0 0 15px 0; padding: 0 20px 0 0; list-style: none; display: block;}
+.side-navigation li.new-section {border-top: dotted 1px #f77; padding-top: 20px;}
 .side-navigation li a {margin: 0; padding: 0;}
 .side-navigation li.selected a {color: #999;}
 
 /* table */
 table {width: auto; border-collapse: collapse;}
+table.full {width: 800px;}
 th, td {padding: 10px 30px; border: solid 1px #ddd;}
 th.url {width: 300px;}
 
@@ -64,7 +69,7 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 .row-toolbar-icons {float: right; overflow: hidden;}
 .row-toolbar-icons div.toolbar-item {float: left; margin-right: 10px;}
 .row-toolbar-icons div.row-drag {width: 20px; height: 20px; display: inline-block; cursor: move;}
-.row-toolbar-columns {position: absolute; padding: 10px; left: 0px; top: 2px; overflow: hidden;}
+.row-toolbar-columns {position: absolute; padding: 10px; left: 0px; top: 0px; overflow: hidden;}
 
 .row-content {padding: 20px; background: #f2f2f2; border-top: solid 1px #aaa}
 .row-content > div {overflow: hidden;} /* that's the columns container */
@@ -75,14 +80,14 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 /* widget box */
 .widgets-container {position: relative;}
 .widget {margin: 0 0 20px 0; position: relative;}
-.widget.text {border: dotted 1px #999; background: #fff; padding: 40px 20px 20px 20px; min-height: 100px;}
-.widget.navigation {border: dotted 1px #999; background: #eee; padding: 40px 20px 20px 20px; min-height: 100px;}
+.widget {border: dotted 1px #999; background: #fff; padding: 40px 20px 20px 20px; min-height: 100px;}
+.widget.navigation {background: #eee;}
 .widget img {display: block; max-width: 100%;}
-.widget-toolbar {position: absolute; right: 5px; top: 10px; color: #999; display: none; z-index: 5;}
+.widget-toolbar {position: absolute; right: 5px; top: 6px; color: #999; display: none; z-index: 5;}
 .widget:hover .widget-toolbar {display: inline-block;}
 .widget-toolbar div {float: left;}
 .widget-toolbar .widget-drag {cursor: move;}
-.widget-info {display: none; position: absolute; top: -1px; left: -1px; background: #bbb; color: #fff; padding: 0 10px;}
+.widget-info {display: inline-block; position: absolute; top: -1px; left: -1px; background: #bbb; color: #fff; padding: 0 10px;}
 .icon.add-widget {display: inline-block; background: url(images/icon-add.png) no-repeat; width: 45px; height: 45px; text-indent: -9999px;/*border: dotted 1px #999; background: #fff; padding: 15px 20px 15px 15px; display: block;*/}
 
 /* images in widget preview */
@@ -133,9 +138,9 @@ a.more.opened .icon-close {display: block;}
 a.more.opened .icon-open {display: none;}
 
 /* column sizes */
-input.columns-size {width: 56px; margin-right: 5px;}
-input.columns-size:checked:after {background-color: #fbeed5;}
-input.columns-size:after {content: ''; cursor: pointer; display: inline-block; width: 65px; height: 32px; background: #e5e5e5 url(images/icons-columns.png) 10px center no-repeat; position: relative; top: -10px;}
+input.columns-size {width: 56px; margin-right: 5px; opacity: 0.8;}
+input.columns-size:checked:after {background-color: #fbf7bc;}
+input.columns-size:after {content: ''; cursor: pointer; display: inline-block; width: 66px; height: 32px; background: #e5e5e5 url(images/icons-columns2.png) 10px center no-repeat; position: relative; top: -10px; border-radius: 4px;}
 input.columns-size.one-small:after {background-position: -60px center;}
 input.columns-size.two:after {background-position: -130px center;}
 input.columns-size.two-large-small:after {background-position: -200px center;}
@@ -143,9 +148,9 @@ input.columns-size.two-small-large:after {background-position: -270px center;}
 input.columns-size.three:after {background-position: -340px center;}
 
 /* messages */
-.messages {display: block; background: #eaf4e7; border: solid 1px #2fbc03; color: #2fbc03; padding: 20px; margin: 0 0 30px 0; max-width: 700px;}
+.messages {display: block; background: #eaf4e7; border: solid 1px #2fbc03; color: #2fbc03; padding: 20px; margin: 0 0 30px 0; max-width: 800px;}
 .messages ul {margin: 0 0 0 10px;}
-.errors {display: block; background: #ffd4d4; border: solid 1px #f00; color: #f00; padding: 20px; margin: 0 0 30px 0; max-width: 700px;}
+.errors {display: block; background: #ffd4d4; border: solid 1px #f00; color: #f00; padding: 20px; margin: 0 0 30px 0; max-width: 800px;}
 .errors ul {margin: 0 0 0 10px;}
 
 /* dialog */
@@ -180,13 +185,14 @@ input.columns-size.three:after {background-position: -340px center;}
 .trumbowyg-modal-box input.text {min-width: auto; width: 100%; padding: 5px 10px;}
 
 /* nestable */
-.dd {position: relative; display: block; margin: 0 0 40px 0; padding: 0; max-width: 600px; list-style: none; text-align: left;}
+.dd {position: relative; display: block; margin: 0 0 40px 0; padding: 0; max-width: 800px; list-style: none; text-align: left;}
 .dd-list {display: block; position: relative; margin: 0; padding: 0; list-style: none;}
 .dd-list .dd-list {padding-left: 30px;}
 .dd-collapsed .dd-list {display: none;}
 .dd-item, .dd-empty, .dd-placeholder {display: block; position: relative; margin: 0; padding: 0; min-height: 20px;}
 .dd-handle {display: block; height: 40px; margin: 10px 0; padding: 5px 10px; color: #333; text-decoration: none; border: 1px solid #ccc; background: #eee; border-radius: 3px; cursor: move;}
 .dd-handle:hover {background: #fff; }
+.dd-handle i {color: #bbb; font-size: 20px; margin: 2px 10px 0 0;}
 .dd-item > button {display: none; color: #333; position: relative; cursor: pointer; float: left; width: 25px; height: 20px; margin: 5px 0; padding: 0; text-indent: 100%; white-space: nowrap; overflow: hidden; border: 0; background: transparent; text-align: center; font-weight: normal; }
 .dd-item > button:before {content: '+'; display: block; position: absolute; width: 100%; text-align: center; text-indent: 0;}
 .dd-item > button[data-action="collapse"]:before {content: '-';}
