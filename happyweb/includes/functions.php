@@ -99,6 +99,9 @@ function get_messages() {
 } // get_messages
 
 
+/**
+ * returns admin tools for the public site
+ */
 function get_admin_tools($page) {
   $output = "";
   if (isset($_SESSION["happyweb"]["user"])) {
@@ -113,7 +116,16 @@ function get_admin_tools($page) {
     $output .= '</ul>';
   }
   return $output;
-}
+} // get_admin_tools
+
+
+/**
+ * returns the ID for a YouTube video
+ */
+function get_youtube_id($url) {
+	parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );
+	return $my_array_of_vars['v'];
+} // get_youtube_id
 
 
 /**

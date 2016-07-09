@@ -6,7 +6,7 @@ global $db;
 // load db and various functions
 require("happyweb/includes/ez_sql/ez_sql_core.php");
 require("happyweb/includes/ez_sql/ez_sql_pdo.php");
-require("config.php");
+require("your_site/config.php");
 require("happyweb/includes/functions.php");
 
 // set up database
@@ -79,7 +79,7 @@ switch(arg(0)) {
     $admin_tools = get_admin_tools($page);
 
     // display the template
-    $path_theme = ($theme == "basic" || $theme == "admin")?"happyweb/themes/":"custom_themes/";
+    $path_theme = ($theme == "basic" || $theme == "admin")?"happyweb/themes/":"your_site/themes/";
     include($path_theme.$theme."/template.php");
   break;
 }

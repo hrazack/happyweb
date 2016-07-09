@@ -1,6 +1,5 @@
 <?php
-preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $data->video_url, $matches);
-$youtube_id = $matches[1];
+$youtube_id = get_youtube_id($data->video_url);
 $width = 640;
 $height = 360;
 ?>

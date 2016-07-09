@@ -1,8 +1,7 @@
 <?php
-preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $data->video_url, $matches);
-$youtube_id = $matches[1];
-//$thumbnail_url = "http://i3.ytimg.com/vi/".$youtube_id."/mqdefault.jpg";
-$thumbnail_url = "http://i3.ytimg.com/vi/".$youtube_id."/maxresdefault.jpg";
+$youtube_id = get_youtube_id($data->video_url);
+$thumbnail_url = "http://i3.ytimg.com/vi/".$youtube_id."/mqdefault.jpg";
+//$thumbnail_url = "http://i3.ytimg.com/vi/".$youtube_id."/maxresdefault.jpg";
 ?>
 
 <div class="video-image">

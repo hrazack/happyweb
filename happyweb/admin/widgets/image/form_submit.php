@@ -1,7 +1,7 @@
 <?php
 
 include($_SERVER["DOCUMENT_ROOT"]."/happyweb/includes/image_manipulator.php");
-$path = "uploaded_files/originals/";
+$file_path = "your_site/uploaded_files/";
 $size = $db->escape($_POST["size"]);
 
 // uploading a new image
@@ -13,10 +13,10 @@ if ($action == "create") {
   } 
   else {
     // upload the original image
-    $result = upload_image($_FILES['image_file'], $path);
+    $result = upload_image($_FILES['image_file'], $file_path."originals/");
     if ($result->status == "success") {
       // resize the image
-      resize_image($result->file_name, $path, $size);
+      resize_image($result->file_name, $file_path."originals/", $size);
       // save data
       $file_name = $db->escape($result->file_name);
       $db->query("INSERT INTO widget_image (widget_id, file, size) VALUES (".$widget_id.", '".$file_name."', '".$size."')");
@@ -34,17 +34,17 @@ else {
    
   // if we have entered a new image
   if ($_FILES['image_file']['error'] == 0) {
-    $result = upload_image($_FILES['image_file'], $path);
+    $result = upload_image($_FILES['image_file'], $file_path."originals/");
     if ($result->status == "success") {
       // resize the image
-      resize_image($result->file_name, $path, $size);
+      resize_image($result->file_name, $file_path."originals/", $size);
       // save data
       $file_name = $db->escape($result->file_name);
       $db->query("UPDATE widget_image SET file='".$file_name."', size='".$size."' WHERE widget_id=".$widget_id);
       // delete the previous image
-      unlink($_SERVER["DOCUMENT_ROOT"]."/uploaded_files/".$original_data->size."/".$original_data->file);
+      unlink($_SERVER["DOCUMENT_ROOT"]."/".$file_path.$original_data->size."/".$original_data->file);
       // delete the previous resized image
-      unlink($_SERVER["DOCUMENT_ROOT"]."/uploaded_files/originals/".$original_data->file);
+      unlink($_SERVER["DOCUMENT_ROOT"]."/".$file_path."originals/".$original_data->file);
     }
     else {
       $data->status = "error";
@@ -57,10 +57,10 @@ else {
     // check if we have changed the size
     if ($original_data->size != $size) {
       // if so, resize the image
-      resize_image($original_data->file, $path, $size);
+      resize_image($original_data->file, $file_path."originals/", $size);
       $db->query("UPDATE widget_image SET size='".$size."' WHERE widget_id=".$widget_id);
       // delete the previous resized image
-      unlink($_SERVER["DOCUMENT_ROOT"]."/uploaded_files/".$original_data->size."/".$original_data->file);
+      unlink($_SERVER["DOCUMENT_ROOT"]."/".$file_path.$original_data->size."/".$original_data->file);
     }
   }
   

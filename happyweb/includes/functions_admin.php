@@ -65,7 +65,7 @@ function resize_image($file_name, $path, $size) {
       $newImage = $manipulator->resample(400, 400);
       break;
   }
-  $manipulator->save('uploaded_files/'.$size."/".$file_name);
+  $manipulator->save('your_site/uploaded_files/'.$size."/".$file_name);
 } // resize_image
 
 

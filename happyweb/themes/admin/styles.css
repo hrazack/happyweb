@@ -14,7 +14,7 @@ footer {background: #ddd; padding: 30px;}
 /* general */ 
 h1, h2, h3 {font-family: Georgia;}
 h1 {font-size: 32px; line-height: 40px; font-weight: 400; margin: 0 0 30px 0; padding: 0;}
-h2 {font-size: 20px; line-height: 40px; font-weight: 400; margin: 0 0 30px 0; padding: 0;}
+h2 {font-size: 28px; line-height: 40px; font-weight: 400; margin: 0 0 30px 0; padding: 0;}
 h3 {font-size: 20px; line-height: 30px; font-weight: 400; margin: 0 0 10px 0; padding: 0;}
 p {margin: 0 0 30px 0;}
 p.add-row {margin: 0 0 50px 0;}
@@ -26,7 +26,7 @@ i {float: left; margin-right: 5px; position: relative; top: 2px;}
 span.disabled {color: #ccc;}
 span.comment {color: #999; font-size: 0.9em; font-weight: normal;}
 button {outline: none;}
-p.help {border: solid 1px #ff9229; background: #fcf2e9; color: #ff9229; padding: 10px 10px 10px 40px; max-width: 800px; position: relative; overflow: hidden; border-radius: 5px;}
+p.help {background: #f5e9fa; border: solid 1px #c18adb; color: #c18adb; padding: 10px 10px 10px 40px; max-width: 800px; position: relative; overflow: hidden; border-radius: 5px;}
 p.help.full {max-width: 100%;}
 p.help i {position: absolute; top: 12px; left: 10px;}
 
@@ -93,6 +93,7 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 /* images in widget preview */
 .video-image {position: relative;}
 .video-image:before {content: ''; position: absolute; top: 25%; left: 35%; width: 60px; height: 60px; background: url(images/icon-play.png); background-size: cover;}
+.video-description {margin: 20px 0 0 0;}
 
 /* widget colors */
 /*.widget.text {border-color: #6fc90f;}
@@ -148,9 +149,9 @@ input.columns-size.two-small-large:after {background-position: -270px center;}
 input.columns-size.three:after {background-position: -340px center;}
 
 /* messages */
-.messages {display: block; background: #eaf4e7; border: solid 1px #2fbc03; color: #2fbc03; padding: 20px; margin: 0 0 30px 0; max-width: 800px;}
+.messages {display: block; background: #eaf4e7; border: solid 1px #2fbc03; color: #2fbc03; padding: 20px; margin: 0 0 30px 0; max-width: 800px; border-radius: 5px;}
 .messages ul {margin: 0 0 0 10px;}
-.errors {display: block; background: #ffd4d4; border: solid 1px #f00; color: #f00; padding: 20px; margin: 0 0 30px 0; max-width: 800px;}
+.errors {display: block; background: #ffd4d4; border: solid 1px #f00; color: #f00; padding: 20px; margin: 0 0 30px 0; max-width: 800px; border-radius: 5px;}
 .errors ul {margin: 0 0 0 10px;}
 
 /* dialog */

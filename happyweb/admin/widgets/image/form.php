@@ -19,7 +19,7 @@ if ($action == "edit") {
 
   <div class="form-item">
     <label>Current image:</label />
-    <img src="/uploaded_files/originals/<?php print $data->file; ?>" width="200" />
+    <img src="/your_site/uploaded_files/originals/<?php print $data->file; ?>" width="200" />
   </div>
   
 <?php } ?>

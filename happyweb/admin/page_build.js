@@ -236,7 +236,7 @@ $(document).ready(function() {
         $("#loader").hide();
         // open the widget form in a dialog
         $("#widget_form_dialog").html(string);
-        $('.ui-dialog textarea').trumbowyg(editor_options);
+        $('.ui-dialog textarea.formatted').trumbowyg(editor_options);
         widget_form_dialog.dialog("open");
       }
     });
