@@ -223,6 +223,7 @@ $(document).ready(function() {
       {
         text: "Save",
         click: function() {
+          $('body').removeClass('stop-scrolling')
           // submit the widget form
           $("form[name='widget']").submit();
         }
@@ -230,6 +231,7 @@ $(document).ready(function() {
       {
         text: "Cancel",
         click: function() {
+          $('body').removeClass('stop-scrolling');
           $(this).dialog("close");
         }
       }
@@ -255,6 +257,7 @@ $(document).ready(function() {
       data: {action: "create", widget_type: widget_type, col_id: col_id, display_order: display_order, index_row: index_row, index_col: index_col},
       success: function(string) {
         $("#loader").hide();
+        $('body').addClass('stop-scrolling');
         // open the widget form in a dialog
         $("#widget_form_dialog").html(string);
         tinymce.init(editor_options);
@@ -277,6 +280,7 @@ $(document).ready(function() {
       data: {action: "edit", widget_id: widget_id},
       success: function(string) {
         $("#loader").hide();
+        $('body').addClass('stop-scrolling')
         // open the widget form in a dialog
         $("#widget_form_dialog").html(string);
         tinymce.init(editor_options);
