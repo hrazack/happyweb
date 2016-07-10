@@ -40,7 +40,7 @@ function file_newname($path, $filename) {
  * display a row on the list of pages
  */
 function display_page_list_row($page) {
-  $link_page = '<i class="material-icons">open_with</i><a href="/'.$page->url.'">'.$page->title.'</a>';
+  $link_page = '<a href="/'.$page->url.'">'.$page->title.'</a>';
   $link_edit = '<a href="/admin/page_edit/'.$page->id.'"><i class="material-icons md-24">edit</i> edit</a>';
   if ($page->id == 1 || $page->id == 2) {
     $link_delete = '<span class="disabled"><i class="material-icons md-24">clear</i> delete</span>';

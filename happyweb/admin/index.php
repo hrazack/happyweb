@@ -23,7 +23,7 @@ if (isset($_POST["action"])) {
   <i class="material-icons">info_outline</i>
   These are all the pages on your site.<br />
   You can edit or delete them, and also create a new page.<br />
-  You can also change their order by clicking on a page and moving it around.
+  You can also change their order by clicking on a page's handle and moving it around.
 </p>
 
 <p><a href="/admin/page_create"><i class="material-icons md-24">add_circle</i> Create a new awesome page</a></p>
@@ -32,13 +32,13 @@ if (isset($_POST["action"])) {
   
 <div class="dd">
   <ol class="dd-list">
-    <div class="dd-handle text">Pages included in the navigation</div>
-    <?php
+     <?php
     $pages = $db->get_results("SELECT * FROM page WHERE parent=0 ORDER BY display_order ASC");
     foreach($pages as $page) {
       ?>
       <li class="dd-item" data-id="<?php print $page->id; ?>">
-        <div class="dd-handle"><?php print display_page_list_row($page); ?></div>
+        <div class="dd-handle"><i class="material-icons">open_with</i></div>
+        <div class="dd-content"><?php print display_page_list_row($page); ?></div>
         <?php
         if ($sub_pages = $db->get_results("SELECT * FROM page WHERE parent=".$page->id." ORDER BY display_order ASC")) {
           ?>
@@ -47,7 +47,8 @@ if (isset($_POST["action"])) {
           foreach($sub_pages as $sub_page) {
             ?>
             <li class="dd-item" data-id="<?php print $sub_page->id; ?>">
-              <div class="dd-handle"><?php print display_page_list_row($sub_page); ?></div>
+              <div class="dd-handle"><i class="material-icons">open_with</i></div>
+              <div class="dd-content"><?php print display_page_list_row($sub_page); ?></div>
             </li>
             <?php
           }
@@ -61,14 +62,15 @@ if (isset($_POST["action"])) {
     }
     ?>
     <li class="dd-item" data-id="-1">
-      <div class="dd-handle text margin">Pages that are not in the navigation</div>
+      <div class="item-text">Pages that are not in the navigation:</div>
       <ol class="dd-list not-in-nav">
       <?php
       $pages = $db->get_results("SELECT * FROM page WHERE parent=-1");
       foreach($pages as $page) {
         ?>
         <li class="dd-item" data-id="<?php print $page->id; ?>">
-          <div class="dd-handle"><?php print display_page_list_row($page); ?></div>
+          <div class="dd-handle"><i class="material-icons">open_with</i></div>
+          <div class="dd-content"><?php print display_page_list_row($page); ?></div>
         </li>
         <?php
       }

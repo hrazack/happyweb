@@ -210,7 +210,7 @@ function build_navigation($current_page) {
   $output .= '<ul>';
   if ($pages) {
     foreach($pages as $page) {
-      $selected = ($page->id == $current_page->id || $page->parent == $current_page->id)?"selected":"";
+      $selected = ($page->id == $current_page->id || $page->id == $current_page->parent)?"selected":"";
       $output .= '<li class="'.$selected.'"><a href="/'.$page->url.'">'.$page->title.'</a></li>';
     }
   }

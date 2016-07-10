@@ -192,22 +192,21 @@ input.columns-size.three:after {background-position: -340px center;}
 .dd-list .dd-list.not-in-nav {padding-left: 0;}
 .dd-collapsed .dd-list {display: none;}
 .dd-item, .dd-empty, .dd-placeholder {display: block; position: relative; margin: 0; padding: 0; min-height: 20px;}
-.dd-handle {display: block; height: 50px; margin: -1px 0 0 0; padding: 0; color: #333; text-decoration: none; border: 1px solid #ccc; background: #fff; cursor: move; border-collapse: collapse;}
-.dd-handle:hover {background: #fff; }
-.dd-handle .page i {color: #bbb; font-size: 20px; margin: 2px 10px 0 0;}
+.dd-content {display: block; height: 50px; margin: -1px 0 0 0; padding: 0 0 0 30px; color: #333; text-decoration: none; border: 1px solid #ccc; background: #fff;}
+.dd-handle {position: absolute; top: 12px; left: 10px; width: 50px; cursor: move;}
+.dd-handle i {color: #bbb; font-size: 20px;}
 .dd-item > button {display: none;}
-.dd-placeholder, .dd-empty {margin: 5px 0; padding: 0; min-height: 30px; background: #f2fbff; border: 1px dashed #b6bcbf; box-sizing: border-box; -moz-box-sizing: border-box;}
+.dd-placeholder, .dd-empty {margin: 2px 0; padding: 0; min-height: 30px; background: #f2fbff; border: 1px dashed #b6bcbf; box-sizing: border-box; -moz-box-sizing: border-box;}
 .dd-empty {border: 1px dashed #bbb; min-height: 100px; background-color: #e5e5e5; background-size: 60px 60px; background-position: 0 0, 30px 30px;}
 .dd-dragel {position: absolute; pointer-events: none; z-index: 9999; text-align: left;}
 .dd-dragel > .dd-item .dd-handle {margin-top: 0;}
-.dd-dragel .dd-handle {box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);}
 
-.dd-handle div.cell {float: left; padding: 10px 30px;}
-.dd-handle div.cell:first-child {padding: 10px;}
-.dd-handle div.cell.edit {float: right; width: 140px; border-left: solid 1px #ccc;}
-.dd-handle div.cell.delete {float: right; width: 140px; border-left: solid 1px #ccc;}
-.dd-handle.text {padding: 10px; background: #efefef;}
-.dd-handle.text.margin {margin-top: 40px;}
+.dd-content div.cell {float: left; padding: 10px 30px;}
+.dd-content div.cell a {z-index: 100;}
+.dd-content div.cell:first-child {padding: 10px;}
+.dd-content div.cell.edit {float: right; width: 140px; border-left: solid 1px #ccc;}
+.dd-content div.cell.delete {float: right; width: 140px; border-left: solid 1px #ccc;}
+.item-text {margin: 40px 0 10px 0;}
 
 
 /* tablet */

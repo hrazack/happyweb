@@ -9,7 +9,7 @@ section:nth-child(odd) {background: #efefef; overflow: hidden;}
 
 /* header */
 header {background: #ddd; padding: 50px; height: 200px; position: relative;}
-header h1 {font-size: 60px; line-height: 60px; margin: 0;}
+header h1 {font-size: 50px; line-height: 50px; margin: 0;}
 header #mobile-nav-button {display: none; background: url(images/icon-mobile.png) no-repeat; width: 32px; height: 23px; position: absolute; top: 20px; right: 20px; cursor: pointer; text-indent: -9999px;}
 
 /* footer */
@@ -20,6 +20,7 @@ nav {padding: 20px; position: relative;}
 nav ul {margin: 0; padding: 0;}
 nav ul li {margin: 0 50px 0 0; padding: 0; list-style: none; display: inline-block;}
 nav ul li a {}
+nav ul li.selected a {color: #777;}
 nav #mobile-nav-close {display: none; cursor: pointer; position: absolute; top: 10px; right: 10px; background: url(images/icon-close.png) 0px 3px no-repeat; padding: 0 0 0 25px;}
 
 /* general */ 
@@ -41,8 +42,11 @@ a {color: #f77; text-decoration: none; transition: opacity 0.3s;}
 a:hover {opacity: 0.7;}
 
 /* sub navigation */
-.widget.navigation ul {margin: 0; padding: 0;}
-.widget.navigation ul li {margin: 0; padding: 0; list-style: none;}
+.widget.navigation ul {margin: 0; padding: 0; border-bottom: solid 1px #ccc;}
+.widget.navigation ul li {margin: 0; padding: 0; list-style: none; border-top: solid 1px #ccc;}
+.widget.navigation ul li a {display: block; padding: 10px 0;}
+.widget.navigation ul li.selected a {color: #777;}
+.sub-navigation-heading {margin: 0 0 10px 0;}
 
 /* messages */
 .messages {display: block; background: #eaf4e7; border: solid 1px #2fbc03; color: #2fbc03; padding: 20px; margin: 0 0 30px 0; max-width: 700px;}
