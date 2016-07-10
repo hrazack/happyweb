@@ -219,11 +219,13 @@ $(document).ready(function() {
     autoOpen: false,
     modal: true,
     width: 800,
+    close: function( event, ui ) {
+      $('body').removeClass('stop-scrolling');
+    },
     buttons: [
       {
         text: "Save",
         click: function() {
-          $('body').removeClass('stop-scrolling')
           // submit the widget form
           $("form[name='widget']").submit();
         }
@@ -231,7 +233,6 @@ $(document).ready(function() {
       {
         text: "Cancel",
         click: function() {
-          $('body').removeClass('stop-scrolling');
           $(this).dialog("close");
         }
       }
