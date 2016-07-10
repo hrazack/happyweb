@@ -3,12 +3,10 @@ $head_page_title = "Super settings";
 $display_navigation = true;
 if (isset($_POST["action"])) {
   
-  $site_name = $db->escape($_POST["site_name"]);
-  update_setting("site_name", $site_name);
-  $footer_text = $db->escape($_POST["footer_text"]);
-  update_setting("footer_text", $footer_text);
-  $theme = $_POST["theme"];
-  update_setting("theme", $theme);
+  update_setting("site_name", $db->escape($_POST["site_name"]));
+  update_setting("footer_text", $db->escape($_POST["footer_text"]));
+  update_setting("side_nav_heading", $db->escape($_POST["side_nav_heading"]));
+  update_setting("theme", $_POST["theme"]);
   set_message('The settings have been updated!');
   redirect('admin/settings');
   
@@ -26,7 +24,12 @@ if (isset($_POST["action"])) {
   
   <div class="form-item">
     <label>Text in the footer:</label>
-    <input type="text" class="text" name="footer_text" placeholder="The text at the bottom of each page" value="<?php print get_setting("footer_text"); ?>" required />
+    <input type="text" class="text" name="footer_text" placeholder="The text at the bottom of each page" value="<?php print get_setting("footer_text"); ?>" />
+  </div>
+  
+  <div class="form-item">
+    <label>Text above the side navigation:</label>
+    <input type="text" class="text" name="side_nav_heading" placeholder="The text displayed above the side navigation" value="<?php print get_setting("side_nav_heading"); ?>" />
   </div>
   
   <div class="form-item">

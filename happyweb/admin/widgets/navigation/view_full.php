@@ -1,4 +1,9 @@
-<div class="sub-navigation-heading">See also:</div>
+<?php
+$heading = get_setting("side_nav_heading");
+if ($heading != "") { ?>
+<div class="sub-navigation-heading"><?php print $heading; ?></div>
+<?php } ?>
+
 <?php
 $current_page = get_current_page();
 // check if the page has children

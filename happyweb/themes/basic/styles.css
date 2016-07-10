@@ -32,7 +32,7 @@ h3 {font-size: 18px; line-height: 28px; font-weight: 400; margin: 0 0 10px 0; pa
 p {margin: 0 0 30px 0;}
 p:last-child {margin-bottom: 0;}
 iframe {display: block; width: 100%;}
-img {}
+img {max-width: 100%;}
 
 /* list */
 ul {margin: 0; padding: 0;}
