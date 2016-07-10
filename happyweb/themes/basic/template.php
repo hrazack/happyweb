@@ -31,7 +31,7 @@
   </nav>
   
   <div id="content">
-    <?php if ($messages != "") print $messages; ?>
+    <?php if ($messages != "") print '<div class="container">'.$messages.'</div>'; ?>
     <?php print $content; ?>
   </div>
   

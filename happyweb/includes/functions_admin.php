@@ -50,8 +50,8 @@ function display_page_list_row($page) {
   }
   $output = '
     <div class="cell page">'.$link_page.'</div>
-    <div class="cell edit">'.$link_edit.'</div>
     <div class="cell delete">'.$link_delete.'</div>
+    <div class="cell edit">'.$link_edit.'</div>
   ';
   return $output;
 } // display_page_list_row

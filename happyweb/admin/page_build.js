@@ -2,14 +2,53 @@ $(document).ready(function() {
   
   var current_column;
   var current_widget;
-  
+
+  // add "Heading" plugin to TinyMCE
+  tinyMCE.PluginManager.add('heading', function(editor, url) {
+    editor.addButton("heading", {
+      tooltip: "Heading",
+      text: "Heading",
+      onClick: function() { editor.execCommand('mceToggleFormat', false, "h2"); },
+      onPostRender: function() {
+        var self = this, setup = function() {
+          editor.formatter.formatChanged("h2", function(state) {
+            self.active(state);
+          });
+        };
+        editor.formatter ? setup() : editor.on('init', setup);
+      }
+    })
+  });
+
   // wysiwyg editor options
   editor_options = {
-    btns: [['formatting'], ['strong', 'em', 'underline', 'strikethrough'], ['justifyLeft', 'justifyCenter', 'justifyRight'], ['unorderedList', 'orderedList'], 'link', 'viewHTML'],
-    removeformatPasted: true,
-    //autogrow: true
+    selector: '.formatted',
+    menubar: false,
+    plugins: 'link paste autolink code heading',
+    paste_as_text: true,
+    target_list: false,
+    link_title: false,
+    link_class_list: [
+      {title: 'Default', value: ''},
+      {title: 'Button', value: 'button'}
+    ],
+    height: 400,
+    toolbar: 'heading bold italic underline strikethrough | bullist numlist | alignleft aligncenter alignright | link unlink | code',
+    content_css: '/happyweb/themes/basic/styles.css',
+    setup: function (editor) {
+      editor.on('change', function () {
+        editor.save();
+      });
+    }
   };
   
+  // Make sure jquery_ui doesn't block TinyMCE
+  $(document).on('focusin', function(e) {
+      if ($(e.target).closest(".mce-window, .moxman-window").length) {
+      e.stopImmediatePropagation();
+    }
+  });
+        
   // form validation
   $("form").validate({
     invalidHandler: function(event, validator) {
@@ -17,12 +56,15 @@ $(document).ready(function() {
     }
   });
   
-  // tooltips
-  $('.tooltip').tooltipster({
+  // tooltip options
+  tooltip_options = {
     animation: 'grow',
     theme: 'tooltipster-borderless',
     delay: 0
-  });
+  };
+  
+  // tooltips
+  $('.tooltip').tooltipster(tooltip_options);
   
   // page submit
   $(".submit.page").click(function() {
@@ -55,6 +97,7 @@ $(document).ready(function() {
         new_row = $('<div/>').html(string).contents();
         new_row.hide().appendTo("#rows-container").slideDown();
         $("#add-row").removeClass("loader");
+        $('.tooltip').tooltipster(tooltip_options);
       }
     });
   });
@@ -214,7 +257,7 @@ $(document).ready(function() {
         $("#loader").hide();
         // open the widget form in a dialog
         $("#widget_form_dialog").html(string);
-        $('.ui-dialog textarea.formatted').trumbowyg(editor_options);
+        tinymce.init(editor_options);
         widget_list_dialog.dialog("close");
         widget_form_dialog.dialog("open");
       }
@@ -236,7 +279,7 @@ $(document).ready(function() {
         $("#loader").hide();
         // open the widget form in a dialog
         $("#widget_form_dialog").html(string);
-        $('.ui-dialog textarea.formatted').trumbowyg(editor_options);
+        tinymce.init(editor_options);
         widget_form_dialog.dialog("open");
       }
     });
@@ -251,7 +294,7 @@ $(document).ready(function() {
     $.ajax({
       url: "/ajax/widget_submit",
       type: "post",
-      data: new FormData(this), //$("form[name='widget']").serialize(),
+      data: new FormData(this),
       dataType: "json",
       processData: false,
       contentType: false,
@@ -267,6 +310,8 @@ $(document).ready(function() {
             widget_container = current_column.find(".widgets-container");
             new_widget = $('<div/>').html(data.widget_box).contents();
             new_widget.hide().appendTo(widget_container).fadeIn();
+            // register tooltip
+            $('.tooltip').tooltipster(tooltip_options);
           }
           else {
             // update the widget

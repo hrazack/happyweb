@@ -10,13 +10,12 @@
   <title><?php print $head_page_title; ?></title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="/happyweb/includes/happyweb.css" media="all" />
-  <link rel="stylesheet" href="/happyweb/includes/trumbowyg/trumbowyg.css" media="all" />
   <link rel="stylesheet" href="/happyweb/includes/tooltipster/tooltipster.min.css" media="all" />
   <link rel="stylesheet" href="/happyweb/themes/admin/styles.css" media="all" />
-  <script src="/happyweb/includes/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="/happyweb/includes/jquery.validate.min.js"></script>
-  <script src="/happyweb/includes/jquery-ui.min.js"></script>
-  <script src="/happyweb/includes/trumbowyg/trumbowyg.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
   <script src="/happyweb/includes/tooltipster/tooltipster.min.js"></script>
 </head>
 
