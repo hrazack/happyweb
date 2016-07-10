@@ -1,6 +1,20 @@
 <?php
 
 /**
+ * updates the value of a setting
+ */
+function update_setting($name, $value) {
+  global $db;
+  if ($db->get_var("SELECT name FROM settings WHERE name='".$name."'")) {
+    $db->query("UPDATE settings SET value='".$value."' WHERE name='".$name."'");
+  }
+  else {
+    $db->query("INSERT INTO settings (name, value) VALUES ('".$name."', '".$value."')");
+  }
+} // update_setting
+
+
+/**
  * checks if a file already exists. If so, rename it with incremental number
  */
 function file_newname($path, $filename) {
@@ -20,6 +34,27 @@ function file_newname($path, $filename) {
    }
   return $newname;
 } // file_newname
+
+
+/**
+ * display a row on the list of pages
+ */
+function display_page_list_row($page) {
+  $link_page = '<i class="material-icons">open_with</i><a href="/'.$page->url.'">'.$page->title.'</a>';
+  $link_edit = '<a href="/admin/page_edit/'.$page->id.'"><i class="material-icons md-24">edit</i> edit</a>';
+  if ($page->id == 1 || $page->id == 2) {
+    $link_delete = '<span class="disabled"><i class="material-icons md-24">clear</i> delete</span>';
+  }
+  else {
+    $link_delete = '<a href="/admin/page_delete/'.$page->id.'"><i class="material-icons md-24">clear</i> delete</a>';
+  }
+  $output = '
+    <div class="cell page">'.$link_page.'</div>
+    <div class="cell edit">'.$link_edit.'</div>
+    <div class="cell delete">'.$link_delete.'</div>
+  ';
+  return $output;
+} // display_page_list_row
 
 
 /**

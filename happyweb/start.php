@@ -70,10 +70,10 @@ switch(arg(0)) {
     $content = build_page($page);
 
     // get the current theme
-    $theme = $db->get_var("SELECT value FROM settings WHERE name='theme'");
+    $theme = get_setting("theme");
     
     // get the site name
-    $site_name = $db->get_var("SELECT value FROM settings WHERE name='site_name'");
+    $site_name = get_setting("site_name");
     
     // get admin tools
     $admin_tools = get_admin_tools($page);

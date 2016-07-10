@@ -21,6 +21,9 @@ function redirect($path) {
 } // set_message
 
 
+/**
+ * returns the current page
+ */
 function get_current_page() {
   global $db;
   $url_info = parse_url($_SERVER['REQUEST_URI']);
@@ -40,6 +43,15 @@ function get_current_page() {
   $page = $db->get_row("SELECT * FROM page WHERE id=".$page_id);
   return $page;
 } // get_current_page
+
+
+/**
+ * returns a setting's value
+ */
+function get_setting($name) {
+  global $db;
+  return $db->get_var("SELECT value FROM settings WHERE name='".$name."'");
+} // get_setting
 
 
 /**

@@ -44,7 +44,6 @@
       ?>
       <ul class="side-navigation">
         <li class="<?php print $selected_pages; ?>"><a href="/admin"><i class="material-icons">library_books</i> Pages</a></li>
-        <li class="<?php print $selected_navigation; ?>"><a href="/admin/navigation"><i class="material-icons">featured_play_list</i> Navigation</a></li>
         <li class="<?php print $selected_users; ?>"><a href="/admin/users"><i class="material-icons">account_circle</i> Users</a></li>
         <li class="<?php print $selected_settings; ?>"><a href="/admin/settings"><i class="material-icons">settings</i>Settings</a></li>
         <li class="new-section"><a href="/admin/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>

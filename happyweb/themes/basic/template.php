@@ -37,7 +37,7 @@
   
   <footer>
     <div class="container">
-      Super footer
+      <?php print get_setting("footer_text"); ?>
     </div>
   </footer>
   

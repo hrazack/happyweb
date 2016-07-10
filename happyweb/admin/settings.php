@@ -4,9 +4,11 @@ $display_navigation = true;
 if (isset($_POST["action"])) {
   
   $site_name = $db->escape($_POST["site_name"]);
-  $db->query("UPDATE settings SET value='".$site_name."' WHERE name='site_name'");
+  update_setting("site_name", $site_name);
+  $footer_text = $db->escape($_POST["footer_text"]);
+  update_setting("footer_text", $footer_text);
   $theme = $_POST["theme"];
-  $db->query("UPDATE settings SET value='".$theme."' WHERE name='theme'");
+  update_setting("theme", $theme);
   set_message('The settings have been updated!');
   redirect('admin/settings');
   
@@ -19,20 +21,24 @@ if (isset($_POST["action"])) {
   
   <div class="form-item">
     <label>Site name:</label>
-    <?php $site_name = $db->get_var("SELECT value FROM settings WHERE name='site_name'"); ?>
-    <input type="text" class="text" name="site_name" placeholder="The name of the site" value="<?php print $site_name; ?>" required />
+    <input type="text" class="text" name="site_name" placeholder="The name of the site" value="<?php print get_setting("site_name"); ?>" required />
+  </div>
+  
+  <div class="form-item">
+    <label>Text in the footer:</label>
+    <input type="text" class="text" name="footer_text" placeholder="The text at the bottom of each page" value="<?php print get_setting("footer_text"); ?>" required />
   </div>
   
   <div class="form-item">
     <label>Theme:</label>
     <select name="theme">
       <?php
-      $current_theme = $db->get_var("SELECT value FROM settings WHERE name='theme'");
+      $current_theme = get_setting("theme");
       $selected = ($current_theme == "basic")?"selected":"";
       ?>
       <option value="basic" <?php print $selected; ?>>Basic</option>
       <?php
-      $themes = array_diff(scandir("custom_themes"), array('..', '.', 'readme.txt'));
+      $themes = array_diff(scandir("your_site/themes"), array('..', '.', 'readme.txt'));
       foreach($themes as $theme) {
         $selected = ($current_theme == $theme)?"selected":"";
         ?>
