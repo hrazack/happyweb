@@ -19,6 +19,5 @@
   </div>
    
   <a class="add-widget icon grey tooltip" title="Add something to this column">Add something</a>
-  <!--<a class="add-widget grey" title="Add something here"><i class="material-icons">add_circle</i>Add something here</a>-->
-  
+ 
 </div>

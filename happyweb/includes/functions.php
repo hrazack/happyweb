@@ -170,8 +170,8 @@ function build_page($page) {
   global $db;
   $content = "";
   if ($rows = $db->get_results("SELECT * FROM row WHERE page_id=".$page->id." ORDER BY display_order ASC")) {
-    foreach($rows as $row) {
-      $content .= '<section>';
+    foreach($rows as $index => $row) {
+      $content .= '<section id="section'.$index.'">';
       $content .= '<div class="container">';
       if ($row->heading != "") {
         $content .= '<h1>'.$row->heading.'</h1>';

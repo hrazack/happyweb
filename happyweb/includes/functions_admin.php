@@ -155,6 +155,14 @@ function save_page($var, $page_id = 0) {
   foreach($var["rows"] as $row) {
     save_row($row, $page_id);
   }
+  // save text widgets
+  if (isset($var["widget_text"])) {
+    foreach($var["widget_text"] as $widget_id => $text) {
+      $text = $db->escape($text);
+      $db->query("UPDATE widget_text SET text='".$text."' WHERE widget_id=".$widget_id);
+    }
+  }
+  // when editing a page, do some clean up
   if ($page_id != 0) {
     // delete rows that have been removed
     if ($var["deleted_rows"] != "") {

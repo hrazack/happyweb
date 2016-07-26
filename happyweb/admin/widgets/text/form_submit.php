@@ -1,5 +1,5 @@
 <?php
-$text = $db->escape($_POST["text"]);
+$text = (isset($_POST["text"]))?$db->escape($_POST["text"]):"";
 
 if ($action == "create") {
   $db->query("INSERT INTO widget_text (widget_id, text) VALUES (".$widget_id.", '".$text."')");

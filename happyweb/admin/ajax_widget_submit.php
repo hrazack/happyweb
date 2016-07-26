@@ -24,17 +24,16 @@ include($_SERVER["DOCUMENT_ROOT"]."/happyweb/admin/widgets/".$widget->type."/for
 
 // get some output to pass on to the javascript
 if ($action == "create") {
-  // get widget box
+  // get widget box (that's the whole box, including the toolbar)
   ob_start();
   require('inc_form_widget.php');
   $data->widget_box = ob_get_contents();
   ob_end_clean();
 }
 else {
-  // only get widget overview
+  // only get widget overview (we don't need the whole box, we are just updating the content of the overview)
   $data->widget_overview = build_widget_overview($widget);
 }
 
 print json_encode($data);
-
 ?>

@@ -75,6 +75,9 @@ switch(arg(0)) {
     // get the site name
     $site_name = get_setting("site_name");
     
+    // add body class
+    $body_class = "page".$page->id;
+    
     // get admin tools
     $admin_tools = get_admin_tools($page);
 

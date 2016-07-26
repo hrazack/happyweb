@@ -88,12 +88,12 @@
 
 <div id="widget-list">
   <ul class="widget-list">
-    <li><a data-widget-type="text" class="text"><i class="material-icons bigger">subject</i>Some text</a></li>
-    <li><a data-widget-type="image" class="image"><i class="material-icons bigger">image</i>An image</a></li>
-    <li><a data-widget-type="video" class="video"><i class="material-icons bigger">video_label</i>A video</a></li>
+    <li><a data-widget-type="text" data-require-form="false" class="text"><i class="material-icons bigger">subject</i>Some text</a></li>
+    <li><a data-widget-type="image" data-require-form="true" class="image"><i class="material-icons bigger">image</i>An image</a></li>
+    <li><a data-widget-type="video" data-require-form="true" class="video"><i class="material-icons bigger">video_label</i>A video</a></li>
   </ul>
   <p><a class="more"><i class="material-icons icon-open">arrow_right</i><i class="material-icons icon-close">arrow_drop_down</i> More things you can add</a></p>
   <ul class="widget-list extra">
-    <li><a data-widget-type="navigation" class="navigation"><i class="material-icons bigger">featured_play_list</i>Navigation</a></li>
+    <li><a data-widget-type="navigation" data-require-form="false" class="navigation"><i class="material-icons bigger">featured_play_list</i>Navigation</a></li>
   </ul>
 </div>

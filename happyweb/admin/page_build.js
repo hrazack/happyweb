@@ -24,7 +24,9 @@ $(document).ready(function() {
   editor_options = {
     selector: '.formatted',
     menubar: false,
-    plugins: 'link paste autolink code heading',
+    statusbar: false,
+    plugins: 'link paste autolink code heading autoresize',
+    autoresize_max_height: 800,
     paste_as_text: true,
     target_list: false,
     link_title: false,
@@ -41,10 +43,11 @@ $(document).ready(function() {
       });
     }
   };
+  tinymce.init(editor_options);
   
   // Make sure jquery_ui doesn't block TinyMCE
   $(document).on('focusin', function(e) {
-      if ($(e.target).closest(".mce-window, .moxman-window").length) {
+    if ($(e.target).closest(".mce-window, .moxman-window").length) {
       e.stopImmediatePropagation();
     }
   });
@@ -219,9 +222,6 @@ $(document).ready(function() {
     autoOpen: false,
     modal: true,
     width: 800,
-    close: function( event, ui ) {
-      $('body').removeClass('stop-scrolling');
-    },
     buttons: [
       {
         text: "Save",
@@ -245,27 +245,43 @@ $(document).ready(function() {
     $("#loader-anim").position({my: 'center', at: 'center', of: window, collision: 'fit'});
     widget_list_dialog.dialog("close");
     widget_type = $(this).attr("data-widget-type");
+    is_display_form = $(this).attr("data-require-form");
     row = current_column.parents("section");
     col_id = current_column.find(".col-id").val();
-    number_of_widgets = current_column.find(".col-number-of-widgets").val();
+    number_of_widgets = parseInt(current_column.find(".col-number-of-widgets").val());
     display_order = number_of_widgets + 1;
     index_row = row.find(".row-index").val();
     index_col = current_column.find(".col-display-order").val();
-    // get the content of the widget form
-    $.ajax({
-      url: "/ajax/widget_form",
-      method: "post",
-      data: {action: "create", widget_type: widget_type, col_id: col_id, display_order: display_order, index_row: index_row, index_col: index_col},
-      success: function(string) {
-        $("#loader").hide();
-        $('body').addClass('stop-scrolling');
-        // open the widget form in a dialog
-        $("#widget_form_dialog").html(string);
-        tinymce.init(editor_options);
-        widget_list_dialog.dialog("close");
-        widget_form_dialog.dialog("open");
-      }
-    });
+    if (is_display_form == "true") {
+      // get the content of the widget form
+      $.ajax({
+        url: "/ajax/widget_form",
+        method: "post",
+        data: {action: "create", widget_type: widget_type, col_id: col_id, display_order: display_order, index_row: index_row, index_col: index_col},
+        success: function(string) {
+          $("#loader").hide();
+          // open the widget form in a dialog
+          $("#widget_form_dialog").html(string);
+          tinymce.init(editor_options);
+          widget_list_dialog.dialog("close");
+          widget_form_dialog.dialog("open");
+        }
+      });
+    }
+    else {
+      // if the widget doesn't require a form, we insert the widget overview straightaway
+      $.ajax({
+          url: "/ajax/widget_submit",
+          type: "POST",
+          data: {action: "create", widget_type: widget_type, col_id: col_id, display_order: display_order, index_row: index_row, index_col: index_col},
+          success: function(data, status) {
+            data = jQuery.parseJSON(data);
+            insert_widget(data);
+            tinymce.init(editor_options);
+            $("#loader").hide();
+          }
+      });
+    }
   });
   
   // editing a widget
@@ -281,7 +297,6 @@ $(document).ready(function() {
       data: {action: "edit", widget_id: widget_id},
       success: function(string) {
         $("#loader").hide();
-        $('body').addClass('stop-scrolling')
         // open the widget form in a dialog
         $("#widget_form_dialog").html(string);
         tinymce.init(editor_options);
@@ -307,19 +322,10 @@ $(document).ready(function() {
       success: function(data, status) {
         if (data.status != "error") {
           if (data.action == "create") {
-            // update the number of widgets for that column
-            number_of_widgets = parseInt(current_column.find(".col-number-of-widgets").val());
-            widget_display_order = number_of_widgets + 1;
-            current_column.find(".col-number-of-widgets").val(widget_display_order);
-            // insert the widget
-            widget_container = current_column.find(".widgets-container");
-            new_widget = $('<div/>').html(data.widget_box).contents();
-            new_widget.hide().appendTo(widget_container).fadeIn();
-            // register tooltip
-            $('.tooltip').tooltipster(tooltip_options);
+            insert_widget(data);
           }
           else {
-            // update the widget
+            // update the widget (just the overview)
             widget_overview = current_widget.find(".widget-overview");
             widget_overview.html(data.widget_overview);
           }
@@ -391,5 +397,19 @@ $(document).ready(function() {
     }
   });
   $(".widgets-container").disableSelection();
+  
+  // inserts a widget in the current column (that's called after an ajax call to the widget submit form)
+  function insert_widget(data) {
+    // update the number of widgets for that column
+    number_of_widgets = parseInt(current_column.find(".col-number-of-widgets").val());
+    widget_display_order = number_of_widgets + 1;
+    current_column.find(".col-number-of-widgets").val(widget_display_order);
+    // insert the widget (the whole box)
+    widget_container = current_column.find(".widgets-container");
+    new_widget = $('<div/>').html(data.widget_box).contents();
+    new_widget.hide().appendTo(widget_container).fadeIn();
+    // register tooltip
+    $('.tooltip').tooltipster(tooltip_options);
+  }
   
 });

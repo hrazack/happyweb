@@ -15,7 +15,7 @@
 	<meta property="og:url" content="<?php print $_SERVER['REQUEST_URI']; ?>">
 </head>
 
-<body>
+<body class="<?php print $body_class; ?>">
 
   <header>
     <div class="container">
@@ -41,7 +41,7 @@
     </div>
   </footer>
   
-  <script type="text/javascript" src="/happyweb/includes/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript" src="/happyweb/includes/scripts.js"></script>
   <?php print $admin_tools; ?>
   
