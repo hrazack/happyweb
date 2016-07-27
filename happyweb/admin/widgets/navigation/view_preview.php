@@ -1,1 +1,1 @@
-Page navigation
+Side navigation

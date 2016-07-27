@@ -4,8 +4,8 @@ $video_description = ($action == "edit")?$data->video_description:"";
 ?>
 
 <div class="form-item">
-  <label>Youtube URL:</label>
-  <input name="video_url" class="text" placeholder="Please paste the full Youtube video link here" value="<?php print $video_url; ?>" required />
+  <label>Youtube or Vimeo URL:</label>
+  <input name="video_url" class="text" placeholder="Please paste the full Youtube or Vimeo video link here" value="<?php print $video_url; ?>" required />
 </div>
 
 <div class="form-item">
