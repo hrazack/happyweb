@@ -1,10 +1,21 @@
-<?php
-$video = get_video($data->video_url);
+<?php 
+if ($data->popup == 0) {
+  ?>
+  <div class="video-container">
+    <?php print get_video_iframe($data->video_url); ?>
+  </div>
+  <?php
+}
+else {
+  $thumbnail_url = get_video_thumbnail($data->video_url);
+  ?>
+  <div class="video-thumbnail">
+    <a href="<?php print get_video_embed($data->video_url); ?>" class="colorbox"><img src="/happyweb/themes/basic/images/icon-play.png" width="60" /></a>
+    <img src="<?php print $thumbnail_url; ?>" />
+  </div>
+  <?php
+}
 ?>
-
-<div class="video-container">
-  <?php print $video; ?>
-</div>
 
 <?php if ($data->video_description != "") { ?>
 <div class="video-description">

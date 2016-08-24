@@ -6,8 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <!--<link rel="shortcut icon" href="http://www.livingmelody.com/sites/default/files/favicon-lm.png" type="image/png" />-->
   <title><?php print $page->title; ?> | <?php print $site_name; ?></title>
-  <link rel="stylesheet" href="/happyweb/includes/happyweb.css" media="all" />
-  <link rel="stylesheet" href="/happyweb/themes/<?php print $theme; ?>/styles.css" media="all" />
+  <?php print $css; ?>
   <meta name="description" content="<?php print $page->description; ?>">
 	<meta property="og:title" content="<?php print $page->title; ?>">
 	<meta property="og:site_name" content="<?php print $page->title; ?>">
@@ -41,8 +40,7 @@
     </div>
   </footer>
   
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script type="text/javascript" src="/happyweb/includes/scripts.js"></script>
+  <?php print $scripts; ?>
   <?php print $admin_tools; ?>
   
 </body>

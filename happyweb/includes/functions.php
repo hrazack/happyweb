@@ -18,7 +18,7 @@ $columns_sizes = array(
 function redirect($path) {
   header('Location: /'.$path);
   exit();
-} // set_message
+} // redirect
 
 
 /**
@@ -135,8 +135,20 @@ function get_admin_tools($page) {
  * returns the ID for a YouTube video
  */
 function get_youtube_id($url) {
-	parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );
-	return $my_array_of_vars['v'];
+  $parts = parse_url($url);
+  if (isset($parts['query'])){
+    parse_str($parts['query'], $qs);
+    if (isset($qs['v'])){
+      return $qs['v'];
+    } else if(isset($qs['vi'])){
+      return $qs['vi'];
+    }
+  }
+  if (isset($parts['path'])){
+    $path = explode('/', trim($parts['path'], '/'));
+    return $path[count($path)-1];
+  }
+  return false;
 } // get_youtube_id
 
 
@@ -145,7 +157,7 @@ function get_youtube_id($url) {
  */
 function get_vimeo_id($url) {
 	$regex = '~(?:<iframe [^>]*src=")?(?:https?:\/\/(?:[\w]+\.)*vimeo\.com(?:[\/\w]*\/videos?)?\/([0-9]+)[^\s]*)"?(?:[^>]*></iframe>)?(?:<p>.*</p>)?~ix';
-	preg_match( $regex, $url, $matches );
+	preg_match($regex, $url, $matches);
 	return $matches[1];
 } // get_vimeo_id
 
@@ -158,22 +170,40 @@ function get_video_thumbnail($url) {
   $is_vimeo = (strpos($url, "vimeo") !== FALSE);
   if ($is_youtube) {
     $youtube_id = get_youtube_id($url);
-    $thumbnail = "http://i3.ytimg.com/vi/".$youtube_id."/mqdefault.jpg";
+    $thumbnail = "http://i3.ytimg.com/vi/".$youtube_id."/hqdefault.jpg";
   }
   else if ($is_vimeo) {
     $vimeo_id = get_vimeo_id($url);
     $data = file_get_contents("http://vimeo.com/api/v2/video/$vimeo_id.json");
     $data = json_decode($data);
-    $thumbnail = $data[0]->thumbnail_medium;
+    $thumbnail = $data[0]->thumbnail_large;
   }
   return $thumbnail;
 } // get_video_thumbnail
 
 
 /**
+ * returns an embedded YouTube or Vimeo video from the URL
+ */
+function get_video_embed($url) {
+  $is_youtube = (strpos($url, "youtu") !== FALSE);
+  $is_vimeo = (strpos($url, "vimeo") !== FALSE);
+  if ($is_youtube) {
+    $youtube_id = get_youtube_id($url);
+    $video = 'http://www.youtube.com/embed/'.$youtube_id.'?rel=0&showinfo=0&color=white&iv_load_policy=3&autoplay=1';
+  }
+  else if ($is_vimeo) {
+    $vimeo_id = get_vimeo_id($url);
+    $video = 'http://player.vimeo.com/video/'.$vimeo_id.'?title=0&byline=0&portrait=0&autoplay=1';
+  }
+  return $video;
+} // get_video_embed
+
+
+/**
  * returns a YouTube or Vimeo video from the URL
  */
-function get_video($url) {
+function get_video_iframe($url) {
   $is_youtube = (strpos($url, "youtu") !== FALSE);
   $is_vimeo = (strpos($url, "vimeo") !== FALSE);
   if ($is_youtube) {

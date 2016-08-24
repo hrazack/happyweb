@@ -13,6 +13,7 @@ require("happyweb/includes/functions.php");
 $db = new ezSQL_pdo('mysql:host='.$host.';dbname='.$db_name.';', $user, $password);
 
 // catch errors
+error_reporting(E_ALL);
 set_error_handler("set_error");
 
 // check if we have any messages to display
@@ -80,6 +81,23 @@ switch(arg(0)) {
     
     // get admin tools
     $admin_tools = get_admin_tools($page);
+    
+    // print javascript
+    $scripts = '
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.6.4/jquery.colorbox-min.js"></script>
+  <script type="text/javascript" src="/happyweb/includes/scripts.js"></script>';
+    
+    // print css
+    $css = '
+  <link rel="stylesheet" href="/happyweb/includes/happyweb.css" media="all" />
+  <link rel="stylesheet" href="/happyweb/includes/colorbox/colorbox.css" media="all" />';
+    if ($theme == "basic") {
+      $css .= '<link rel="stylesheet" href="/happyweb/themes/basic/styles.css" media="all" />';
+    }
+    else {
+      $css .= '<link rel="stylesheet" href="/your_site/themes/'.$theme.'/styles.css" media="all" />';
+    }
 
     // display the template
     $path_theme = ($theme == "basic" || $theme == "admin")?"happyweb/themes/":"your_site/themes/";

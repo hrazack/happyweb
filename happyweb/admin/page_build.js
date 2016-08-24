@@ -7,7 +7,7 @@ $(document).ready(function() {
   tinyMCE.PluginManager.add('heading', function(editor, url) {
     editor.addButton("heading", {
       tooltip: "Heading",
-      text: "Heading",
+      text: "H",
       onClick: function() { editor.execCommand('mceToggleFormat', false, "h2"); },
       onPostRender: function() {
         var self = this, setup = function() {
@@ -63,7 +63,8 @@ $(document).ready(function() {
   tooltip_options = {
     animation: 'grow',
     theme: 'tooltipster-borderless',
-    delay: 0
+    delay: 0,
+    maxWidth: 400
   };
   
   // tooltips
@@ -389,7 +390,19 @@ $(document).ready(function() {
   $(".widgets-container").sortable({
     handle: ".widget-drag",
     axis: "y",
-    update: function(event, ui) {
+    start: function (e, ui) {
+      $(ui.item).find('textarea').each(function () {
+        tinymce.execCommand('mceRemoveEditor', false, $(this).attr('id'));
+        $(this).addClass("dragged"); 
+      });
+    },
+    stop: function (e, ui) {
+      $(ui.item).find('textarea').each(function () {
+        tinymce.execCommand('mceAddEditor', true, $(this).attr('id'));
+        $(this).removeClass("dragged"); 
+      });
+    },
+    update: function(e, ui) {
       $(".widgets-container").children().each(function(i) {
         display_order = i+1;
         $(this).find(".widget-display-order").val(display_order);

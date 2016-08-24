@@ -4,9 +4,9 @@
     <div class="toolbar-item edit"><a title="Edit this <?php print $widget->type; ?>" class="edit-widget icon tooltip"><i class="material-icons">create</i></a></div>
     <?php } ?>
     <div class="toolbar-item delete"><a title="Delete this <?php print $widget->type; ?>" class="delete-widget icon tooltip"><i class="material-icons">delete</i></a></div>
-    <?php if ($widget->type != "text") { ?>
+    <?php //if ($widget->type != "text") { ?>
     <div class="toolbar-item widget-drag"><i class="material-icons">open_with</i></div>
-    <?php } ?>
+    <?php //} ?>
   </div>
   <div class="widget-info">
     <?php print $widget->type; ?>

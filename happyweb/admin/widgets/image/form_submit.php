@@ -3,6 +3,7 @@
 include($_SERVER["DOCUMENT_ROOT"]."/happyweb/includes/image_manipulator.php");
 $file_path = "your_site/uploaded_files/";
 $size = $db->escape($_POST["size"]);
+$description = $db->escape($_POST["description"]);
 
 // uploading a new image
 if ($action == "create") {
@@ -19,7 +20,7 @@ if ($action == "create") {
       resize_image($result->file_name, $file_path."originals/", $size);
       // save data
       $file_name = $db->escape($result->file_name);
-      $db->query("INSERT INTO widget_image (widget_id, file, size) VALUES (".$widget_id.", '".$file_name."', '".$size."')");
+      $db->query("INSERT INTO widget_image (widget_id, file, size, description) VALUES (".$widget_id.", '".$file_name."', '".$size."', '".$description."')");
     }
     else {
       $data->status = "error";
@@ -31,6 +32,7 @@ if ($action == "create") {
 // editing an existing image
 else {
    $original_data = $db->get_row("SELECT * FROM widget_image WHERE widget_id=".$widget_id);
+   $db->query("UPDATE widget_image SET description='".$description."' WHERE widget_id=".$widget_id);
    
   // if we have entered a new image
   if ($_FILES['image_file']['error'] == 0) {

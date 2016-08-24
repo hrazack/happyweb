@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * increment update index
+ */
+function increment_update() {
+  global $db;
+  $db->query("UPDATE settings SET value=value+1 WHERE name='current_update'");
+} // increment_update
+
+
+/**
  * updates the value of a setting
  */
 function update_setting($name, $value) {
@@ -40,7 +49,12 @@ function file_newname($path, $filename) {
  * display a row on the list of pages
  */
 function display_page_list_row($page) {
-  $link_page = '<a href="/'.$page->url.'">'.$page->title.'</a>';
+  $max_length = 50;
+  $title = $page->title;
+  if (strlen($page->title) > $max_length) {
+    $title = substr($page->title, 0, $max_length)."...";
+  }
+  $link_page = '<a href="/'.$page->url.'">'.$title.'</a>';
   $link_edit = '<a href="/admin/page_edit/'.$page->id.'"><i class="material-icons md-24">edit</i> edit</a>';
   if ($page->id == 1 || $page->id == 2) {
     $link_delete = '<span class="disabled"><i class="material-icons md-24">clear</i> delete</span>';
@@ -98,6 +112,9 @@ function resize_image($file_name, $path, $size) {
       break;
     case "small":
       $newImage = $manipulator->resample(400, 400);
+      break;
+    case "thumbnail":
+      $newImage = $manipulator->resample(200, 200);
       break;
   }
   $manipulator->save('your_site/uploaded_files/'.$size."/".$file_name);
