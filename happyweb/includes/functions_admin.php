@@ -130,6 +130,7 @@ function create_new_row($index) {
   $row->display_order = $index;
   $row->columns_size = "two-large-small";
   $row->number_of_columns = 2;
+  $row->no_padding = 0;
   $row->heading = "";
   $row->column1 = "";
   $row->column2 = "";
@@ -210,12 +211,13 @@ function save_row($row, $page_id) {
   global $db;
   $row_id = $row["id"];
   $heading = $db->escape($row["heading"]);
+  $no_padding = (isset($row["options"]["no_padding"]))?1:0;
   if ($row["id"] == 0) { // this is a new row
-    $db->query("INSERT INTO row (page_id, display_order, columns_size, number_of_columns, heading) VALUES (".$page_id.", ".$row["display_order"].", '".$row["columns_size"]."', ".$row["number_of_columns"].", '".$heading."')");
+    $db->query("INSERT INTO row (page_id, display_order, columns_size, number_of_columns, heading, no_padding) VALUES (".$page_id.", ".$row["display_order"].", '".$row["columns_size"]."', ".$row["number_of_columns"].", '".$heading."', ".$no_padding.")");
     $row_id = $db->insert_id;
   }
   else { // updating an existing row
-    $db->query("UPDATE row SET display_order=".$row["display_order"].", columns_size='".$row["columns_size"]."', number_of_columns=".$row["number_of_columns"].", heading='".$heading."' WHERE id=".$row_id);
+    $db->query("UPDATE row SET display_order=".$row["display_order"].", columns_size='".$row["columns_size"]."', number_of_columns=".$row["number_of_columns"].", heading='".$heading."', no_padding=".$no_padding." WHERE id=".$row_id);
   }
   // save columns
   for ($i=1; $i<=$row["number_of_columns"]; $i++) {

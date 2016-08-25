@@ -5,6 +5,16 @@
   <input type="hidden" name="rows[<?php print $index_row; ?>][index]" class="row-index" value="<?php print $row->display_order; ?>" />
   <input type="hidden" name="rows[<?php print $index_row; ?>][id]" class="row-id" value="<?php print $row->id; ?>" />
   
+  <div class="row-options">
+    <?php
+    $checked = ($row->no_padding == 1)?"checked":"";
+    ?>
+    <div class="form-item">
+      <input type="checkbox" name="rows[<?php print $index_row; ?>][options][no_padding]" value="1" <?php print $checked; ?> />
+      <label class="inline">Remove the top and bottom padding for this row</label>
+    </div>
+  </div>
+  
   <div class="row-toolbar toolbar">
     <div class="row-toolbar-columns">
       <?php 
@@ -17,7 +27,7 @@
       }?>
     </div>
     <div class="row-toolbar-icons">
-      <!--<div class="toolbar-item settings"><a title="Row settings"><i class="material-icons">settings</i></a></div>-->
+      <div class="toolbar-item settings"><a title="Some options for this row" class="tooltip icon row-options-button"><i class="material-icons">settings</i></a></div>
       <!--<div class="toolbar-item columns"><a title="Change the columns for this row" class="tooltip icon row-columns"><i class="material-icons">view_week</i></a></div>-->
       <div class="toolbar-item delete"><a title="Delete this row" class="tooltip icon delete-row"><i class="material-icons">delete</i></a></div>
       <div class="toolbar-item row-drag"><i class="material-icons">open_with</i></div>

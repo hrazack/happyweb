@@ -6,6 +6,7 @@ body.mce-content-body {text-align: left; padding: 10px !important; overflow-y: s
 .container {max-width: 1100px; margin: auto; text-align: left;}
 section {padding: 50px; border-bottom: solid 1px #ddd;}
 section:nth-child(odd) {background: #efefef; overflow: hidden;}
+section.no-padding {padding: 0;}
 .widget {margin: 0 0 40px 0; overflow: hidden;}
 .widget:last-child {margin: 0;}
 
@@ -68,7 +69,6 @@ a:hover {opacity: 0.7;}
 
 /* widget: thumbnail */
 .widget.thumbnail {margin-bottom: 20px;}
-.widget.thumbnail:last-child {margin-bottom: 40px;}
 .widget.thumbnail img {float: left; width: 150px; margin: 0 20px 20px 0;}
 .widget.thumbnail .heading {margin-left: 170px;}
 .widget.thumbnail .text {margin-left: 170px;}

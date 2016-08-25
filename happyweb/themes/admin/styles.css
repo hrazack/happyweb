@@ -73,6 +73,8 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 .row-toolbar-icons div.row-drag {width: 20px; height: 20px; display: inline-block; cursor: move;}
 .row-toolbar-columns {position: absolute; padding: 10px; left: 0px; top: 0px; overflow: hidden;}
 
+.row-options {display: none;}
+
 .row-content {padding: 20px; background: #f2f2f2; border-top: solid 1px #aaa}
 .row-content > div {overflow: hidden;} /* that's the columns container */
 .row-content textarea {width: 100%; min-height: 200px; margin: 0; min-width: 10px;}

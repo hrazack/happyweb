@@ -1,5 +1,6 @@
 $(document).ready(function() {
   
+  var current_row;
   var current_column;
   var current_widget;
 
@@ -169,6 +170,29 @@ $(document).ready(function() {
     }
   });
   $("#rows-container").disableSelection();
+  
+  // row options
+  $(document).on("click", ".row-options-button", function() {
+    current_row = $(this).parents("section");
+    row_options = current_row.find('.row-options');
+    row_options.dialog({
+      autoOpen: true,
+      modal: true,
+      width: 800,
+      buttons: [
+        {
+          text: "Save",
+          click: function() {
+            $(this).dialog("destroy");
+          }
+        }
+      ],
+      close: function() {
+        $(this).dialog("destroy");
+      }
+    });
+    row_options.dialog("open");
+  });
   
   
   /************/

@@ -55,6 +55,14 @@ function perform_update($index) {
       $db->query("ALTER TABLE `widget_video` ADD `popup` INT(2) NOT NULL DEFAULT '0' AFTER `video_description`;"); 
       $message .= "<p>Added popup option for videos</p>";
       increment_update();
+      
+    // Add padding options for rows
+    case 5:
+      $db->query("ALTER TABLE `settings` DROP `id`;");
+      $db->query("ALTER TABLE `settings` ADD UNIQUE(`name`);");
+      $db->query("ALTER TABLE `row` ADD `no_padding` INT(2) NOT NULL DEFAULT '0' AFTER `heading`;");
+      $message .= "<p>Added padding options for rows</p>";
+      increment_update();
 
   }
   return $message;
