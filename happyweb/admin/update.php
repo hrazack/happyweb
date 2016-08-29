@@ -63,7 +63,14 @@ function perform_update($index) {
       $db->query("ALTER TABLE `row` ADD `no_padding` INT(2) NOT NULL DEFAULT '0' AFTER `heading`;");
       $message .= "<p>Added padding options for rows</p>";
       increment_update();
-
+    
+    // Rename "thumbnail" widget to "image link"
+    case 6:
+      $db->query("RENAME TABLE `widget_thumbnail` TO `widget_imagelink`;");
+      $db->query("UPDATE widget SET type='imagelink' WHERE type='thumbnail';");
+      $message .= "<p>Renamed 'thumbnail' into 'widget_link'</p>";
+      increment_update();
+      
   }
   return $message;
 } // perform_updates

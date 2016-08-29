@@ -20,7 +20,7 @@ if ($action == "create") {
       resize_image($result->file_name, $file_path."originals/", "thumbnail");
       // save data
       $file_name = $db->escape($result->file_name);
-      $db->query("INSERT INTO widget_thumbnail (widget_id, file, heading, text, url) VALUES (".$widget_id.", '".$file_name."', '".$heading."', '".$text."', '".$url."')");
+      $db->query("INSERT INTO widget_imagelink (widget_id, file, heading, text, url) VALUES (".$widget_id.", '".$file_name."', '".$heading."', '".$text."', '".$url."')");
     }
     else {
       $data->status = "error";
@@ -30,8 +30,8 @@ if ($action == "create") {
 }
 
 else {
-  $original_data = $db->get_row("SELECT * FROM widget_thumbnail WHERE widget_id=".$widget_id);
-  $db->query("UPDATE widget_thumbnail SET text='".$text."', heading='".$heading."', url='".$url."' WHERE widget_id=".$widget_id);
+  $original_data = $db->get_row("SELECT * FROM widget_imagelink WHERE widget_id=".$widget_id);
+  $db->query("UPDATE widget_imagelink SET text='".$text."', heading='".$heading."', url='".$url."' WHERE widget_id=".$widget_id);
    
   // if we have entered a new image
   if ($_FILES['image_file']['error'] == 0) {
@@ -41,7 +41,7 @@ else {
       resize_image($result->file_name, $file_path."originals/", "thumbnail");
       // save data
       $file_name = $db->escape($result->file_name);
-      $db->query("UPDATE widget_thumbnail SET file='".$file_name."' WHERE widget_id=".$widget_id);
+      $db->query("UPDATE widget_image_link SET file='".$file_name."' WHERE widget_id=".$widget_id);
       // delete the previous image
       unlink($_SERVER["DOCUMENT_ROOT"]."/".$file_path."medium/".$original_data->file);
       // delete the previous resized image

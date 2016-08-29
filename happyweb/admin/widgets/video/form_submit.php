@@ -1,7 +1,7 @@
 <?php
 $video_url = $db->escape($_POST["video_url"]);
 $video_description = (isset($_POST["video_description"]))?$db->escape($_POST["video_description"]):"";
-$popup = isset($_POST["popup"])?1:0;
+$popup = $_POST["popup"];
 
 if ($action == "create") {
   $db->query("INSERT INTO widget_video (widget_id, video_url, video_description, popup) VALUES (".$widget_id.", '".$video_url."', '".$video_description."', ".$popup.")");

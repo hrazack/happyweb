@@ -67,11 +67,11 @@ a:hover {opacity: 0.7;}
 .widget.navigation ul li.selected a {color: #777;}
 .sub-navigation-heading {margin: 0 0 10px 0;}
 
-/* widget: thumbnail */
-.widget.thumbnail {margin-bottom: 20px;}
-.widget.thumbnail img {float: left; width: 150px; margin: 0 20px 20px 0;}
-.widget.thumbnail .heading {margin-left: 170px;}
-.widget.thumbnail .text {margin-left: 170px;}
+/* widget: image link */
+.widget.imagelink {margin-bottom: 20px;}
+.widget.imagelink img {float: left; width: 150px; margin: 0 20px 20px 0;}
+.widget.imagelink .heading {margin-left: 170px;}
+.widget.imagelink .text {margin-left: 170px;}
 
 
 
