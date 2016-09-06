@@ -7,6 +7,7 @@
   <!--<link rel="shortcut icon" href="http://www.livingmelody.com/sites/default/files/favicon-lm.png" type="image/png" />-->
   <title><?php print $page->title; ?> | <?php print $site_name; ?></title>
   <?php print $css; ?>
+  <?php print $scripts; ?>
   <meta name="description" content="<?php print $page->description; ?>">
 	<meta property="og:title" content="<?php print $page->title; ?>">
 	<meta property="og:site_name" content="<?php print $page->title; ?>">
@@ -40,7 +41,6 @@
     </div>
   </footer>
   
-  <?php print $scripts; ?>
   <?php print $admin_tools; ?>
   
 </body>

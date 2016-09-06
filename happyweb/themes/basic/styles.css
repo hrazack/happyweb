@@ -73,6 +73,32 @@ a:hover {opacity: 0.7;}
 .widget.imagelink .heading {margin-left: 170px;}
 .widget.imagelink .text {margin-left: 170px;}
 
+/* widget: slideshow */
+.widget.slideshow .slideshow-full {margin: 0 0 20px 0;}
+#content .widget.slideshow .slideshow-full img {outline: none; width: auto;}
+.widget.slideshow .slideshow-nav div {margin: 0 10px 0 0; outline: none;}
+.widget.slideshow .slideshow-nav div img {border: solid 2px transparent; width: 80px;}
+.widget.slideshow .slideshow-nav.slick-initialized div img {width: 100%;}
+.widget.slideshow .slideshow-nav div.slick-current img {border-color: #000;}
+
+#content .slideshow-full img {display: none;}
+#content .slideshow-full img:first-child {display: block;}
+#content .slideshow-full.slick-initialized img {display: block;}
+#content .slideshow-nav div {display: none;}
+#content .slideshow-nav div:first-child {display: block;}
+#content .slideshow-nav.slick-initialized div {display: block;}
+
+.slick-dots {margin: 10px 0 0 0; text-align: center;}
+.slick-dots ul {display: inline-block !important; margin: auto;}
+.slick-dots li {display: inline-block; margin: 0 5px;}
+.slick-dots li button {color: transparent; border: none; cursor: pointer; outline: none; background: #ccc; width: 12px; height: 12px; border-radius: 12px;}
+.slick-dots li.slick-active button {background: #000;}
+.slick-arrow {z-index: 10; position: absolute; top: 50%; display: block; cursor: pointer; border: none; color: transparent; outline: none; width: 55px; height: 55px; background: url(/happyweb/themes/basic/images/arrows.png) no-repeat;}
+.slick-arrow.slick-prev, .slick-arrow.slick-prev.slick-disabled:hover {left: 10px; background-position: -3px -33px;}
+.slick-arrow.slick-prev:hover {background-position: -123px -33px;}
+.slick-arrow.slick-next, .slick-arrow.slick-next.slick-disabled:hover {right: 10px; background-position: -63px -33px;}   
+.slick-arrow.slick-next:hover {background-position: -183px -33px;}
+.slick-arrow.slick-disabled {opacity: 0;}
 
 
 /* tablet */

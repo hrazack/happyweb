@@ -101,7 +101,7 @@ function upload_image($file, $path) {
  * resizes an image
  */
 function resize_image($file_name, $path, $size) {
-  $full_path = $_SERVER["DOCUMENT_ROOT"]."/".$path.$file_name;
+  $full_path = $path.$file_name;
   $manipulator = new ImageManipulator($full_path);
   switch($size) {
     case "large":
@@ -117,7 +117,7 @@ function resize_image($file_name, $path, $size) {
       $newImage = $manipulator->resample(200, 200);
       break;
   }
-  $manipulator->save('your_site/uploaded_files/'.$size."/".$file_name);
+  $manipulator->save($_SERVER["DOCUMENT_ROOT"].'/your_site/uploaded_files/'.$size."/".$file_name);
 } // resize_image
 
 

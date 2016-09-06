@@ -20,7 +20,7 @@ h3 {font-size: 20px; line-height: 30px; font-weight: 400; margin: 0 0 10px 0; pa
 p {margin: 0 0 30px 0;}
 p:last-child {margin: 0;}
 p.add-row {margin: 0 0 50px 0;}
-iframe {display: block;}
+iframe {display: block; width: 100%; border: none;}
 pre {font-size: 14px; line-height: 18px; font-family: Georgia;}
 i {float: left; margin-right: 5px; position: relative; top: 2px;}
 .material-icons.big {font-size: 36px;}
@@ -41,7 +41,7 @@ p.help i {position: absolute; top: 12px; left: 10px;}
 .loader.grey:before {background-image: url(images/loader-grey.gif);}
 
 /* links */
-a {color: #f77; text-decoration: none; cursor: pointer; transition: opacity 0.3s;}
+a {color: #f77; text-decoration: none; cursor: pointer; transition: opacity 0.3s; outline: none;}
 a:hover {opacity: 0.7; text-decoration: none;}
 a.cancel {display: inline-block; border: #ccc; background: #ff7777; color: #fff; padding: 10px 20px; margin: 0 0 0 30px; border-radius: 5px; transition: opacity 0.4s;}
 a.cancel i {position: relative; top: -5px;}
@@ -108,6 +108,8 @@ textarea.dragged {color: #fff;}
 .widget.imagelink .heading {margin-left: 170px;}
 .widget.imagelink .text {margin-left: 170px;}
 
+.widget.slideshow img {display: inline-block; width: 100px; margin: 0 15px 8px 0;}
+
 /* widget list */
 #widget-list {display: none; margin: 0 0 40px 0;}
 ul.widget-list {overflow: hidden;}
@@ -116,8 +118,9 @@ ul.widget-list li a {display: block; padding: 10px; background: #ccc; color: #ff
 ul.widget-list li a.text {background: #6fc90f;}
 ul.widget-list li a.image {background: #ff9f4a;}
 ul.widget-list li a.video {background: #3fabdd;}
-ul.widget-list li a.navigation {background: #0307bc;}
+ul.widget-list li a.navigation {background: #af8e55;}
 ul.widget-list li a.imagelink {background: #ba83f5;}
+ul.widget-list li a.slideshow {background: #d28c8c;}
 ul.widget-list li i {float: none; margin: 0 0 5px 0; display: block;}
 ul.widget-list.extra {display: none;}
 
@@ -193,7 +196,7 @@ div.mce-edit-area {border-right-width: 1px !important;}
 .dd-list .dd-list.not-in-nav {padding-left: 0;}
 .dd-collapsed .dd-list {display: none;}
 .dd-item, .dd-empty, .dd-placeholder {display: block; position: relative; margin: 0; padding: 0; min-height: 20px;}
-.dd-content {display: block; height: 50px; margin: -1px 0 0 0; padding: 0 0 0 30px; color: #333; text-decoration: none; border: 1px solid #ccc; background: #fff;}
+.dd-content {display: block; height: 50px; margin: -1px 0 0 0; padding: 0 0 0 30px; color: #333; text-decoration: none; border: 1px solid #ccc; background: #fff; overflow: hidden;}
 .dd-handle {position: absolute; top: 12px; left: 10px; width: 50px; cursor: move;}
 .dd-handle i {color: #bbb; font-size: 20px;}
 .dd-item > button {display: none;}
@@ -207,8 +210,11 @@ div.mce-edit-area {border-right-width: 1px !important;}
 .dd-content div.cell:first-child {padding: 10px;}
 .dd-content div.cell.edit {float: right; width: 140px; border-left: solid 1px #ccc;}
 .dd-content div.cell.delete {float: right; width: 140px; border-left: solid 1px #ccc;}
+.dd-content div.cell.delete.large {width: 180px;}
 .item-text {margin: 40px 0 10px 0;}
 
+.slideshow .dd-content {height: auto;}
+.slideshow .dd-content div.cell.delete {border: none;}
 
 /* tablet */
 @media (max-width: 820px) {

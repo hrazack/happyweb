@@ -1,18 +1,14 @@
 <?php
 
 include($_SERVER["DOCUMENT_ROOT"]."/happyweb/includes/image_manipulator.php");
-$file_path = "your_site/uploaded_files/";
+$file_path = $_SERVER["DOCUMENT_ROOT"]."/your_site/uploaded_files/";
 $size = $db->escape($_POST["size"]);
 $description = $db->escape($_POST["description"]);
 
 // uploading a new image
 if ($action == "create") {
   
-  if ($_FILES['image_file']['error'] > 0) {
-    $data->status = "error";
-    $data->errorMessage = $_FILES['image_file']['error'];
-  } 
-  else {
+  if ($_FILES['image_file']['error'] == 0) {
     // upload the original image
     $result = upload_image($_FILES['image_file'], $file_path."originals/");
     if ($result->status == "success") {
@@ -26,6 +22,10 @@ if ($action == "create") {
       $data->status = "error";
       $data->errorMessage = $result->erroMessage;
     }
+  }
+  else {
+    $data->status = "error";
+    $data->errorMessage = $_FILES['image_file']['error'];
   }
 }
 
@@ -44,9 +44,9 @@ else {
       $file_name = $db->escape($result->file_name);
       $db->query("UPDATE widget_image SET file='".$file_name."', size='".$size."' WHERE widget_id=".$widget_id);
       // delete the previous image
-      unlink($_SERVER["DOCUMENT_ROOT"]."/".$file_path.$original_data->size."/".$original_data->file);
+      unlink($file_path."originals/".$original_data->file);
       // delete the previous resized image
-      unlink($_SERVER["DOCUMENT_ROOT"]."/".$file_path."originals/".$original_data->file);
+      unlink($file_path.$original_data->size."/".$original_data->file);
     }
     else {
       $data->status = "error";
@@ -62,7 +62,7 @@ else {
       resize_image($original_data->file, $file_path."originals/", $size);
       $db->query("UPDATE widget_image SET size='".$size."' WHERE widget_id=".$widget_id);
       // delete the previous resized image
-      unlink($_SERVER["DOCUMENT_ROOT"]."/".$file_path.$original_data->size."/".$original_data->file);
+      unlink($file_path.$original_data->size."/".$original_data->file);
     }
   }
   
