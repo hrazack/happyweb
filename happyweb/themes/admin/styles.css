@@ -98,15 +98,8 @@ textarea.dragged {color: #fff;}
 .widget.text {padding: 0; border: none;}
 .widget.text .widget-info {display: none;}
 
-.widget.image .description {margin: 20px 0 0 0;}
-
 .video-image {position: relative;}
 .video-image:before {content: ''; position: absolute; top: 25%; left: 35%; width: 60px; height: 60px; background: url(images/icon-play.png); background-size: cover;}
-.video-description {margin: 20px 0 0 0;}
-
-.widget.imagelink img {float: left; width: 150px; margin: 0 20px 20px 0;}
-.widget.imagelink .heading {margin-left: 170px;}
-.widget.imagelink .text {margin-left: 170px;}
 
 .widget.slideshow img {display: inline-block; width: 100px; margin: 0 15px 8px 0;}
 
@@ -121,6 +114,7 @@ ul.widget-list li a.video {background: #3fabdd;}
 ul.widget-list li a.navigation {background: #af8e55;}
 ul.widget-list li a.imagelink {background: #ba83f5;}
 ul.widget-list li a.slideshow {background: #d28c8c;}
+ul.widget-list li a.quote {background: #99b348;}
 ul.widget-list li i {float: none; margin: 0 0 5px 0; display: block;}
 ul.widget-list.extra {display: none;}
 

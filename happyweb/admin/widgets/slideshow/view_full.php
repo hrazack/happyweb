@@ -10,6 +10,8 @@ foreach($files as $obj) {
 ?>
 </div>
 
+<?php
+/*
 <div class="slideshow-nav">
 <?php
 foreach($files as $obj) {
@@ -17,6 +19,8 @@ foreach($files as $obj) {
 }
 ?>
 </div>
+*/
+?>
 
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
@@ -28,8 +32,13 @@ $(document).ready(function(){
     arrows: true,
     infinite: false,
     adaptiveHeight: true,
-    asNavFor: '.slideshow-nav'
+    autoplay: true,
+    autoplaySpeed: 5000,
+    dots: true,
+    //variableWidth: true
+    //asNavFor: '.slideshow-nav'
   });
+  /*
   $('.slideshow-nav').slick({
     slidesToShow: 8,
     slidesToScroll: 1,
@@ -37,7 +46,9 @@ $(document).ready(function(){
     dots: true,
     arrows: false,
     infinite: false,
+    autoplay: true,
+    autoplaySpeed: 5000,
     focusOnSelect: true
-  });
+  });*/
 });
 </script>

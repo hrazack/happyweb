@@ -1,19 +1,18 @@
+/* body */
+* {box-sizing: border-box;}
 body {text-align: center; font-family: Georgia; font-size: 18px; line-height: 28px; color: #000; background: #fff; margin: 0; padding: 0; position: relative; width: 100%; height: 100%;}
 body.mce-content-body {text-align: left; padding: 10px !important; overflow-y: scroll;}
-* {box-sizing: border-box;}
 
 /* structure */
 .container {max-width: 1100px; margin: auto; text-align: left;}
 section {padding: 50px; border-bottom: solid 1px #ddd;}
 section:nth-child(odd) {background: #efefef; overflow: hidden;}
-section.no-padding {padding: 0;}
 .widget {margin: 0 0 40px 0; overflow: hidden;}
 .widget:last-child {margin: 0;}
 
 /* header */
 header {background: #ddd; padding: 50px; height: 200px; position: relative;}
 header h1 {font-size: 50px; line-height: 50px; margin: 0;}
-header #mobile-nav-button {display: none; background: url(images/icon-mobile.png) no-repeat; width: 32px; height: 23px; position: absolute; top: 20px; right: 20px; cursor: pointer; text-indent: -9999px;}
 
 /* footer */
 footer {background: #ddd; padding: 30px;}
@@ -24,17 +23,12 @@ nav ul {margin: 0; padding: 0;}
 nav ul li {margin: 0 50px 0 0; padding: 0; list-style: none; display: inline-block;}
 nav ul li a {}
 nav ul li.selected a {color: #777;}
-nav #mobile-nav-close {display: none; cursor: pointer; position: absolute; top: 10px; right: 10px; background: url(images/icon-close.png) 0px 3px no-repeat; padding: 0 0 0 25px;}
 
-/* general */ 
+/* headings */ 
 h1, h2, h3 {font-family: Georgia;}
 h1 {font-size: 34px; line-height: 40px; font-weight: 400; margin: 0 0 30px 0; padding: 0;}
 h2 {font-size: 26px; line-height: 36px; font-weight: 400; margin: 0 0 20px 0; padding: 0;}
 h3 {font-size: 18px; line-height: 28px; font-weight: 400; margin: 0 0 10px 0; padding: 0;}
-p {margin: 0 0 30px 0;}
-p:last-child {margin-bottom: 0;}
-iframe {display: block; width: 100%;}
-#content img {max-width: 100%; height: auto; display: block;}
 
 /* list */
 ul {margin: 0; padding: 0;}
@@ -44,61 +38,7 @@ ul li {margin: 0; padding: 0;}
 a {color: #f77; text-decoration: none; transition: opacity 0.3s;}
 a:hover {opacity: 0.7;}
 
-/* messages */
-.messages {display: block; background: #eaf4e7; border: solid 1px #2fbc03; color: #2fbc03; padding: 20px; margin: 0 0 30px 0; max-width: 700px;}
-.messages ul {margin: 0 0 0 10px;}
-.errors {display: block; background: #ffd4d4; border: solid 1px #f00; color: #f00; padding: 20px; margin: 0 0 30px 0; max-width: 700px;}
-.errors ul {margin: 0 0 0 10px;}
 
-/* widget: video */
-.video-container {position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;}
-.video-container iframe, .video-container object, .video-container embed {position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
-.video-thumbnail {position: relative;}
-.video-thumbnail a {position: absolute; top: 25%; left: 35%; outline: none;}
-.video-description {margin-top: 10px;}
-
-/* widget: image */
-.widget.image .description {margin-top: 10px;}
-
-/* widget: sub navigation */
-.widget.navigation ul {margin: 0; padding: 0; border-bottom: solid 1px #ccc;}
-.widget.navigation ul li {margin: 0; padding: 0; list-style: none; border-top: solid 1px #ccc;}
-.widget.navigation ul li a {display: block; padding: 10px 0;}
-.widget.navigation ul li.selected a {color: #777;}
-.sub-navigation-heading {margin: 0 0 10px 0;}
-
-/* widget: image link */
-.widget.imagelink {margin-bottom: 20px;}
-.widget.imagelink img {float: left; width: 150px; margin: 0 20px 20px 0;}
-.widget.imagelink .heading {margin-left: 170px;}
-.widget.imagelink .text {margin-left: 170px;}
-
-/* widget: slideshow */
-.widget.slideshow .slideshow-full {margin: 0 0 20px 0;}
-#content .widget.slideshow .slideshow-full img {outline: none; width: auto;}
-.widget.slideshow .slideshow-nav div {margin: 0 10px 0 0; outline: none;}
-.widget.slideshow .slideshow-nav div img {border: solid 2px transparent; width: 80px;}
-.widget.slideshow .slideshow-nav.slick-initialized div img {width: 100%;}
-.widget.slideshow .slideshow-nav div.slick-current img {border-color: #000;}
-
-#content .slideshow-full img {display: none;}
-#content .slideshow-full img:first-child {display: block;}
-#content .slideshow-full.slick-initialized img {display: block;}
-#content .slideshow-nav div {display: none;}
-#content .slideshow-nav div:first-child {display: block;}
-#content .slideshow-nav.slick-initialized div {display: block;}
-
-.slick-dots {margin: 10px 0 0 0; text-align: center;}
-.slick-dots ul {display: inline-block !important; margin: auto;}
-.slick-dots li {display: inline-block; margin: 0 5px;}
-.slick-dots li button {color: transparent; border: none; cursor: pointer; outline: none; background: #ccc; width: 12px; height: 12px; border-radius: 12px;}
-.slick-dots li.slick-active button {background: #000;}
-.slick-arrow {z-index: 10; position: absolute; top: 50%; display: block; cursor: pointer; border: none; color: transparent; outline: none; width: 55px; height: 55px; background: url(/happyweb/themes/basic/images/arrows.png) no-repeat;}
-.slick-arrow.slick-prev, .slick-arrow.slick-prev.slick-disabled:hover {left: 10px; background-position: -3px -33px;}
-.slick-arrow.slick-prev:hover {background-position: -123px -33px;}
-.slick-arrow.slick-next, .slick-arrow.slick-next.slick-disabled:hover {right: 10px; background-position: -63px -33px;}   
-.slick-arrow.slick-next:hover {background-position: -183px -33px;}
-.slick-arrow.slick-disabled {opacity: 0;}
 
 
 /* tablet */
@@ -110,13 +50,11 @@ a:hover {opacity: 0.7;}
 @media (max-width: 500px) {
   header {padding: 20px; height: 150px;}
   header h1 {font-size: 40px; line-height: 40px;}
-  header #mobile-nav-button {display: inline-block;}
-  nav {display: block; position: fixed; top: 0; right: -250px; width: 250px; border-left: solid 4px #f2f2f2; z-index: 1000; height: 100%; padding: 0; overflow-x: none; overflow-y: auto; text-align: left; background: #fff;}
+  nav {padding: 0; border-left: solid 4px #f2f2f2;}
   nav ul {margin: 45px 0 0 0;}
   nav ul li {margin: 0; padding: 0; display: block;}
   nav ul li a {color: #555; display: block; padding: 12px 10px; font-weight: normal; background: none; transition: all 0.4s;}
   nav ul li a:hover {background-color: #f4f4f4; text-decoration: none; opacity: 1;}
-  nav #mobile-nav-close {display: block;}
   section {padding: 20px;}
   footer {padding: 20px;}
 }

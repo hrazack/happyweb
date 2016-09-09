@@ -74,9 +74,16 @@ function perform_update($index) {
     // Add slideshow widget
     case 7:
       $db->query("CREATE TABLE IF NOT EXISTS `widget_slideshow` (`widget_id` int(11) NOT NULL, `filenames` mediumtext NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;"); 
-      $db->query("ALTER TABLE `widget_slideshow` ADD UNIQUE KEY `widget_id` (`widget_id`);")
+      $db->query("ALTER TABLE `widget_slideshow` ADD UNIQUE KEY `widget_id` (`widget_id`);");
       $message .= "<p>Added slideshow widget</p>";
       increment_update();    
+    
+    // Add quote widget
+    case 8:
+      $db->query("CREATE TABLE IF NOT EXISTS `widget_quote` (`widget_id` int(11) NOT NULL, `text` mediumtext NOT NULL, `author` varchar(400) NOT NULL DEFAULT '') ENGINE=InnoDB DEFAULT CHARSET=latin1;"); 
+      $db->query("ALTER TABLE `widget_quote` ADD UNIQUE KEY `widget_id` (`widget_id`);");
+      $message .= "<p>Added quote widget</p>";
+      increment_update(); 
   }
   return $message;
 } // perform_updates

@@ -4,7 +4,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <!--<link rel="shortcut icon" href="http://www.livingmelody.com/sites/default/files/favicon-lm.png" type="image/png" />-->
+  <link rel="shortcut icon" href="/happyweb/themes/basic/images/favicon.png" type="image/png" />
   <title><?php print $page->title; ?> | <?php print $site_name; ?></title>
   <?php print $css; ?>
   <?php print $scripts; ?>
