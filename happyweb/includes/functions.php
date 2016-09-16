@@ -22,6 +22,20 @@ function redirect($path) {
 
 
 /**
+ * get the base url
+ */
+function base_url() {
+  if (isset($_SERVER['HTTPS'])){
+    $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+  }
+  else {
+    $protocol = 'http';
+  }
+  return $protocol . "://" . $_SERVER['HTTP_HOST'];
+} // base_url
+
+
+/**
  * returns the current page
  */
 function get_current_page() {
@@ -129,6 +143,26 @@ function get_admin_tools($page) {
   }
   return $output;
 } // get_admin_tools
+
+
+/**
+ * add some javascript to be inserted in the page
+ */
+function add_js($js) {
+  if (!in_array($js, $_SESSION['happyweb']['js'])) {
+    $_SESSION['happyweb']['js'][] = $js;
+  }
+} // add_js
+
+
+/**
+ * add some css to be inserted in the page
+ */
+function add_css($css) {
+  if (!in_array($css, $_SESSION['happyweb']['css'])) {
+    $_SESSION['happyweb']['css'][] = $css;
+  }
+} // add_css
 
 
 /**

@@ -23,6 +23,10 @@ $messages = get_messages();
 $url_info = parse_url($_SERVER['REQUEST_URI']);
 $path = ltrim($url_info["path"], "/");
 
+// initialize optional extra scripts and styles
+$_SESSION['happyweb']['js'] = array();
+$_SESSION['happyweb']['css'] = array();
+
 switch(arg(0)) {
   
   // first, let's check if it's an admin page
@@ -84,14 +88,20 @@ switch(arg(0)) {
     
     // print javascript
     $scripts = '
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.6.4/jquery.colorbox-min.js"></script>
-  <script type="text/javascript" src="/happyweb/includes/scripts.js"></script>';
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.6.4/jquery.colorbox-min.js"></script>
+      <script src="/happyweb/includes/scripts.js"></script>';
+    foreach($_SESSION['happyweb']['js'] as $js) {
+      $scripts .= "\n".$js;
+    }
     
     // print css
     $css = '
-  <link rel="stylesheet" href="/happyweb/includes/happyweb.css" media="all" />
-  <link rel="stylesheet" href="/happyweb/includes/colorbox/colorbox.css" media="all" />';
+      <link rel="stylesheet" href="/happyweb/includes/happyweb.css" media="all" />
+      <link rel="stylesheet" href="/happyweb/includes/colorbox/colorbox.css" media="all" />';
+    foreach($_SESSION['happyweb']['css'] as $c) {
+      $css .= "\n".$c;
+    }
     if ($theme == "basic") {
       $css .= '<link rel="stylesheet" href="/happyweb/themes/basic/styles.css" media="all" />';
     }

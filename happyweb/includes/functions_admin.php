@@ -98,6 +98,32 @@ function upload_image($file, $path) {
 
 
 /**
+ * uploads a file
+ */
+function upload_file($file, $path) {
+  $result = new stdClass();
+  $result->status = "success";
+  $validExtensions = array('.mp3');
+  $fileExtension = strrchr($file['name'], ".");
+  if (in_array($fileExtension, $validExtensions)) {
+    $file_name = file_newname($path, $file['name']);
+    $destination = $path.$file_name;
+    if (move_uploaded_file($file['tmp_name'], $destination)) {
+      $result->file_name = $file_name;
+    }
+    else {
+      $result->status = "error";
+      $result->errorMessage = "Mmm, something went wrong with the file upload...";
+    }
+  } else {
+    $result->status = "error";
+    $result->errorMessage = "The file must be an MP3 file";
+  }
+  return $result;
+} // upload_file
+
+
+/**
  * resizes an image
  */
 function resize_image($file_name, $path, $size) {

@@ -31,8 +31,10 @@ h2 {font-size: 26px; line-height: 36px; font-weight: 400; margin: 0 0 20px 0; pa
 h3 {font-size: 18px; line-height: 28px; font-weight: 400; margin: 0 0 10px 0; padding: 0;}
 
 /* list */
-ul {margin: 0; padding: 0;}
-ul li {margin: 0; padding: 0;}
+ul {margin: 0 0 30px 30px; padding: 0;}
+ul li {margin: 0 0 10px 0; padding: 0;}
+ol {margin: 0 0 30px 30px; padding: 0;}
+ol li {margin: 0 0 10px 0;}
 
 /* links */
 a {color: #f77; text-decoration: none; transition: opacity 0.3s;}

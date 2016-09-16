@@ -20,7 +20,7 @@ if ($action == "create") {
     }
     else {
       $data->status = "error";
-      $data->errorMessage = $result->erroMessage;
+      $data->errorMessage = $result->errorMessage;
     }
   }
   else {
@@ -49,7 +49,7 @@ else {
     }
     else {
       $data->status = "error";
-      $data->errorMessage = $result->erroMessage;
+      $data->errorMessage = $result->errorMessage;
     }
   }
 }

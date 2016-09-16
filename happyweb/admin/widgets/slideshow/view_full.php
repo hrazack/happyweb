@@ -1,5 +1,8 @@
 <?php
 $files = json_decode($data->filenames);
+add_css('<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>');
+add_js('<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>');
+add_js('<script type="text/javascript" src="/happyweb/admin/widgets/slideshow/slideshow.js"></script>');
 ?>
 
 <div class="slideshow-full">
@@ -21,34 +24,3 @@ foreach($files as $obj) {
 </div>
 */
 ?>
-
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
-<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-<script>
-$(document).ready(function(){
-  $('.slideshow-full').slick({
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    infinite: false,
-    adaptiveHeight: true,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    dots: true,
-    //variableWidth: true
-    //asNavFor: '.slideshow-nav'
-  });
-  /*
-  $('.slideshow-nav').slick({
-    slidesToShow: 8,
-    slidesToScroll: 1,
-    asNavFor: '.slideshow-full',
-    dots: true,
-    arrows: false,
-    infinite: false,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    focusOnSelect: true
-  });*/
-});
-</script>

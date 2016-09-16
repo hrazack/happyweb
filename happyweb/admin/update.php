@@ -84,6 +84,14 @@ function perform_update($index) {
       $db->query("ALTER TABLE `widget_quote` ADD UNIQUE KEY `widget_id` (`widget_id`);");
       $message .= "<p>Added quote widget</p>";
       increment_update(); 
+      
+    // Add audio widget
+    case 9:
+      $db->query("CREATE TABLE IF NOT EXISTS `widget_audio` (`widget_id` int(11) NOT NULL, `file` varchar(400) NOT NULL DEFAULT '', `title` varchar(400) NOT NULL DEFAULT '', `description` mediumtext NOT NULL DEFAULT '') ENGINE=InnoDB DEFAULT CHARSET=latin1;"); 
+      $db->query("ALTER TABLE `widget_audio` ADD UNIQUE KEY `widget_id` (`widget_id`);");
+      $message .= "<p>Added audio widget</p>";
+      increment_update(); 
+      
   }
   return $message;
 } // perform_updates
