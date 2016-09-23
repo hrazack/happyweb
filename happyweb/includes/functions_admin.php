@@ -77,7 +77,7 @@ function display_page_list_row($page) {
 function upload_image($file, $path) {
   $result = new stdClass();
   $result->status = "success";
-  $validExtensions = array('.jpg', '.jpeg', '.gif', '.png');
+  $validExtensions = array('.jpg', '.jpeg', '.gif', '.png', '.JPG', '.JPEG');
   $fileExtension = strrchr($file['name'], ".");
   if (in_array($fileExtension, $validExtensions)) {
     $file_name = file_newname($path, $file['name']);

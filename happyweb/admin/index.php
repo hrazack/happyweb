@@ -32,7 +32,7 @@ if (isset($_POST["action"])) {
   
 <div class="dd">
   <ol class="dd-list">
-     <?php
+    <?php
     $pages = $db->get_results("SELECT * FROM page WHERE parent=0 ORDER BY display_order ASC");
     foreach($pages as $page) {
       ?>

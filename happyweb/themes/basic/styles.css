@@ -9,6 +9,7 @@ section {padding: 50px; border-bottom: solid 1px #ddd;}
 section:nth-child(odd) {background: #efefef; overflow: hidden;}
 .widget {margin: 0 0 40px 0; overflow: hidden;}
 .widget:last-child {margin: 0;}
+p {margin: 0 0 30px 0;}
 
 /* header */
 header {background: #ddd; padding: 50px; height: 200px; position: relative;}
@@ -31,15 +32,16 @@ h2 {font-size: 26px; line-height: 36px; font-weight: 400; margin: 0 0 20px 0; pa
 h3 {font-size: 18px; line-height: 28px; font-weight: 400; margin: 0 0 10px 0; padding: 0;}
 
 /* list */
-ul {margin: 0 0 30px 30px; padding: 0;}
-ul li {margin: 0 0 10px 0; padding: 0;}
-ol {margin: 0 0 30px 30px; padding: 0;}
+ul {margin: 0 0 30px 0; padding: 0; list-style: none;}
+ul li {margin: 0 0 10px 0; padding: 0 0 0 20px; position: relative;}
+.widget.text ul li:before, .mce-content-body ul li:before {content: ''; width: 8px; height: 8px; background: #aaa; position: absolute; top: 10px; left: 0; border-radius: 8px;}
+ol {margin: 0 0 30px 25px; padding: 0;}
 ol li {margin: 0 0 10px 0;}
 
 /* links */
 a {color: #f77; text-decoration: none; transition: opacity 0.3s;}
 a:hover {opacity: 0.7;}
-
+a.button {display: inline-block; background: #f77; color: #fff; border-radius: 4px; padding: 10px 20px;}
 
 
 

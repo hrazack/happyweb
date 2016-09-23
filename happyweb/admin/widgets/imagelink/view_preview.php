@@ -1,4 +1,6 @@
-<img src="/your_site/uploaded_files/thumbnail/<?php print $data->file; ?>" />
+<div class="image">
+  <img src="/your_site/uploaded_files/thumbnail/<?php print $data->file; ?>" />
+</div>
 
 <div class="heading">
   <a href="/<?php print $data->url; ?>"><?php print $data->heading; ?></a>

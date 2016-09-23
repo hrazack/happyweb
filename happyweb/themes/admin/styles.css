@@ -85,7 +85,6 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 .widgets-container {position: relative;}
 .widget {margin: 0 0 20px 0; position: relative;}
 .widget {border: dotted 1px #999; background: #fff; padding: 40px 20px 20px 20px; min-height: 100px; overflow: hidden;}
-.widget.navigation {background: #eee;}
 .widget img {display: block; max-width: 100%;}
 .widget-toolbar {position: absolute; right: 5px; top: 6px; color: #999; display: none; z-index: 5;}
 .widget:hover .widget-toolbar {display: inline-block;}
@@ -95,13 +94,13 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 .icon.add-widget {display: inline-block; background: url(images/icon-add.png) no-repeat; width: 45px; height: 45px; text-indent: -9999px;/*border: dotted 1px #999; background: #fff; padding: 15px 20px 15px 15px; display: block;*/}
 textarea.dragged {color: #fff;}
 
+.widget.navigation {background: #eee;}
 .widget.text {padding: 0; border: none;}
 .widget.text .widget-info {display: none;}
-
-.video-image {position: relative;}
-.video-image:before {content: ''; position: absolute; top: 25%; left: 35%; width: 60px; height: 60px; background: url(images/icon-play.png); background-size: cover;}
-
-.widget.slideshow img {display: inline-block; width: 100px; margin: 0 15px 8px 0;}
+.video-image {position: relative; display: inline-block; overflow: hidden;}
+.video-image:before {content: ''; position: absolute; top: calc(50% - 30px); left: calc(50% - 30px); width: 60px; height: 60px; background: url(images/icon-play.png); background-size: cover;}
+.video-image img {margin: -10% 0;}
+.widget.slideshow img {display: inline-block; width: 100px; margin: 0 15px 8px 0; float: left;}
 
 /* widget list */
 #widget-list {display: none; margin: 0 0 40px 0;}

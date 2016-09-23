@@ -17,7 +17,7 @@ $(document).ready(function() {
           });
         };
         editor.formatter ? setup() : editor.on('init', setup);
-      }
+      },
     })
   });
 
@@ -26,19 +26,21 @@ $(document).ready(function() {
     selector: '.formatted',
     menubar: false,
     statusbar: false,
-    plugins: 'link paste autolink code heading autoresize',
+    plugins: 'paste autolink code heading autoresize',
+    external_plugins: {
+      "superlinks": "/happyweb/includes/tinymce_plugins/superlinks.js"
+    },
     autoresize_max_height: 800,
     paste_as_text: true,
-    target_list: false,
-    link_title: false,
+    relative_urls: false,
     link_class_list: [
       {title: 'Default', value: ''},
       {title: 'Button', value: 'button'}
     ],
     height: 400,
-    toolbar: 'heading bold italic underline strikethrough | bullist numlist | alignleft aligncenter alignright | link unlink | code',
+    toolbar: 'heading bold italic underline strikethrough | bullist numlist | alignleft aligncenter alignright | superlinks | code',
     content_css: '/happyweb/themes/basic/styles.css',
-    setup: function (editor) {
+    setup: function(editor) {
       editor.on('change', function () {
         editor.save();
       });
@@ -47,9 +49,9 @@ $(document).ready(function() {
   tinymce.init(editor_options);
   
   // Make sure jquery_ui doesn't block TinyMCE
-  $(document).on('focusin', function(e) {
-    if ($(e.target).closest(".mce-window, .moxman-window").length) {
-      e.stopImmediatePropagation();
+  $.widget("ui.dialog", $.ui.dialog, {
+    _allowInteraction: function(event) {
+      return !!$(event.target).closest(".mce-container").length || this._super( event );
     }
   });
         

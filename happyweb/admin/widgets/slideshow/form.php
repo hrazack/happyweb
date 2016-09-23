@@ -25,7 +25,7 @@ $filenames = ($action == "edit")?$data->filenames:"";
 
 <div class="form-item file-upload">
   <div class="form-element">
-    <label>Add some images</label />
+    <label>Add some images from your computer</label />
     <input type="file" name="image_files" id="file-upload" multiple />
   </div>
   <div class="loader"></div>
@@ -68,7 +68,6 @@ $(document).ready(function() {
       contentType: false,
       cache: false,
       success: function(data) {
-        console.log(data);
         if (data.status != "error") {
           $('#file-upload').val();
           $.each(data.files, function(key, filename) {
@@ -86,7 +85,7 @@ $(document).ready(function() {
           });
         }
         else {
-          console.log("error: "+data.errorMessage);
+          alert("error: "+data.errorMessage);
         }
         $(".file-upload .form-element").show();
         $(".file-upload .loader").hide();

@@ -10,8 +10,9 @@ else {
   $thumbnail_url = get_video_thumbnail($data->video_url);
   ?>
   <div class="video-thumbnail">
-    <a href="<?php print get_video_embed($data->video_url); ?>" class="colorbox"><img src="/happyweb/themes/basic/images/icon-play.png" width="60" /></a>
-    <img src="<?php print $thumbnail_url; ?>" />
+    <a href="<?php print get_video_embed($data->video_url); ?>" class="colorbox">
+      <img src="<?php print $thumbnail_url; ?>" />
+    </a>
   </div>
   <?php
 }

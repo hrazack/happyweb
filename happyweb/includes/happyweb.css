@@ -10,7 +10,7 @@ iframe {display: block; width: 100%;}
 #content img {max-width: 100%; height: auto; display: block;}
 
 /* admin tools */
-#admin-tools {position: absolute; top: 10px; left: 10px; margin: 0; padding: 5px 5px 0 5px; background: #fff; border-radius: 5px; opacity: 0.6; transition: opacity 0.3s;}
+#admin-tools {position: fixed; top: 10px; left: 10px; margin: 0; padding: 5px 5px 0 5px; background: #fff; border-radius: 5px; opacity: 0.6; transition: opacity 0.3s;}
 #admin-tools:hover {opacity: 1;}
 #admin-tools li {margin: 0 5px 0 5px; padding: 0; list-style: none; background: none; display: inline-block;}
 
@@ -49,7 +49,9 @@ iframe {display: block; width: 100%;}
 .video-container {position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;}
 .video-container iframe, .video-container object, .video-container embed {position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
 .video-thumbnail {position: relative;}
-.video-thumbnail a {position: absolute; top: 25%; left: 35%; outline: none;}
+.video-thumbnail a {display: inline-block; position: relative; outline: none; overflow: hidden;}
+.video-thumbnail a:before {content: ''; position: absolute; top: calc(50% - 30px); left: calc(50% - 30px); width: 60px; height: 60px; background: url(images/icon-play.png); background-size: cover; outline: none;}
+.video-thumbnail a img {margin: -10% 0;}
 .video-description {margin-top: 10px; font-style: italic; font-size: 0.9em;}
 
 /* widget: image */
@@ -64,7 +66,8 @@ iframe {display: block; width: 100%;}
 
 /* widget: image link */
 .widget.imagelink {margin-bottom: 20px;}
-.widget.imagelink img {float: left; width: 150px; margin: 0 20px 20px 0;}
+.widget.imagelink .image {width: 150px; height: 150px; float: left; margin: 0 20px 20px 0; overflow: hidden; position: relative;}
+.widget.imagelink .image img {position: absolute; top: 0;}
 .widget.imagelink .heading {margin-left: 170px;}
 .widget.imagelink .text {margin-left: 170px;}
 
