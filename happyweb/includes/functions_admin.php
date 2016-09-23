@@ -148,6 +148,25 @@ function resize_image($file_name, $path, $size) {
 
 
 /**
+ * returns a tree of all pages (in hierarchical order)
+ */
+function get_pages_tree(&$pages_full, &$pages_url, $page_id=0, $level=0) {
+  global $db;
+  if ($pages = $db->get_results("SELECT * FROM page WHERE parent=".$page_id." ORDER BY display_order ASC")) {
+    foreach($pages as $page) {
+      $page_title = str_repeat("-- ",$level).$page->title;
+      $obj = new stdClass();
+      $obj->text = $page_title;
+      $obj->value = "/".$page->url;
+      $pages_full[] = $obj;
+      $pages_url[] = "/".$page->url;
+      get_pages_tree($pages_full, $pages_url, $page->id, $level+1);
+    }
+  }
+} // page_tree
+
+
+/**
  * creates a new empty row
  */
 function create_new_row($index) {

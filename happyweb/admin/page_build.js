@@ -28,17 +28,17 @@ $(document).ready(function() {
     statusbar: false,
     plugins: 'paste autolink code heading autoresize',
     external_plugins: {
-      "superlinks": "/happyweb/includes/tinymce_plugins/superlinks.js"
+      "happylink": "/happyweb/includes/tinymce_plugins/happylink.js"
     },
     autoresize_max_height: 800,
     paste_as_text: true,
     relative_urls: false,
     link_class_list: [
-      {title: 'Default', value: ''},
-      {title: 'Button', value: 'button'}
+      {title: 'Regular link', value: ''},
+      {title: 'Button link', value: 'button'}
     ],
     height: 400,
-    toolbar: 'heading bold italic underline strikethrough | bullist numlist | alignleft aligncenter alignright | superlinks | code',
+    toolbar: 'heading bold italic underline strikethrough | bullist numlist | alignleft aligncenter alignright | happylink | code',
     content_css: '/happyweb/themes/basic/styles.css',
     setup: function(editor) {
       editor.on('change', function () {

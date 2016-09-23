@@ -1,8 +1,8 @@
-tinymce.PluginManager.add('superlinks', function(editor) {
+tinymce.PluginManager.add('happylink', function(editor) {
 
   this.showDialog = showDialog;
   
-  editor.addButton('superlinks', {
+  editor.addButton('happylink', {
 		icon: 'link',
 		tooltip: 'Add/edit a link',
 		onclick: showDialog,
@@ -18,10 +18,10 @@ tinymce.PluginManager.add('superlinks', function(editor) {
       data = jQuery.parseJSON(data);
       pages = data.pages;
       pages_url = data.pages_url;
-      page1 = {text: '- Please choose -', value: ''};
-      page2 = {text: '[A page outside of the site]', value: 'external-url'};
-      pages.unshift(page2);
-      pages.unshift(page1);
+      //page_select = {text: '- Please choose -', value: ''};
+      page_external = {text: '[A page outside of the site]', value: 'external-url'};
+      pages.push(page_external);
+      //pages.unshift(page_select);
     }
   });
   

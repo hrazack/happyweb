@@ -1,8 +1,29 @@
 <?php
 $text = ($action == "edit")?$data->text:"";
 $heading = ($action == "edit")?$data->heading:"";
+$external_url = "";
 $url = ($action == "edit")?$data->url:"";
 $label_image = ($action == "edit")?"Select a new image":"Select your image";
+
+$pages_full = array();
+$pages_url = array();
+
+// get pages that are in the hierarchy
+get_pages_tree($pages_full, $pages_url);
+
+// get other pages
+$pages = $db->get_results("SELECT * FROM page WHERE parent=-1 AND id!=2 ORDER BY display_order ASC");
+foreach($pages as $page) {
+  $obj = new stdClass();
+  $obj->text = $page->title;
+  $obj->value = "/".$page->url;
+  $pages_full[] = $obj;
+  $pages_url[] = "/".$page->url;
+}
+
+if (!in_array($url, $pages_url)) {
+  $external_url = $url;
+}
 ?>
 
 <?php if ($action == "edit") { ?>
@@ -30,7 +51,30 @@ $label_image = ($action == "edit")?"Select a new image":"Select your image";
 </div>
 
 <div class="form-item">
-  <label>Address of the page you would like to link to</label />
-  <input name="url" class="text" value="<?php print $url; ?>" placeholder='Something like "about-us", or "contact/location-map"' />
+  <label>Choose the page you would like to link to</label />
+  <select name="url" id="image-link-url">
+    <?php 
+    foreach($pages_full as $page) { 
+      $selected = ($url == $page->value)?"selected":"";
+      ?>
+      <option value="<?php print $page->value; ?>" <?php print $selected; ?>><?php print $page->text; ?></option>
+    <?php } ?>
+    <option value="external-url" <?php print ($external_url != "")?"selected":""; ?>>[A page outside of your site]</option>
+  </select>
+</div>
+  
+<div class="form-item" id="image-link-external-url" style="display: <?php print ($external_url != "")?"block":"none"; ?>;">
+  <label>Type the address of the outside page</label />
+  <input name="external-url" class="text" value="<?php print $external_url; ?>" placeholder='Something like "www.google.com"' />
 </div>
 
+<script>
+  $("#image-link-url").change(function() {
+    if ($(this).val() == "external-url") {
+      $("#image-link-external-url").slideDown();
+    }
+    else {
+      $("#image-link-external-url").slideUp();
+    }
+  });
+</script>

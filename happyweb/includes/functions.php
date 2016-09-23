@@ -79,8 +79,8 @@ function set_message($str) {
 /**
  * catches and sets errors to be displayed
  */
-function set_error($errno, $errstr) {
-  $_SESSION["happyweb"]["errors"][] = $errstr;
+function set_error($error_level, $message, $filename, $line, $context) {
+  $_SESSION["happyweb"]["errors"][] = $message." in ".$filename." on line ".$line;
 } // display_error
 
 

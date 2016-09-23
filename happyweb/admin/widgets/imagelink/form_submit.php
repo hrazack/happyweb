@@ -5,6 +5,9 @@ $file_path = $_SERVER["DOCUMENT_ROOT"]."/your_site/uploaded_files/";
 $text = (isset($_POST["text"]))?$db->escape($_POST["text"]):"";
 $heading = (isset($_POST["heading"]))?$db->escape($_POST["heading"]):"";
 $url = (isset($_POST["url"]))?$db->escape($_POST["url"]):"";
+if ($url == "external-url") {
+  $url = (isset($_POST["external-url"]))?$db->escape($_POST["external-url"]):"";
+}
 
 if ($action == "create") {
   

@@ -3,7 +3,7 @@
 </div>
 
 <div class="heading">
-  <a href="/<?php print $data->url; ?>"><?php print $data->heading; ?></a>
+  <a href="<?php print $data->url; ?>"><?php print $data->heading; ?></a>
 </div>
 
 <?php if ($data->text != "") { ?>

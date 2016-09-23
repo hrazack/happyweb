@@ -13,8 +13,7 @@ require("happyweb/includes/functions.php");
 $db = new ezSQL_pdo('mysql:host='.$host.';dbname='.$db_name.';', $user, $password);
 
 // catch errors
-error_reporting(E_ALL);
-set_error_handler("set_error");
+set_error_handler("set_error", E_ALL);
 
 // check if we have any messages to display
 $messages = get_messages();
