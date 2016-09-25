@@ -5,19 +5,13 @@ $display_navigation = true;
 if (isset($_POST["action"])) {
   
   $pages = json_decode($_POST["pages"]); 
-  foreach($pages as $index => $page) {
-    $db->query("UPDATE page SET parent=0, display_order=".$index." WHERE id=".$page->id);
-    if (isset($page->children)) {
-      foreach($page->children as $index_sub => $sub_page) {
-        $db->query("UPDATE page SET parent=".$page->id.", display_order=".$index_sub." WHERE id=".$sub_page->id);
-      }
-    }
-  }
+  save_pages_order($pages, 0);
   set_message('The page order has been updated!');
   redirect('admin');
   
 }   
 ?>
+
 
 <p class="help">
   <i class="material-icons">info_outline</i>
@@ -31,53 +25,7 @@ if (isset($_POST["action"])) {
 <form action="<?php print $url_info["path"];?>" method="post">
   
 <div class="dd">
-  <ol class="dd-list">
-    <?php
-    $pages = $db->get_results("SELECT * FROM page WHERE parent=0 ORDER BY display_order ASC");
-    foreach($pages as $page) {
-      ?>
-      <li class="dd-item" data-id="<?php print $page->id; ?>">
-        <div class="dd-handle"><i class="material-icons">open_with</i></div>
-        <div class="dd-content"><?php print display_page_list_row($page); ?></div>
-        <?php
-        if ($sub_pages = $db->get_results("SELECT * FROM page WHERE parent=".$page->id." ORDER BY display_order ASC")) {
-          ?>
-          <ol class="dd-list">
-          <?php
-          foreach($sub_pages as $sub_page) {
-            ?>
-            <li class="dd-item" data-id="<?php print $sub_page->id; ?>">
-              <div class="dd-handle"><i class="material-icons">open_with</i></div>
-              <div class="dd-content"><?php print display_page_list_row($sub_page); ?></div>
-            </li>
-            <?php
-          }
-          ?>
-          </ol>
-          <?php
-        }
-        ?>
-      </li>
-      <?php
-    }
-    ?>
-    <li class="dd-item" data-id="-1">
-      <div class="item-text">Pages that are not in the navigation:</div>
-      <ol class="dd-list not-in-nav">
-      <?php
-      $pages = $db->get_results("SELECT * FROM page WHERE parent=-1");
-      foreach($pages as $page) {
-        ?>
-        <li class="dd-item" data-id="<?php print $page->id; ?>">
-          <div class="dd-handle"><i class="material-icons">open_with</i></div>
-          <div class="dd-content"><?php print display_page_list_row($page); ?></div>
-        </li>
-        <?php
-      }
-      ?>
-      </ol>
-    </li>
-  </ol>
+  <?php print_page_edit_row(0); ?>
 </div>
   
   <input type="submit" class="submit" value="Save pages order" />
@@ -99,3 +47,43 @@ if (isset($_POST["action"])) {
     });
   });
 </script>
+
+
+<?php
+function print_page_edit_row($parent) {
+  global $db;
+  if ($pages = $db->get_results("SELECT * FROM page WHERE parent=".$parent." ORDER BY display_order ASC")) {
+    print '<ol class="dd-list">';
+    foreach($pages as $page) {
+      ?>
+      <li class="dd-item" data-id="<?php print $page->id; ?>">
+        <div class="dd-handle"><i class="material-icons">open_with</i></div>
+        <div class="dd-content"><?php print display_page_list_row($page); ?></div>
+        <?php print_page_edit_row($page->id); ?>
+      </li>
+      <?php
+    }
+    if ($parent == 0) {
+      ?>
+      <li class="dd-item" data-id="-1">
+      <div class="item-text">Pages that are not in the navigation:</div>
+      <ol class="dd-list not-in-nav">
+      <?php
+      $pages = $db->get_results("SELECT * FROM page WHERE parent=-1");
+      foreach($pages as $page) {
+        ?>
+        <li class="dd-item" data-id="<?php print $page->id; ?>">
+          <div class="dd-handle"><i class="material-icons">open_with</i></div>
+          <div class="dd-content"><?php print display_page_list_row($page); ?></div>
+        </li>
+        <?php
+      }
+      ?>
+      </ol>
+    </li>
+      <?php
+    }
+    print '</ol>';
+  }
+}
+?>

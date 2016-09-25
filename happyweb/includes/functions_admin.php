@@ -148,6 +148,20 @@ function resize_image($file_name, $path, $size) {
 
 
 /**
+ * saves the order of the pages returned by nestable
+ */
+function save_pages_order($pages, $parent) {
+  global $db;
+  foreach($pages as $index => $page) {
+    $db->query("UPDATE page SET parent=".$parent.", display_order=".$index." WHERE id=".$page->id);
+    if (isset($page->children)) {
+      save_pages_order($page->children, $page->id);
+    }
+  }
+} // save_pages_order
+
+
+/**
  * returns a tree of all pages (in hierarchical order)
  */
 function get_pages_tree(&$pages_full, &$pages_url, $page_id=0, $level=0) {
