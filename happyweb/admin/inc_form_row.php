@@ -6,12 +6,18 @@
   <input type="hidden" name="rows[<?php print $index_row; ?>][id]" class="row-id" value="<?php print $row->id; ?>" />
   
   <div class="row-options">
+    <h2>Magnificent options for this row</h2>
     <?php
-    $checked = ($row->no_padding == 1)?"checked":"";
+    $checked_padding = ($row->no_padding == 1)?"checked":"";
+    $checked_heading = ($row->center_heading == 1)?"checked":"";
     ?>
+    <div class="form-item-radio">
+      <input type="checkbox" name="rows[<?php print $index_row; ?>][options][no_padding]" value="1" <?php print $checked_padding; ?> />
+      <label class="inline">Remove the top and bottom padding</label>
+    </div>
     <div class="form-item">
-      <input type="checkbox" name="rows[<?php print $index_row; ?>][options][no_padding]" value="1" <?php print $checked; ?> />
-      <label class="inline">Remove the top and bottom padding for this row</label>
+      <input type="checkbox" name="rows[<?php print $index_row; ?>][options][center_heading]" value="1" <?php print $checked_heading; ?> />
+      <label class="inline">Center the optional heading</label>
     </div>
   </div>
   
@@ -56,14 +62,9 @@
 
       // create empty columns if needed
       for($i=1; $i<=3; $i++) {
-        //print "Checking column ".$i." - ";
         if (!isset($columns[$i])) {
-          //print "It doesn't exist, so we create it<br />";
           $col = create_new_col($i);
           $columns[$i] = $col;
-        }
-        else {
-          //print "It exists!<br />";
         }
       }
       

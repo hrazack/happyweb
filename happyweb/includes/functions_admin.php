@@ -164,14 +164,15 @@ function save_pages_order($pages, $parent) {
 /**
  * returns a tree of all pages (in hierarchical order)
  */
-function get_pages_tree(&$pages_full, &$pages_url, $page_id=0, $level=0) {
+function get_pages_tree(&$pages_full, &$pages_url=array(), $page_id=0, $level=0) {
   global $db;
   if ($pages = $db->get_results("SELECT * FROM page WHERE parent=".$page_id." ORDER BY display_order ASC")) {
     foreach($pages as $page) {
-      $page_title = str_repeat("-- ",$level).$page->title;
+      $page_title = str_repeat("--",$level)." ".$page->title;
       $obj = new stdClass();
       $obj->text = $page_title;
       $obj->value = "/".$page->url;
+      $obj->id = $page->id;
       $pages_full[] = $obj;
       $pages_url[] = "/".$page->url;
       get_pages_tree($pages_full, $pages_url, $page->id, $level+1);
@@ -218,15 +219,16 @@ function save_page($var, $page_id = 0) {
   $title = $db->escape($var["title"]);
   $url = $db->escape($var["url"]);
   $description = $db->escape($var["description"]);
+  $browser_title = $db->escape($var["browser_title"]);
   $parent = $var["parent"];
   if ($page_id == 0) {
     // create new page
-    $db->query("INSERT INTO page (title, url, description, parent) VALUES ('".$title."', '".$url."', '".$description."', ".$parent.")");
+    $db->query("INSERT INTO page (title, url, description, browser_title, parent) VALUES ('".$title."', '".$url."', '".$description."', '".$browser_title."', ".$parent.")");
     $page_id = $db->insert_id;
   }
   else {
     // update existing page
-    $db->query("UPDATE page SET title='".$title."', url='".$url."', description='".$description."', parent=".$parent." WHERE id=".$page_id);
+    $db->query("UPDATE page SET title='".$title."', url='".$url."', description='".$description."', browser_title='".$browser_title."', parent=".$parent." WHERE id=".$page_id);
   }
   // save rows
   foreach($var["rows"] as $row) {
@@ -271,12 +273,13 @@ function save_row($row, $page_id) {
   $row_id = $row["id"];
   $heading = $db->escape($row["heading"]);
   $no_padding = (isset($row["options"]["no_padding"]))?1:0;
+  $center_heading = (isset($row["options"]["center_heading"]))?1:0;
   if ($row["id"] == 0) { // this is a new row
-    $db->query("INSERT INTO row (page_id, display_order, columns_size, number_of_columns, heading, no_padding) VALUES (".$page_id.", ".$row["display_order"].", '".$row["columns_size"]."', ".$row["number_of_columns"].", '".$heading."', ".$no_padding.")");
+    $db->query("INSERT INTO row (page_id, display_order, columns_size, number_of_columns, heading, no_padding, center_heading) VALUES (".$page_id.", ".$row["display_order"].", '".$row["columns_size"]."', ".$row["number_of_columns"].", '".$heading."', ".$no_padding.", ".$center_heading.")");
     $row_id = $db->insert_id;
   }
   else { // updating an existing row
-    $db->query("UPDATE row SET display_order=".$row["display_order"].", columns_size='".$row["columns_size"]."', number_of_columns=".$row["number_of_columns"].", heading='".$heading."', no_padding=".$no_padding." WHERE id=".$row_id);
+    $db->query("UPDATE row SET display_order=".$row["display_order"].", columns_size='".$row["columns_size"]."', number_of_columns=".$row["number_of_columns"].", heading='".$heading."', no_padding=".$no_padding.", center_heading=".$center_heading." WHERE id=".$row_id);
   }
   // save columns
   for ($i=1; $i<=$row["number_of_columns"]; $i++) {

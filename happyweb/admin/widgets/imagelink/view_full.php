@@ -8,6 +8,6 @@
 
 <?php if ($data->text != "") { ?>
 <div class="text">
-  <?php print $data->text; ?>
+  <?php print nl2br($data->text); ?>
 </div>
 <?php } ?>

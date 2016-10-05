@@ -92,6 +92,29 @@ function perform_update($index) {
       $message .= "<p>Added audio widget</p>";
       increment_update(); 
       
+    // Add center heading options for rows
+    case 10:
+      $db->query("ALTER TABLE `row` ADD `center_heading` INT(2) NOT NULL DEFAULT '0' AFTER `no_padding`;");
+      $message .= "<p>Added center heading options for rows</p>";
+      increment_update();
+    
+    // Add browser title for page
+    case 11:
+      $db->query("ALTER TABLE `page` ADD `browser_title` VARCHAR(400) NOT NULL DEFAULT '' AFTER `description`;");
+      $message .= "<p>Added browser title options for pages</p>";
+      increment_update();
+      
+    // Add right alignment option for images
+    case 12:
+      $db->query("ALTER TABLE `widget_image` ADD `align_right` INT(2) NOT NULL DEFAULT '0' AFTER `description`;");
+      $message .= "<p>Added right alignment option for images</p>";
+      increment_update();
+    
+    // Add "disable slideshow" option for slideshow
+    case 13:
+      $db->query("ALTER TABLE `widget_slideshow` ADD `disable_slideshow` INT(2) NOT NULL DEFAULT '0' AFTER `filenames`;");
+      $message .= "<p>Added \"disable slideshow\" option for slideshow</p>";
+      increment_update();
   }
   return $message;
 } // perform_updates

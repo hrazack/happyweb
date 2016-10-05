@@ -18,10 +18,10 @@ tinymce.PluginManager.add('happylink', function(editor) {
       data = jQuery.parseJSON(data);
       pages = data.pages;
       pages_url = data.pages_url;
-      //page_select = {text: '- Please choose -', value: ''};
-      page_external = {text: '[A page outside of the site]', value: 'external-url'};
-      pages.push(page_external);
-      //pages.unshift(page_select);
+      page_select = {text: '- Please choose -', value: ''};
+      page_external = {text: '* A page outside of the site', value: 'external-url'};
+      pages.unshift(page_external);
+      pages.unshift(page_select);
     }
   });
   
@@ -88,7 +88,7 @@ tinymce.PluginManager.add('happylink', function(editor) {
 				name: 'text',
 				type: 'textbox',
 				size: 40,
-				label: 'Text to display:',
+				label: 'Text:',
 				onchange: function() {
 					data.text = this.value();
 				}

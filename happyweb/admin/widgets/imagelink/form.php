@@ -12,13 +12,14 @@ $pages_url = array();
 get_pages_tree($pages_full, $pages_url);
 
 // get other pages
-$pages = $db->get_results("SELECT * FROM page WHERE parent=-1 AND id!=2 ORDER BY display_order ASC");
-foreach($pages as $page) {
-  $obj = new stdClass();
-  $obj->text = $page->title;
-  $obj->value = "/".$page->url;
-  $pages_full[] = $obj;
-  $pages_url[] = "/".$page->url;
+if ($pages = $db->get_results("SELECT * FROM page WHERE parent=-1 AND id!=2 ORDER BY display_order ASC")) {
+  foreach($pages as $page) {
+    $obj = new stdClass();
+    $obj->text = $page->title;
+    $obj->value = "/".$page->url;
+    $pages_full[] = $obj;
+    $pages_url[] = "/".$page->url;
+  }
 }
 
 if (!in_array($url, $pages_url)) {
@@ -53,13 +54,14 @@ if (!in_array($url, $pages_url)) {
 <div class="form-item">
   <label>Choose the page you would like to link to</label />
   <select name="url" id="image-link-url">
+    <option value="">* No link</option>
+    <option value="external-url" <?php print ($external_url != "")?"selected":""; ?>>* A page outside of your site</option>
     <?php 
     foreach($pages_full as $page) { 
       $selected = ($url == $page->value)?"selected":"";
       ?>
       <option value="<?php print $page->value; ?>" <?php print $selected; ?>><?php print $page->text; ?></option>
     <?php } ?>
-    <option value="external-url" <?php print ($external_url != "")?"selected":""; ?>>[A page outside of your site]</option>
   </select>
 </div>
   

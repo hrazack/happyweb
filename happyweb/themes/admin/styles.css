@@ -22,7 +22,6 @@ p:last-child {margin: 0;}
 p.add-row {margin: 0 0 50px 0;}
 iframe {display: block; width: 100%; border: none;}
 pre {font-size: 12px; line-height: 12px; font-family: Courier;}
-i {float: left; margin-right: 5px; position: relative; top: 2px;}
 .material-icons.big {font-size: 36px;}
 .material-icons.bigger {font-size: 80px;}
 span.disabled {color: #ccc;}
@@ -79,7 +78,6 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 .row-content > div {overflow: hidden;} /* that's the columns container */
 .row-content textarea {width: 100%; min-height: 200px; margin: 0; min-width: 10px;}
 .row-content .column.disabled {display: none;}
-.row-content .column {min-height: 200px;}
 
 /* widget box */
 .widgets-container {position: relative;}

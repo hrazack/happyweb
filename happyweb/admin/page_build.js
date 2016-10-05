@@ -163,13 +163,23 @@ $(document).ready(function() {
   $("#rows-container").sortable({
     handle: ".row-drag",
     axis: "y",
+    start: function (e, ui) {
+      $(ui.item).find('textarea').each(function () {
+        tinymce.execCommand('mceRemoveEditor', false, $(this).attr('id'));
+      });
+    },
     beforeStop: function(event, ui) {
       ui.helper.find(".row-content").show();
       $("#rows-container").children().each(function(i) {
         display_order = i+1;
         $(this).find(".row-display-order").val(display_order);
       });
-    }
+    },
+    stop: function (e, ui) {
+      $(ui.item).find('textarea').each(function () {
+        tinymce.execCommand('mceAddEditor', true, $(this).attr('id'));
+      });
+    },
   });
   $("#rows-container").disableSelection();
   

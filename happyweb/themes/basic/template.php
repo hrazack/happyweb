@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="shortcut icon" href="/happyweb/themes/basic/images/favicon.png" type="image/png" />
-  <title><?php print $page->title; ?> | <?php print $site_name; ?></title>
+  <title><?php print $browser_title; ?></title>
   <?php print $css; ?>
   <?php print $scripts; ?>
   <meta name="description" content="<?php print $page->description; ?>">

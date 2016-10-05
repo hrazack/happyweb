@@ -13,9 +13,9 @@
   <p><a class="more"><i class="material-icons icon-open">arrow_right</i><i class="material-icons icon-close">arrow_drop_down</i> More mind-blasting options for this page</a></p>
 
   <div id="page-options">
-  
+
     <div class="form-item">
-      <label>Page position:</label>
+      <label>Select the parent of the page:</label>
       <select name="parent">
         <?php
         if (!isset($page)) {
@@ -27,20 +27,22 @@
           $selected_top = ($page->parent == 0)?"selected":"";
         }
         ?>
-        <option value="-1" <?php print $selected_nowhere; ?>>Nowhere, it's a standalone page</option>
-        <option value="0" <?php print $selected_top; ?>>In the top navigation</option>
+        <option value="-1" <?php print $selected_nowhere; ?>>* No parent, it's a standalone page</option>
+        <option value="0" <?php print $selected_top; ?>>* In the top navigation</option>
         <?php
-        if ($pages = $db->get_results("SELECT * FROM page WHERE parent=0 AND id!=1 ORDER BY display_order ASC")) {
-          foreach($pages as $p) {
-            if (!isset($page)) {
-              $selected = "";
-            }
-            else {
-              $selected = ($page->parent == $p->id)?"selected":"";
-            }
-            ?>
-            <option value="<?php print $p->id; ?>" <?php print $selected; ?>>Under "<?php print $p->title; ?>"</option>
-            <?php
+        $pages = array();
+        get_pages_tree($pages);
+        foreach($pages as $p) {
+          if ($p->id != $page->id) {
+          if (!isset($page)) {
+            $selected = "";
+          }
+          else {
+            $selected = ($page->parent == $p->id)?"selected":"";
+          }
+          ?>
+          <option value="<?php print $p->id; ?>" <?php print $selected; ?>><?php print $p->text; ?></option>
+          <?php
           }
         }
         ?>
@@ -48,8 +50,13 @@
     </div>
     
     <div class="form-item">
+      <label>Text in the top bar of the browser:</label>
+      <input name="browser_title" class="text" placeholder="This is the text displayed in the top bar of the browser" value="<?php print $browser_title; ?>" />
+    </div>
+    
+    <div class="form-item">
       <label>Description:</label>
-      <textarea id="textarea" name="description" rows="3" placeholder="This is optional. It is used for search engines like Google. Let's type something that will describe your awesome page!"><?php print $description; ?></textarea>
+      <textarea id="textarea" name="description" rows="3" placeholder="This is also optional. It is used for search engines like Google. Let's type something that will describe your awesome page!"><?php print $description; ?></textarea>
     </div>
   
   </div>

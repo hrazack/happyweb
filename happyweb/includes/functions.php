@@ -90,7 +90,7 @@ function set_error($error_level, $message, $filename, $line, $context) {
 function get_messages() {
   $messages = "";
   if (isset($_SESSION["happyweb"]["messages"])) {
-    $messages .= '<div class="messages"><i class="material-icons">check_circle</i>';
+    $messages .= '<div class="messages status"><a class="close"><i class="material-icons">clear</i></a><i class="material-icons">check_circle</i>';
     if (count($_SESSION["happyweb"]["messages"]) > 1) {
       $messages .= '<ul>';
       foreach($_SESSION["happyweb"]["messages"] as $message) {
@@ -106,7 +106,7 @@ function get_messages() {
   }
   $errors = "";
   if (isset($_SESSION["happyweb"]["errors"])) {
-    $errors .= '<div class="errors"><i class="material-icons">check_circle</i>';
+    $errors .= '<div class="messages errors"><a class="close"><i class="material-icons">clear</i></a><i class="material-icons">check_circle</i>';
     if (count($_SESSION["happyweb"]["errors"]) > 1) {
       $errors .= '<ul>';
       foreach($_SESSION["happyweb"]["errors"] as $error) {
@@ -285,33 +285,46 @@ function get_page($page_id) {
 function build_page($page) {
   global $db;
   $content = "";
+  $content .= '<div class="sections">';
   if ($rows = $db->get_results("SELECT * FROM row WHERE page_id=".$page->id." ORDER BY display_order ASC")) {
     foreach($rows as $index => $row) {
       $class_padding = ($row->no_padding == 1)?"no-padding":"";
-      $content .= '<section id="section'.$index.'" class="'.$class_padding.'">';
+      $class_heading = ($row->center_heading == 1)?"center-heading":"";
+      $content .= '<section id="section'.$index.'" class="'.$class_padding.' '.$class_heading.'">';
       $content .= '<div class="container">';
       if ($row->heading != "") {
         $content .= '<h1>'.$row->heading.'</h1>';
       }
-      $content .= '<div class="columns-container '.$row->columns_size.'">';
+      // build columns
+      $is_content_in_columns = false;
+      $content_columns = "";
       $columns = $db->get_results("SELECT * FROM col WHERE row_id=".$row->id." ORDER BY display_order ASC");
       $col_index = 0;
       foreach($columns as $col) {
         $col_index++;
-        $content .= '<div class="column column'.$col_index.'">';
-        if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id." ORDER BY display_order ASC")) {
-          foreach($widgets as $widget) {          
-            $content .= '<div class="widget '.$widget->type.'">';
-            $content .= build_widget($widget);
-            $content .= '</div>';
+        if ($col_index <= $row->number_of_columns) {
+          $content_columns .= '<div class="column column'.$col_index.'">';
+          if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id." ORDER BY display_order ASC")) {
+            $is_content_in_columns = true;
+            foreach($widgets as $widget) {          
+              $content_columns .= '<div class="widget '.$widget->type.'">';
+              $content_columns .= build_widget($widget);
+              $content_columns .= '</div>';
+            }
           }
+          $content_columns .= '</div>';
         }
+      }
+      // populate columns if they have content
+      if ($is_content_in_columns) {
+        $content .= '<div class="columns-container '.$row->columns_size.'">';
+        $content .= $content_columns;
         $content .= '</div>';
       }
       $content .= '</div>';
-      $content .= '</div>';
       $content .= '</section>';
     }
+    $content .= "</div>";
   }
   return $content;
 } // build page

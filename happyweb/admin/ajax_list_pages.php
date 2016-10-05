@@ -6,13 +6,14 @@ $pages_url = array();
 get_pages_tree($pages_full, $pages_url);
 
 // get other pages
-$pages = $db->get_results("SELECT * FROM page WHERE parent=-1 AND id!=2 ORDER BY display_order ASC");
-foreach($pages as $page) {
-  $obj = new stdClass();
-  $obj->text = $page->title;
-  $obj->value = "/".$page->url;
-  $pages_full[] = $obj;
-  $pages_url[] = "/".$page->url;
+if ($pages = $db->get_results("SELECT * FROM page WHERE parent=-1 AND id!=2 ORDER BY display_order ASC")) {
+  foreach($pages as $page) {
+    $obj = new stdClass();
+    $obj->text = $page->title;
+    $obj->value = "/".$page->url;
+    $pages_full[] = $obj;
+    $pages_url[] = "/".$page->url;
+  }
 }
   
 // output the data

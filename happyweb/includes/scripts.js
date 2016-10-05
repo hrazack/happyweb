@@ -1,5 +1,11 @@
 $(document).ready(function() {
   
+  // close messages 
+  $('.messages .close').click(function() {
+    $(this).parent().slideUp();
+    return false;
+  });
+  
   // video colorbox
   $('a.colorbox').colorbox({iframe: true, innerWidth: 640, innerHeight: 390});
   

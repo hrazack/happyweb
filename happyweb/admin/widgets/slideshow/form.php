@@ -1,5 +1,6 @@
 <?php
 $filenames = ($action == "edit")?$data->filenames:"";
+$checked_disable_slideshow = ($data->disable_slideshow == 1)?"checked":"";
 ?>
 
 <div class="dd slideshow">
@@ -31,7 +32,12 @@ $filenames = ($action == "edit")?$data->filenames:"";
   <div class="loader"></div>
 </div>
 
-<input type="hidden" name="filenames" id="filenames" value="<?php print $filenames; ?>" />
+<div class="form-item">
+  <input type="checkbox" name="disable_slideshow" <?php print $checked_disable_slideshow; ?> />
+  <label class="inline">Disable the slideshow and show all the images</label>
+</div>
+
+<input type="hidden" name="filenames" id="filenames" value='<?php print $filenames; ?>' />
 
 <script src="/happyweb/includes/jquery.nestable.js"></script>
 <script>
@@ -42,7 +48,7 @@ $(document).ready(function() {
   $('.dd').on('change', update_nestable);
   
   // remove an image
-  $(".cell.delete a").click(function(e) {
+  $(document).on("click", ".cell.delete a", function(e) {
     e.preventDefault();
     li = $(this).parents("li");
     li.remove();
@@ -91,7 +97,7 @@ $(document).ready(function() {
         $(".file-upload .loader").hide();
       },
       error: function(data) {
-        console.log(data);
+        console.log(data.errorMessage);
       }
     });
   });

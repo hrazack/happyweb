@@ -79,6 +79,9 @@ switch(arg(0)) {
     // get the site name
     $site_name = get_setting("site_name");
     
+    // get the browser title
+    $browser_title = ($page->browser_title != "")?$page->browser_title:$page->title." | ".$site_name;
+    
     // add body class
     $body_class = "page".$page->id;
     

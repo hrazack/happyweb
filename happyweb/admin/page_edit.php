@@ -24,6 +24,7 @@ else {
   $page_title = $page->title;
   $page_url = $page->url;
   $description = $page->description;
+  $browser_title = $page->browser_title;
   $rows = $db->get_results("SELECT * FROM row WHERE page_id=".$page->id." ORDER BY display_order ASC");
   include("inc_form_page.php");
   

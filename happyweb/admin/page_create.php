@@ -14,6 +14,7 @@ if (isset($_POST["action"])) {
   $number_of_rows = 1;
   $page_title = "";
   $page_url = "";
+  $browser_title = "";
   $description = "";
   $row = create_new_row(1);
   $rows[] = $row;
