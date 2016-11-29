@@ -4,7 +4,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/happyweb/includes/image_manipulator.php");
 $file_path = $_SERVER["DOCUMENT_ROOT"]."/your_site/uploaded_files/";
 $size = $db->escape($_POST["size"]);
 $description = $db->escape($_POST["description"]);
-$align_right = (isset($_POST["align_right"]))?1:0;
+$align = $db->escape($_POST["align"]);
 
 // uploading a new image
 if ($action == "create") {
@@ -17,7 +17,7 @@ if ($action == "create") {
       resize_image($result->file_name, $file_path."originals/", $size);
       // save data
       $file_name = $db->escape($result->file_name);
-      $db->query("INSERT INTO widget_image (widget_id, file, size, description, align_right) VALUES (".$widget_id.", '".$file_name."', '".$size."', '".$description."', ".$align_right.")");
+      $db->query("INSERT INTO widget_image (widget_id, file, size, description, align) VALUES (".$widget_id.", '".$file_name."', '".$size."', '".$description."', '".$align."')");
     }
     else {
       $data->status = "error";
@@ -33,7 +33,7 @@ if ($action == "create") {
 // editing an existing image
 else {
    $original_data = $db->get_row("SELECT * FROM widget_image WHERE widget_id=".$widget_id);
-   $db->query("UPDATE widget_image SET description='".$description."', align_right=".$align_right." WHERE widget_id=".$widget_id);
+   $db->query("UPDATE widget_image SET description='".$description."', align='".$align."' WHERE widget_id=".$widget_id);
    
   // if we have entered a new image
   if ($_FILES['image_file']['error'] == 0) {

@@ -28,7 +28,7 @@ $_SESSION['happyweb']['css'] = array();
 
 switch(arg(0)) {
   
-  // first, let's check if it's an admin page
+  // admin page
   case "admin": 
     // make sure we are logged in
     if (!isset($_SESSION["happyweb"]["user"]) && arg(1) != "login") {
@@ -50,7 +50,7 @@ switch(arg(0)) {
   break;
 
   
-  // check if it's an AJAX request
+  // AJAX request
   case "ajax":
     require("happyweb/includes/functions_admin.php");
     // get the filename to display (that's the bit after /ajax in the URL);

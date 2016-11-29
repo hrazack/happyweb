@@ -62,8 +62,12 @@ i {float: left; margin-right: 5px; position: relative; top: 2px;}
 
 /* widget: image */
 .widget.image .image {overflow: hidden;}
-.widget.image .image.right img {float: right;}
+.widget.image .image.align-right img {float: right;}
+.widget.image .image.align-center {text-align: center;}
+.widget.image .image.align-center img {margin: auto;}
 .widget.image .description {margin-top: 10px; font-style: italic; font-size: 0.9em;}
+.widget.image .description.align-center {text-align: center;}
+.widget.image .description.align-right {text-align: right;}
 
 /* widget: sub navigation */
 .widget.navigation ul {margin: 0; padding: 0; border-bottom: solid 1px #ccc;}

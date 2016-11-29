@@ -1,16 +1,21 @@
 <?php
 $label = ($action == "edit")?"Select a new image":"Select your image";
 $description = ($action == "edit")?$data->description:"";
-$checked_align_right = ($data->align_right == 1)?"checked":"";
 if ($action == "edit") {
   $checked_large = ($data->size == "large")?"checked":"";
   $checked_medium = ($data->size == "medium")?"checked":"";
   $checked_small = ($data->size == "small")?"checked":"";
+  $checked_align_left = ($data->align == "left")?"checked":"";
+  $checked_align_right = ($data->align == "right")?"checked":"";
+  $checked_align_center = ($data->align == "center")?"checked":"";
 }
 else {
   $checked_large = "";
   $checked_medium = "checked";
   $checked_small = "";
+  $checked_align_left = "checked";
+  $checked_align_right = "";
+  $checked_align_center = "";
 }
 ?>
 
@@ -38,8 +43,10 @@ else {
 <div id="options" style="display: none;">
   
   <div class="form-item">
-    <input type="checkbox" name="align_right" <?php print $checked_align_right; ?> />
-    <label class="inline">Stick the image to the right</label>
+    <label>alignment</label>
+    <div class="form-item-radio"><input type="radio" class="radio" name="align" value="left" <?php print $checked_align_left; ?> /> Stick the image to the left</div>
+    <div class="form-item-radio"><input type="radio" class="radio" name="align" value="right" <?php print $checked_align_right; ?> /> Stick the image to the right</div>
+    <div class="form-item-radio"><input type="radio" class="radio" name="align" value="center" <?php print $checked_align_center; ?> /> Center the image</div>
   </div>
   
   <div class="form-item">

@@ -115,6 +115,14 @@ function perform_update($index) {
       $db->query("ALTER TABLE `widget_slideshow` ADD `disable_slideshow` INT(2) NOT NULL DEFAULT '0' AFTER `filenames`;");
       $message .= "<p>Added \"disable slideshow\" option for slideshow</p>";
       increment_update();
+    
+    // Add "left/right/center" image alignment options
+    case 14:
+      $db->query("ALTER TABLE `widget_image` CHANGE `align_right` `align` VARCHAR(400) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '';");
+      $db->query("UPDATE widget_image SET align='right' WHERE align='1'");
+      $db->query("UPDATE widget_image SET align='left' WHERE align='' OR align='0'");
+      $message .= "<p>Added \"left/right/center\" image alignment options</p>";
+      increment_update();
   }
   return $message;
 } // perform_updates
