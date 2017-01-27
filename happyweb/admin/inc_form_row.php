@@ -51,10 +51,7 @@
       <?php
       // load columns for that row
       $columns = array();
-      if (!$cols = $db->get_results("SELECT * FROM col WHERE row_id=".$row->id." ORDER BY display_order ASC")) {
-        $cols = array();
-      }
-      else {
+      if ($cols = $db->get_results("SELECT * FROM col WHERE row_id=".$row->id." ORDER BY display_order ASC")) {
         foreach($cols as $col) {
           $columns[$col->display_order] = $col;
         }

@@ -1,5 +1,6 @@
 <?php
 global $db;
+$page_id = 0;
 
 if (isset($_POST["action"])) {
   

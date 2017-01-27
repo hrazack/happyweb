@@ -33,16 +33,16 @@
         $pages = array();
         get_pages_tree($pages);
         foreach($pages as $p) {
-          if ($p->id != $page->id) {
-          if (!isset($page)) {
-            $selected = "";
-          }
-          else {
-            $selected = ($page->parent == $p->id)?"selected":"";
-          }
-          ?>
-          <option value="<?php print $p->id; ?>" <?php print $selected; ?>><?php print $p->text; ?></option>
-          <?php
+          if ($p->id != $page_id) {
+            if (!isset($page)) {
+              $selected = "";
+            }
+            else {
+              $selected = ($page->parent == $p->id)?"selected":"";
+            }
+            ?>
+            <option value="<?php print $p->id; ?>" <?php print $selected; ?>><?php print $p->text; ?></option>
+            <?php
           }
         }
         ?>

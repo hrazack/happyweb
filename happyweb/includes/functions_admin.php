@@ -191,6 +191,7 @@ function create_new_row($index) {
   $row->columns_size = "two-large-small";
   $row->number_of_columns = 2;
   $row->no_padding = 0;
+  $row->center_heading = 0;
   $row->heading = "";
   $row->column1 = "";
   $row->column2 = "";

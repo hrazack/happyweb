@@ -43,7 +43,7 @@ else {
 <div id="options" style="display: none;">
   
   <div class="form-item">
-    <label>alignment</label>
+    <label>Alignment</label>
     <div class="form-item-radio"><input type="radio" class="radio" name="align" value="left" <?php print $checked_align_left; ?> /> Stick the image to the left</div>
     <div class="form-item-radio"><input type="radio" class="radio" name="align" value="right" <?php print $checked_align_right; ?> /> Stick the image to the right</div>
     <div class="form-item-radio"><input type="radio" class="radio" name="align" value="center" <?php print $checked_align_center; ?> /> Center the image</div>
