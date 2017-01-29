@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="/happyweb/includes/happyweb.css" media="all" />
   <link rel="stylesheet" href="/happyweb/includes/tooltipster/tooltipster.min.css" media="all" />
+  <link rel="stylesheet" href="/happyweb/includes/dragula/dragula.min.css" media="all" />
   <link rel="stylesheet" href="/happyweb/themes/admin/styles.css" media="all" />
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="/happyweb/includes/jquery.validate.min.js"></script>
@@ -55,6 +56,7 @@
   
   <div id="loader"><div id="loader-anim"></div></div>
   
+  <script src="/happyweb/includes/dragula/dragula.min.js"></script>
 </body>
 
 </html>

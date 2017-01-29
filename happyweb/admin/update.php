@@ -123,6 +123,19 @@ function perform_update($index) {
       $db->query("UPDATE widget_image SET align='left' WHERE align='' OR align='0'");
       $message .= "<p>Added \"left/right/center\" image alignment options</p>";
       increment_update();
+      
+    // Cleaned some of the data model
+    case 15:
+      // change rows
+      $db->query("ALTER TABLE `row` CHANGE `display_order` `row_index` INT(2) NOT NULL DEFAULT '0';");
+      // change columns
+      $db->query("ALTER TABLE `col` CHANGE `display_order` `col_index` INT(2) NOT NULL DEFAULT '0';");
+      $db->query("ALTER TABLE `col` DROP `number_of_widgets`;");
+      // change widgets
+      $db->query("ALTER TABLE `widget` CHANGE `display_order` `widget_index` INT(2) NOT NULL DEFAULT '0';");
+      $message .= "<p>cleaned some of the data model</p>";
+      increment_update();
+
   }
   return $message;
 } // perform_updates

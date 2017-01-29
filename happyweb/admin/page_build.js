@@ -93,13 +93,14 @@ $(document).ready(function() {
   // adding a row
   $("#add-row").click(function() {
     $(this).addClass("loader");
-    number_of_rows = $("input[name='number_of_rows']").val();
+    number_of_rows = $("section").length;
     number_of_rows++;
-    index = number_of_rows;
+    row_index = number_of_rows;
+    page_id = $("input[name=page_id]").val();
     $("input[name='number_of_rows']").val(number_of_rows);
     $.ajax({
       url: "/ajax/new_row",
-      data: {index: index},
+      data: {row_index: row_index, page_id: page_id},
       success: function(string) {
         new_row = $('<div/>').html(string).contents();
         new_row.hide().appendTo("#rows-container").slideDown();
@@ -123,15 +124,21 @@ $(document).ready(function() {
       {
         text: "Yes, delete it!",
         click: function() {
-          // update the number of rows
-          number_of_rows = $("input[name='number_of_rows']").val();
-          number_of_rows--;
-          $("input[name='number_of_rows']").val(number_of_rows);
           // keep track of the rows that we have deleted
-          if (row_id != 0) { // we ignore new rows
+          if (row_id.indexOf("new") == -1) { 
+            // if it's an existing row, add it to the list of deleted rows. That will delete all the columns and widgets in that row
             deleted_rows = $("input[name='deleted_rows']").val();
             deleted_rows += row_id+",";
             $("input[name='deleted_rows']").val(deleted_rows);
+          }
+          else {
+            // if it's a new row, add all the widgets to the list of deleted widgets
+            deleted_widgets = $("input[name='deleted_widgets']").val();
+            row.find(".widget").each(function() {
+              widget_id = $(this).find(".widget-id").val();
+              deleted_widgets += widget_id+",";
+            });
+            $("input[name='deleted_widgets']").val(deleted_widgets);
           }
           // remove the row
           row.fadeOut(function() {
@@ -153,8 +160,8 @@ $(document).ready(function() {
   
   // sortable rows
   $(document).on("mousedown", ".row-drag", function() {
-    row = $(this).parents("section");
-    row.find(".row-content").hide();
+    current_row = $(this).parents("section");
+    current_row.find(".row-content").hide();
   });
   $(document).on("mouseup", ".row-drag", function() {
     row = $(this).parents("section");
@@ -178,6 +185,11 @@ $(document).ready(function() {
     stop: function (e, ui) {
       $(ui.item).find('textarea').each(function () {
         tinymce.execCommand('mceAddEditor', true, $(this).attr('id'));
+      });
+      // update rows with proper index
+      $("section").each(function(i) {
+        row_index = i+1;
+        $(this).find(".row-index").val(row_index);
       });
     },
   });
@@ -285,16 +297,13 @@ $(document).ready(function() {
     is_display_form = $(this).attr("data-require-form");
     row = current_column.parents("section");
     col_id = current_column.find(".col-id").val();
-    number_of_widgets = parseInt(current_column.find(".col-number-of-widgets").val());
-    display_order = number_of_widgets + 1;
-    index_row = row.find(".row-index").val();
-    index_col = current_column.find(".col-display-order").val();
+    widget_index = current_column.find(".widget").length + 1;
     if (is_display_form == "true") {
       // get the content of the widget form
       $.ajax({
         url: "/ajax/widget_form",
         method: "post",
-        data: {action: "create", widget_type: widget_type, col_id: col_id, display_order: display_order, index_row: index_row, index_col: index_col},
+        data: {action: "create", widget_type: widget_type, col_id: col_id, widget_index: widget_index},
         success: function(string) {
           $("#loader").hide();
           // open the widget form in a dialog
@@ -310,7 +319,7 @@ $(document).ready(function() {
       $.ajax({
           url: "/ajax/widget_submit",
           type: "POST",
-          data: {action: "create", widget_type: widget_type, col_id: col_id, display_order: display_order, index_row: index_row, index_col: index_col},
+          data: {action: "create", widget_type: widget_type, col_id: col_id, widget_index: widget_index},
           success: function(data, status) {
             data = jQuery.parseJSON(data);
             insert_widget(data);
@@ -396,10 +405,6 @@ $(document).ready(function() {
       {
         text: "Yes, delete it!",
         click: function() {
-          // update the number of widgets
-          number_of_widgets = column.find(".col-number-of-widgets").val();
-          number_of_widgets--;
-          column.find(".col-number-of-widgets").val(number_of_widgets);
           // keep track of the widgets that we have deleted
           deleted_widgets = $("input[name='deleted_widgets']").val();
           deleted_widgets += widget_id+",";
@@ -423,36 +428,48 @@ $(document).ready(function() {
   });
   
   // sortable widgets
-  $(".widgets-container").sortable({
-    handle: ".widget-drag",
-    axis: "y",
-    start: function (e, ui) {
-      $(ui.item).find('textarea').each(function () {
-        tinymce.execCommand('mceRemoveEditor', false, $(this).attr('id'));
-        $(this).addClass("dragged"); 
-      });
+  var containers = $(".widgets-container");
+  var dragObject = dragula({
+    isContainer: function (el) {
+      return el.classList.contains('widgets-container');
     },
-    stop: function (e, ui) {
-      $(ui.item).find('textarea').each(function () {
-        tinymce.execCommand('mceAddEditor', true, $(this).attr('id'));
-        $(this).removeClass("dragged"); 
-      });
-    },
-    update: function(e, ui) {
-      $(".widgets-container").children().each(function(i) {
-        display_order = i+1;
-        $(this).find(".widget-display-order").val(display_order);
-      });
+    moves: function (el, container, handle) {
+      return handle.classList.contains('handle');
     }
   });
-  $(".widgets-container").disableSelection();
-  
+  dragObject.on("drag", function(widget, source) {
+    $(widget).find('textarea').each(function () {
+      tinymce.execCommand('mceRemoveEditor', false, $(this).attr('id'));
+      $(this).addClass("dragged"); 
+    });
+  });
+  dragObject.on("dragend", function(widget) {
+    $(widget).find('textarea').each(function () {
+      tinymce.execCommand('mceAddEditor', true, $(this).attr('id'));
+      $(this).removeClass("dragged"); 
+    });
+  });
+  dragObject.on("drop", function(widget, target, source, sibling) {
+    var old_column = $(source).parent();
+    var new_column = $(target).parent();
+    var new_row = new_column.parents("section");
+    // recalculate the index of each widget in the source column
+    $(source).children().each(function(i) {
+      widget_index = i+1;
+      $(this).find(".widget-index").val(widget_index);
+    });
+    // recalculate the index of each widget in the target column
+    $(target).children().each(function(i) {
+      widget_index = i+1;
+      $(this).find(".widget-index").val(widget_index);
+    });
+    // update the widget with the new column reference
+    new_col_id = new_column.find('.col-id').val();
+    $(widget).find('.widget-col-id').val(new_col_id);
+  });
+
   // inserts a widget in the current column (that's called after an ajax call to the widget submit form)
   function insert_widget(data) {
-    // update the number of widgets for that column
-    number_of_widgets = parseInt(current_column.find(".col-number-of-widgets").val());
-    widget_display_order = number_of_widgets + 1;
-    current_column.find(".col-number-of-widgets").val(widget_display_order);
     // insert the widget (the whole box)
     widget_container = current_column.find(".widgets-container");
     new_widget = $('<div/>').html(data.widget_box).contents();

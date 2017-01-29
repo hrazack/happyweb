@@ -1,14 +1,15 @@
-<div class="column column<?php print $index_col; ?> <?php print ($row->number_of_columns < $index_col)?"disabled":""; ?>">
+<div class="column column<?php print $col->col_index; ?> <?php print ($row->number_of_columns < $col->col_index)?"disabled":""; ?>">
   
-  <input type="hidden" name="rows[<?php print $index_row; ?>][cols][<?php print $index_col; ?>][id]" class="col-id" value="<?php print $col->id; ?>" />
-  <input type="hidden" name="rows[<?php print $index_row; ?>][cols][<?php print $index_col; ?>][display_order]" class="col-display-order" value="<?php print $col->display_order; ?>" />
-  <input type="hidden" name="rows[<?php print $index_row; ?>][cols][<?php print $index_col; ?>][number_of_widgets]" class="col-number-of-widgets" value="<?php print $col->number_of_widgets; ?>" />
-  
-  <div class="widgets-container" id="widgets-container-col<?php print $index_col; ?>">
+  <input type="hidden" name="cols[<?php print $row->row_index."_".$col->col_index; ?>][id]" class="col-id" value="<?php print $col->id; ?>" />
+  <input type="hidden" name="cols[<?php print $row->row_index."_".$col->col_index; ?>][row_id]" class="col-row-id" value="<?php print $col->row_id; ?>" />
+  <input type="hidden" name="cols[<?php print $row->row_index."_".$col->col_index; ?>][col_index]" class="col-index" value="<?php print $col->col_index; ?>" />
+
+  <div class="widgets-container" id="widgets-container-col<?php print $col->col_index; ?>">
   <?php
-  if ($col->id != 0) {
+  $is_new_col = (strpos($col->id, "new") !== false);
+  if (!$is_new_col) {
     $index_widget = 1;
-    if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id." ORDER BY display_order ASC")) {
+    if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id." ORDER BY widget_index ASC")) {
       foreach($widgets as $widget) {
         include("inc_form_widget.php");
         $index_widget++;

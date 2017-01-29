@@ -80,7 +80,7 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 .row-content .column.disabled {display: none;}
 
 /* widget box */
-.widgets-container {position: relative;}
+.widgets-container {position: relative; padding-bottom: 30px;}
 .widget {margin: 0 0 20px 0; position: relative;}
 .widget {border: dotted 1px #999; background: #fff; padding: 40px 20px 20px 20px; min-height: 100px; overflow: hidden;}
 .widget img {display: block; max-width: 100%;}
@@ -90,11 +90,12 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 .widget-toolbar .widget-drag {cursor: move;}
 .widget-info {display: inline-block; position: absolute; top: -1px; left: -1px; background: #bbb; color: #fff; padding: 0 10px;}
 .icon.add-widget {display: inline-block; background: url(images/icon-add.png) no-repeat; width: 45px; height: 45px; text-indent: -9999px;/*border: dotted 1px #999; background: #fff; padding: 15px 20px 15px 15px; display: block;*/}
-textarea.dragged {color: #fff;}
+textarea.dragged {color: #fff; border: none;}
 
 .widget.navigation {background: #eee;}
 .widget.text {padding: 0; border: none;}
 .widget.text .widget-info {display: none;}
+.widget.text textarea {resize: none;}
 .video-image {position: relative; display: inline-block; overflow: hidden;}
 .video-image:before {content: ''; position: absolute; top: calc(50% - 30px); left: calc(50% - 30px); width: 60px; height: 60px; background: url(images/icon-play.png); background-size: cover;}
 .video-image img {margin: -10% 0;}

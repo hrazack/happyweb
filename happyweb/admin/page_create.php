@@ -4,7 +4,6 @@ $page_id = 0;
 
 if (isset($_POST["action"])) {
   
-  //print "<pre>".print_r($_POST, 1)."</pre>";
   save_page($_POST);
   set_message('The page <em>"'.$_POST["title"].'"</em> has been created, woohoo!');
   redirect('admin');

@@ -70,11 +70,11 @@
   </p>
 
   <div id="rows-container">
-    <?php    
-    $index_row = 1;
-    foreach($rows as $row) {
-      include("inc_form_row.php");
-      $index_row++;
+    <?php
+    if ($rows) {    
+      foreach($rows as $row) {
+        include("inc_form_row.php");
+      }
     }
     ?>
   </div>
@@ -86,7 +86,7 @@
   
   <input type="hidden" name="deleted_rows" value="" />
   <input type="hidden" name="deleted_widgets" value="" />
-  <input type="hidden" name="number_of_rows" value="<?php print $number_of_rows; ?>" />
+  <input type="hidden" name="page_id" value="<?php print $page_id; ?>" />
   <input type="hidden" name="return" value="<?php print isset($_GET["return-to-page"])?"page":"admin"; ?>" />
   <input type="hidden" name="action" value="form_page" />
   

@@ -6,12 +6,9 @@ if ($action == "edit") {
 else {
   $widget_type = $_POST["widget_type"];
   $col_id = $_POST["col_id"];
-  $display_order = $_POST["display_order"];
-  $index_row = $_POST["index_row"];
-  $index_col = $_POST["index_col"];
-  $index_widget = $display_order;
+  $widget_index = $_POST["widget_index"];
   // save widget
-  $db->query("INSERT INTO widget (col_id, display_order, type) VALUES (".$col_id.", ".$display_order.", '".$widget_type."')");
+  $db->query("INSERT INTO widget (col_id, widget_index, type) VALUES ('".$col_id."', ".$widget_index.", '".$widget_type."')");
   $widget_id = $db->insert_id;
 }
 

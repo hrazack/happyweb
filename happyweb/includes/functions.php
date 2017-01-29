@@ -286,7 +286,7 @@ function build_page($page) {
   global $db;
   $content = "";
   $content .= '<div class="sections">';
-  if ($rows = $db->get_results("SELECT * FROM row WHERE page_id=".$page->id." ORDER BY display_order ASC")) {
+  if ($rows = $db->get_results("SELECT * FROM row WHERE page_id=".$page->id." ORDER BY row_index ASC")) {
     foreach($rows as $index => $row) {
       $class_padding = ($row->no_padding == 1)?"no-padding":"";
       $class_heading = ($row->center_heading == 1)?"center-heading":"";
@@ -298,21 +298,23 @@ function build_page($page) {
       // build columns
       $is_content_in_columns = false;
       $content_columns = "";
-      $columns = $db->get_results("SELECT * FROM col WHERE row_id=".$row->id." ORDER BY display_order ASC");
-      $col_index = 0;
-      foreach($columns as $col) {
-        $col_index++;
-        if ($col_index <= $row->number_of_columns) {
-          $content_columns .= '<div class="column column'.$col_index.'">';
-          if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id." ORDER BY display_order ASC")) {
-            $is_content_in_columns = true;
-            foreach($widgets as $widget) {          
-              $content_columns .= '<div class="widget '.$widget->type.'">';
-              $content_columns .= build_widget($widget);
-              $content_columns .= '</div>';
+      $columns = $db->get_results("SELECT * FROM col WHERE row_id=".$row->id." ORDER BY col_index ASC");
+      if ($columns) {
+        $col_index = 0;
+        foreach($columns as $col) {
+          $col_index++;
+          if ($col_index <= $row->number_of_columns) {
+            $content_columns .= '<div class="column column'.$col_index.'">';
+            if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id." ORDER BY widget_index ASC")) {
+              $is_content_in_columns = true;
+              foreach($widgets as $widget) {          
+                $content_columns .= '<div class="widget '.$widget->type.'">';
+                $content_columns .= build_widget($widget);
+                $content_columns .= '</div>';
+              }
             }
+            $content_columns .= '</div>';
           }
-          $content_columns .= '</div>';
         }
       }
       // populate columns if they have content

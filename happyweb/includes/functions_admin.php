@@ -184,10 +184,10 @@ function get_pages_tree(&$pages_full, &$pages_url=array(), $page_id=0, $level=0)
 /**
  * creates a new empty row
  */
-function create_new_row($index) {
+function create_new_row($row_index) {
   $row = new stdClass();
-  $row->id = 0;
-  $row->display_order = $index;
+  $row->id = "new-".$row_index;
+  $row->row_index = $row_index;
   $row->columns_size = "two-large-small";
   $row->number_of_columns = 2;
   $row->no_padding = 0;
@@ -203,10 +203,11 @@ function create_new_row($index) {
 /**
  * creates a new empty column
  */
-function create_new_col($index) {
+function create_new_col($row_id, $col_index) {
   $col = new stdClass();
-  $col->id = 0;
-  $col->display_order = $index;
+  $col->id = $row_id."-".$col_index;
+  $col->row_id = $row_id;
+  $col->col_index = $col_index;
   $col->number_of_widgets = 0;
   return $col;
 } // create_new_col
@@ -232,8 +233,22 @@ function save_page($var, $page_id = 0) {
     $db->query("UPDATE page SET title='".$title."', url='".$url."', description='".$description."', browser_title='".$browser_title."', parent=".$parent." WHERE id=".$page_id);
   }
   // save rows
-  foreach($var["rows"] as $row) {
-    save_row($row, $page_id);
+  if (isset($var["rows"])) {
+    foreach($var["rows"] as $row) {
+      save_row($row, $page_id, $var);
+    }
+  }
+  // save columns
+  if (isset($var["cols"])) {
+    foreach($var["cols"] as $col) {
+      save_column($col, $var);
+    }
+  }
+  // save widgets
+  if (isset($var["widgets"])) {
+    foreach($var["widgets"] as $widget) {
+      save_widget($widget);
+    }
   }
   // save text widgets
   if (isset($var["widget_text"])) {
@@ -242,24 +257,21 @@ function save_page($var, $page_id = 0) {
       $db->query("UPDATE widget_text SET text='".$text."' WHERE widget_id=".$widget_id);
     }
   }
-  // when editing a page, do some clean up
-  if ($page_id != 0) {
-    // delete rows that have been removed
-    if ($var["deleted_rows"] != "") {
-      $deleted_rows = explode(",", $var["deleted_rows"]);
-      foreach($deleted_rows as $row_id) {
-        if ($row_id != "") {
-          delete_row($row_id);
-        }
+  // delete rows that have been removed
+  if ($var["deleted_rows"] != "") {
+    $deleted_rows = explode(",", $var["deleted_rows"]);
+    foreach($deleted_rows as $row_id) {
+      if ($row_id != "") {
+        delete_row($row_id);
       }
     }
-    // delete widgets that have been removed
-    if ($var["deleted_widgets"] != "") {
-      $deleted_widgets = explode(",", $var["deleted_widgets"]);
-      foreach($deleted_widgets as $widget_id) {
-        if ($widget_id != "") {
-          delete_widget($widget_id);
-        }
+  }
+  // delete widgets that have been removed
+  if ($var["deleted_widgets"] != "") {
+    $deleted_widgets = explode(",", $var["deleted_widgets"]);
+    foreach($deleted_widgets as $widget_id) {
+      if ($widget_id != "") {
+        delete_widget($widget_id);
       }
     }
   }
@@ -269,56 +281,63 @@ function save_page($var, $page_id = 0) {
 /**
  * saves a row for a given page
  */
-function save_row($row, $page_id) {
+function save_row($row, $page_id, &$var) {
   global $db;
   $row_id = $row["id"];
   $heading = $db->escape($row["heading"]);
   $no_padding = (isset($row["options"]["no_padding"]))?1:0;
   $center_heading = (isset($row["options"]["center_heading"]))?1:0;
-  if ($row["id"] == 0) { // this is a new row
-    $db->query("INSERT INTO row (page_id, display_order, columns_size, number_of_columns, heading, no_padding, center_heading) VALUES (".$page_id.", ".$row["display_order"].", '".$row["columns_size"]."', ".$row["number_of_columns"].", '".$heading."', ".$no_padding.", ".$center_heading.")");
+  if (strpos($row["id"], "new") !== false) {
+    // this is a new row
+    $db->query("INSERT INTO row (page_id, row_index, columns_size, number_of_columns, heading, no_padding, center_heading) VALUES (".$page_id.", ".$row["row_index"].", '".$row["columns_size"]."', ".$row["number_of_columns"].", '".$heading."', ".$no_padding.", ".$center_heading.")");
     $row_id = $db->insert_id;
+    // let's update all the columns in that row with the new row id
+    foreach($var["cols"] as $key => $col) {
+      if ($col["row_id"] == $row["id"]) {
+        $var["cols"][$key]["row_id"] = $row_id;
+      }
+    }
   }
-  else { // updating an existing row
-    $db->query("UPDATE row SET display_order=".$row["display_order"].", columns_size='".$row["columns_size"]."', number_of_columns=".$row["number_of_columns"].", heading='".$heading."', no_padding=".$no_padding.", center_heading=".$center_heading." WHERE id=".$row_id);
-  }
-  // save columns
-  for ($i=1; $i<=$row["number_of_columns"]; $i++) {
-    $column = $row["cols"][$i];
-    save_column($column, $row_id);
+  else { 
+  // updating an existing row
+    $db->query("UPDATE row SET row_index=".$row["row_index"].", columns_size='".$row["columns_size"]."', number_of_columns=".$row["number_of_columns"].", heading='".$heading."', no_padding=".$no_padding.", center_heading=".$center_heading." WHERE id=".$row_id);
   }
 } // save_row
 
 
 /**
- * saves a column for a given row
+ * saves a column
  */
-function save_column($column, $row_id) {
+function save_column($column, &$var) {
   global $db;
   $column_id = $column["id"];
-  if ($column_id == 0) { // this is a new column
-    $db->query("INSERT INTO col (row_id, display_order, number_of_widgets) VALUES (".$row_id.", ".$column["display_order"].", ".$column["number_of_widgets"].")");
+  if (strpos($column["id"], "new") !== false) {
+    // this is a new column
+    $db->query("INSERT INTO col (row_id, col_index) VALUES (".$column["row_id"].", ".$column["col_index"].")");
     $column_id = $db->insert_id;
-  }
-  else { // updating an existing column
-    $db->query("UPDATE col SET display_order=".$column["display_order"].", row_id=".$row_id.", number_of_widgets=".$column["number_of_widgets"]." WHERE id=".$column["id"]);
-  }
-  // save widgets
-  if (isset($column["widgets"])) {
-    foreach($column["widgets"] as $widget) {
-      save_widget($widget, $column_id);
+    // let's update all the widgets in that column with the new column id
+    if (isset($var["widgets"])) {
+      foreach($var["widgets"] as $key => $widget) {
+        if ($widget["col_id"] == $column["id"]) {
+          $var["widgets"][$key]["col_id"] = $column_id;
+        }
+      }
     }
+  }
+  else { 
+    // updating an existing column
+    $db->query("UPDATE col SET row_id=".$column["row_id"].", col_index=".$column["col_index"]." WHERE id=".$column["id"]);
   }
 } // save_column
 
 
 /**
- * saves a widget for a given column
+ * saves a widget
  */
-function save_widget($widget, $column_id) {
+function save_widget($widget) {
   global $db;
   $widget_id = $widget["id"];
-  $db->query("UPDATE widget SET display_order=".$widget["display_order"].",  col_id=".$column_id." WHERE id=".$widget["id"]);
+  $db->query("UPDATE widget SET col_id=".$widget["col_id"].", widget_index=".$widget["widget_index"]." WHERE id=".$widget["id"]);
 } // save_widget
 
 
@@ -341,10 +360,14 @@ function delete_page($page_id) {
  */
 function delete_row($row_id) {
   global $db;
-  $db->query("DELETE FROM row WHERE id=".$row_id);
-  if ($columns = $db->get_results("SELECT * FROM col WHERE row_id=".$row_id)) {
-    foreach($columns as $col) {
-      delete_column($col->id);
+  if (strpos($row_id, "new") === false) {
+    // delete the row
+    $db->query("DELETE FROM row WHERE id=".$row_id);
+    // delete each column in the row
+    if ($columns = $db->get_results("SELECT * FROM col WHERE row_id=".$row_id)) {
+      foreach($columns as $col) {
+        delete_column($col->id);
+      }
     }
   }
 } // delete_row
@@ -355,10 +378,14 @@ function delete_row($row_id) {
  */
 function delete_column($column_id) {
   global $db;
-  $db->query("DELETE FROM col WHERE id=".$column_id);
-  if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$column_id)) {
-    foreach($widgets as $widget) {
-      delete_widget($widget->id);
+  if (strpos($column_id, "new") === false) {
+    // delete the column
+    $db->query("DELETE FROM col WHERE id=".$column_id);
+    // delete the widgets for that column
+    if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$column_id)) {
+      foreach($widgets as $widget) {
+        delete_widget($widget->id);
+      }
     }
   }
 } // delete_column

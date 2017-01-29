@@ -11,9 +11,7 @@ else {
   // creating a new widget
   $widget_type = $_POST["widget_type"];
   $col_id = $_POST["col_id"];
-  $display_order = $_POST["display_order"];
-  $index_row = $_POST["index_row"];
-  $index_col = $_POST["index_col"];
+  $widget_index = $_POST["widget_index"];
 }
 ?>
 
@@ -25,11 +23,9 @@ include($_SERVER["DOCUMENT_ROOT"]."/happyweb/admin/widgets/".$widget_type."/form
 
 <?php
 if ($action == "create") { ?>
-<input type="hidden" name="display_order" value="<?php print $display_order; ?>" />
-<input type="hidden" name="col_id" value="<?php print $col_id; ?>" />
 <input type="hidden" name="widget_type" value="<?php print $widget_type; ?>" />
-<input type="hidden" name="index_row" value="<?php print $index_row; ?>" />
-<input type="hidden" name="index_col" value="<?php print $index_col; ?>" />
+<input type="hidden" name="col_id" value="<?php print $col_id; ?>" />
+<input type="hidden" name="widget_index" value="<?php print $widget_index; ?>" />
 <?php } else { ?>
 <input type="hidden" name="widget_id" value="<?php print $widget->id; ?>" />
 <?php } ?>
