@@ -206,6 +206,9 @@ function create_new_row($row_index) {
 function create_new_col($row_id, $col_index) {
   $col = new stdClass();
   $col->id = $row_id."-".$col_index;
+  if (strpos($col->id, "new") === false) { // this will fix the issue with new columns being not created before update #15
+    $col->id = "new-".$col->id;
+  }
   $col->row_id = $row_id;
   $col->col_index = $col_index;
   $col->number_of_widgets = 0;
@@ -325,7 +328,6 @@ function save_column($column, &$var) {
     }
   }
   else { 
-    // updating an existing column
     $db->query("UPDATE col SET row_id=".$column["row_id"].", col_index=".$column["col_index"]." WHERE id=".$column["id"]);
   }
 } // save_column

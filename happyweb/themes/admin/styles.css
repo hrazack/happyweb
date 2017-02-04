@@ -82,7 +82,7 @@ section {border: solid 1px #aaa; background: #fff; margin: 0 0 30px 0; border-ra
 /* widget box */
 .widgets-container {position: relative; padding-bottom: 30px;}
 .widget {margin: 0 0 20px 0; position: relative;}
-.widget {border: dotted 1px #999; background: #fff; padding: 40px 20px 20px 20px; min-height: 100px; overflow: hidden;}
+.widget {border: solid 1px #bbb; background: #fff; border-radius: 3px; padding: 40px 20px 20px 20px; min-height: 100px; overflow: hidden;}
 .widget img {display: block; max-width: 100%;}
 .widget-toolbar {position: absolute; right: 5px; top: 6px; color: #999; display: none; z-index: 5;}
 .widget:hover .widget-toolbar {display: inline-block;}
@@ -123,7 +123,7 @@ ul.widget-list.extra {display: none;}
 .form-item-radio {margin: 0 0 10px 0;}
 label {display: block; margin: 0 0 5px 0; font-weight: bold;}
 label.inline {margin: 0; display: inline; font-weight: normal;}
-input, textarea, select, button {font-family: Georgia; font-size: 18px; line-height: 28px; color: #333; border-radius: 5px; outline: none;}
+input, textarea, select, button {font-family: Georgia; font-size: 18px; line-height: 28px; color: #333; border-radius: 3px; outline: none;}
 input.text, textarea, select {padding: 10px 20px; min-width: 500px; display: block; margin: 0; border: solid 1px #aaa; background: #fff;}
 input.full-width {width: 100%;}
 input.big {font-size: 24px; line-height: 24px;}
