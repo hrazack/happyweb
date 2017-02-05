@@ -304,7 +304,7 @@ function build_page($page) {
         foreach($columns as $col) {
           $col_index++;
           if ($col_index <= $row->number_of_columns) {
-            $content_columns .= '<div class="column column'.$col_index.'">';
+            $content_columns .= '<div class="column column'.$col_index.'" data-id="'.$col->id.'">';
             if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id." ORDER BY widget_index ASC")) {
               $is_content_in_columns = true;
               foreach($widgets as $widget) {          

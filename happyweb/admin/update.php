@@ -124,7 +124,7 @@ function perform_update($index) {
       $message .= "<p>Added \"left/right/center\" image alignment options</p>";
       increment_update();
       
-    // Cleaned some of the data model
+    // Clean some of the data model
     case 15:
       // change rows
       $db->query("ALTER TABLE `row` CHANGE `display_order` `row_index` INT(2) NOT NULL DEFAULT '0';");
@@ -133,7 +133,13 @@ function perform_update($index) {
       $db->query("ALTER TABLE `col` DROP `number_of_widgets`;");
       // change widgets
       $db->query("ALTER TABLE `widget` CHANGE `display_order` `widget_index` INT(2) NOT NULL DEFAULT '0';");
-      $message .= "<p>cleaned some of the data model</p>";
+      $message .= "<p>Cleaned some of the data model</p>";
+      increment_update();
+      
+    // Fix issue with widgets inserted in a new row
+    case 16:
+      $db->query("ALTER TABLE `widget` CHANGE `col_id` `col_id` VARCHAR(11) NOT NULL DEFAULT '0';");
+      $message .= "<p>Fixed issue with widgets inserted in a new row</p>";
       increment_update();
 
   }

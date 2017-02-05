@@ -6,17 +6,23 @@ global $db;
 // load db and various functions
 require("happyweb/includes/ez_sql/ez_sql_core.php");
 require("happyweb/includes/ez_sql/ez_sql_pdo.php");
-require("your_site/config.php");
 require("happyweb/includes/functions.php");
-
-// set up database
-$db = new ezSQL_pdo('mysql:host='.$host.';dbname='.$db_name.';', $user, $password);
 
 // catch errors
 set_error_handler("set_error", E_ALL);
 
 // check if we have any messages to display
 $messages = get_messages();
+
+// check whether config.php exists or not
+if (!file_exists("your_site/config.php")) {
+  include("happyweb/install.php");
+  exit();
+}
+
+// set up database
+require("your_site/config.php");
+$db = new ezSQL_pdo('mysql:host='.$host.';dbname='.$db_name.';', $user, $password);
 
 // check which page we want to see
 $url_info = parse_url($_SERVER['REQUEST_URI']);

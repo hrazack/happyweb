@@ -1,5 +1,5 @@
 <?php
-$head_page_title = "All the great people on your site";
+$head_page_title = "All the fantastic users on your site";
 $display_navigation = true;
 ?>
 
@@ -18,6 +18,9 @@ $display_navigation = true;
 <?php
 $users = $db->get_results("SELECT * FROM user");
 foreach($users as $user) {
+  if ($user->id == 1 && $_SESSION["happyweb"]["user"]->id != 1) {
+    continue;
+  }
   if ($user->id == 1 || $user->id == 2) {
     $link_delete = '<span class="disabled"><i class="material-icons md-24">clear</i> delete</span>';
   }

@@ -468,7 +468,7 @@ $(document).ready(function() {
     $(widget).find('.widget-col-id').val(new_col_id);
   });
 
-  // inserts a widget in the current column (that's called after an ajax call to the widget submit form)
+  // inserts a widget in the current column (this is called after an ajax call to the widget submit form)
   function insert_widget(data) {
     // insert the widget (the whole box)
     widget_container = current_column.find(".widgets-container");

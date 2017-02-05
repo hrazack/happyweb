@@ -35,7 +35,7 @@ if (isset($_POST["action"])) {
     <input type="password" class="text" name="password" required />
   </div>
   
-  <input type="submit" class="submit" value="Login, oh!" />
+  <input type="submit" class="submit" value="Let's login!" />
   <input type="hidden" name="action" value="login" />
   
 </form>
