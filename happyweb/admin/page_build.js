@@ -4,15 +4,32 @@ $(document).ready(function() {
   var current_column;
   var current_widget;
 
-  // add "Heading" plugin to TinyMCE
-  tinyMCE.PluginManager.add('heading', function(editor, url) {
-    editor.addButton("heading", {
-      tooltip: "Heading",
-      text: "H",
+  // add "Heading2" plugin to TinyMCE
+  tinyMCE.PluginManager.add('heading2', function(editor, url) {
+    editor.addButton("heading2", {
+      tooltip: "Heading2",
+      text: "H2",
       onClick: function() { editor.execCommand('mceToggleFormat', false, "h2"); },
       onPostRender: function() {
         var self = this, setup = function() {
           editor.formatter.formatChanged("h2", function(state) {
+            self.active(state);
+          });
+        };
+        editor.formatter ? setup() : editor.on('init', setup);
+      },
+    })
+  });
+  
+  // add "Heading3" plugin to TinyMCE
+  tinyMCE.PluginManager.add('heading3', function(editor, url) {
+    editor.addButton("heading3", {
+      tooltip: "Heading3",
+      text: "H3",
+      onClick: function() { editor.execCommand('mceToggleFormat', false, "h3"); },
+      onPostRender: function() {
+        var self = this, setup = function() {
+          editor.formatter.formatChanged("h3", function(state) {
             self.active(state);
           });
         };
@@ -26,7 +43,7 @@ $(document).ready(function() {
     selector: '.formatted',
     menubar: false,
     statusbar: false,
-    plugins: 'paste autolink code heading autoresize',
+    plugins: 'paste autolink code heading2 heading3 autoresize',
     external_plugins: {
       "happylink": "/happyweb/includes/tinymce_plugins/happylink.js"
     },
@@ -38,7 +55,7 @@ $(document).ready(function() {
       {title: 'Button link', value: 'button'}
     ],
     height: 400,
-    toolbar: 'heading bold italic underline strikethrough | bullist numlist | alignleft aligncenter alignright | happylink | code',
+    toolbar: 'heading2 heading3 bold italic underline strikethrough | bullist numlist | alignleft aligncenter alignright | happylink | code',
     content_css: '/happyweb/themes/basic/styles.css',
     setup: function(editor) {
       editor.on('change', function () {

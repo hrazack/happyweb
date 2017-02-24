@@ -20,6 +20,6 @@ else {
 
 <?php if ($data->video_description != "") { ?>
 <div class="video-description">
-  <?php print $data->video_description; ?>
+  <?php print nl2br($data->video_description); ?>
 </div>
 <?php } ?>

@@ -8,6 +8,6 @@ $thumbnail_url = get_video_thumbnail($data->video_url);
 
 <?php if ($data->video_description != "") { ?>
 <div class="video-description">
-  <?php print $data->video_description; ?>
+  <?php print nl2br($data->video_description); ?>
 </div>
 <?php } ?>
