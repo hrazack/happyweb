@@ -110,11 +110,16 @@ $(document).ready(function() {
   // adding a row
   $("#add-row").click(function() {
     $(this).addClass("loader");
-    number_of_rows = $("section").length;
-    number_of_rows++;
-    row_index = number_of_rows;
+    // find the highest index
+    var highest_index = 1;
+    $(".row-index").each(function() {
+      var index = $(this).val();
+      if (index > highest_index) {
+        highest_index = index;
+      }
+    });
+    row_index = parseInt(highest_index) + 1;
     page_id = $("input[name=page_id]").val();
-    $("input[name='number_of_rows']").val(number_of_rows);
     $.ajax({
       url: "/ajax/new_row",
       data: {row_index: row_index, page_id: page_id},
