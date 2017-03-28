@@ -84,7 +84,8 @@ $(document).ready(function() {
     animation: 'grow',
     theme: 'tooltipster-borderless',
     delay: 0,
-    maxWidth: 400
+    maxWidth: 400,
+    debug: false
   };
   
   // tooltips
@@ -113,7 +114,7 @@ $(document).ready(function() {
     // find the highest index
     var highest_index = 1;
     $(".row-index").each(function() {
-      var index = $(this).val();
+      var index = parseInt($(this).val());
       if (index > highest_index) {
         highest_index = index;
       }
