@@ -12,7 +12,7 @@ $checked_disable_slideshow = ($data->disable_slideshow == 1)?"checked":"";
         $str = $obj->id;
         $part = explode("||", $str);
         $filename = $part[0];
-        $description = isset($part[1])?urldecode($part[1]):"";
+        $description = isset($part[1])?$part[1]:"";
         ?>
         <li class="dd-item" data-id="<?php print $obj->id; ?>">
           <div class="dd-handle"><i class="material-icons">open_with</i></div>
@@ -83,7 +83,7 @@ $(document).ready(function() {
           $('#file-upload').val();
           $.each(data.files, function(key, obj) {
             //console.log(filename);
-            str = '<li class="dd-item" data-id="'+obj.filename+'||'+encodeURI(obj.description)+'">';
+            str = '<li class="dd-item" data-id="'+obj.filename+'||'+htmlEntities(obj.description)+'">';
             str += '<div class="dd-handle"><i class="material-icons">open_with</i></div>';
             str += '<div class="dd-content">';
             str += '<div class="cell image"><img src="/your_site/uploaded_files/originals/'+obj.filename+'" width="100" /></div>';
@@ -117,7 +117,7 @@ $(document).ready(function() {
     filename = part[0];
     description = part[1];
     // we replace the description with the new one
-    new_description = $(this).val();
+    new_description = htmlEntities($(this).val());
     new_str = filename+"||"+new_description;
     li.attr("data-id", new_str);
   });
@@ -128,5 +128,9 @@ function update_nestable() {
   var filenames = $('.dd').nestable('serialize');
   filenames = JSON.stringify(filenames);
   $("#filenames").val(filenames);
+}
+
+function htmlEntities(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 </script>
