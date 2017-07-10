@@ -75,6 +75,7 @@ function print_page_edit_row($parent) {
         <li class="dd-item" data-id="<?php print $page->id; ?>">
           <div class="dd-handle"><i class="material-icons">open_with</i></div>
           <div class="dd-content"><?php print display_page_list_row($page); ?></div>
+          <?php print_page_edit_row($page->id); ?>
         </li>
         <?php
       }
