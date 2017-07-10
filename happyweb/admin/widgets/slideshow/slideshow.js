@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-  $('.slideshow-full').slick({
+  $('.slideshow-full:not(.disabled)').slick({
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,

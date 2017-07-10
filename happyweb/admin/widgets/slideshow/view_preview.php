@@ -8,7 +8,11 @@ $n = count($files);
 <?php
 if ($data->filenames != "") {
   foreach($files as $obj) {
-    print '<img src="/your_site/uploaded_files/large/'.$obj->id.'" />';
+    $str = $obj->id;
+    $part = explode("||", $str);
+    $filename = $part[0];
+    $description = isset($part[1])?urldecode($part[1]):"";
+    print '<img src="/your_site/uploaded_files/large/'.$filename.'" alt="'.$description.'" />';
   }
 }
 ?>

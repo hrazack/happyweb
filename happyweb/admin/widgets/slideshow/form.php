@@ -8,13 +8,18 @@ $checked_disable_slideshow = ($data->disable_slideshow == 1)?"checked":"";
     <?php
     if ($action == "edit") {
       $files = json_decode($filenames);
-      foreach($files as $obj) {
+      foreach($files as $index => $obj) {
+        $str = $obj->id;
+        $part = explode("||", $str);
+        $filename = $part[0];
+        $description = isset($part[1])?urldecode($part[1]):"";
         ?>
         <li class="dd-item" data-id="<?php print $obj->id; ?>">
           <div class="dd-handle"><i class="material-icons">open_with</i></div>
           <div class="dd-content">
-            <div class="cell image"><img src="/your_site/uploaded_files/originals/<?php print $obj->id; ?>" width="100" /></div>
+            <div class="cell image"><img src="/your_site/uploaded_files/originals/<?php print $filename; ?>" width="100" /></div>
             <div class="cell delete large"><a href=""><i class="material-icons md-24">clear</i> remove</a></div>
+            <div class="cell"><input type="text" class="text slideshow-description" placeholder="Optional description" value="<?php print $description; ?>" /></div>
           </div>
         </li>
         <?php
@@ -76,13 +81,14 @@ $(document).ready(function() {
       success: function(data) {
         if (data.status != "error") {
           $('#file-upload').val();
-          $.each(data.files, function(key, filename) {
+          $.each(data.files, function(key, obj) {
             //console.log(filename);
-            str = '<li class="dd-item" data-id="'+filename+'">';
+            str = '<li class="dd-item" data-id="'+obj.filename+'||'+encodeURI(obj.description)+'">';
             str += '<div class="dd-handle"><i class="material-icons">open_with</i></div>';
             str += '<div class="dd-content">';
-            str += '<div class="cell image"><img src="/your_site/uploaded_files/originals/'+filename+'" width="100" /></div>';
+            str += '<div class="cell image"><img src="/your_site/uploaded_files/originals/'+obj.filename+'" width="100" /></div>';
             str += '<div class="cell delete large"><a href=""><i class="material-icons md-24">clear</i> remove</a></div>';
+            str += '<div class="cell"><input type="text" class="text" placeholder="Optional description" value="'+obj.description+'" /></div>';
             str += '</div>';
             str += '</li>';
             $('#uploaded-images').append(str);
@@ -100,6 +106,20 @@ $(document).ready(function() {
         console.log(data.errorMessage);
       }
     });
+  });
+  
+  // when updating the description
+  $(".slideshow-description").keyup(function() {
+    // the id format is filename||description
+    li = $(this).closest("li");
+    str = li.attr("data-id");
+    part = str.split("||");
+    filename = part[0];
+    description = part[1];
+    // we replace the description with the new one
+    new_description = $(this).val();
+    new_str = filename+"||"+new_description;
+    li.attr("data-id", new_str);
   });
 
 });
