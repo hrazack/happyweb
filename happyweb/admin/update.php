@@ -141,6 +141,12 @@ function perform_update($index) {
       $db->query("ALTER TABLE `widget` CHANGE `col_id` `col_id` VARCHAR(11) NOT NULL DEFAULT '0';");
       $message .= "<p>Fixed issue with widgets inserted in a new row</p>";
       increment_update();
+      
+    // Add widget_form table
+    case 17:
+      $db->query("CREATE TABLE IF NOT EXISTS `widget_form` (`widget_id` int(11) NOT NULL, `name_from` varchar(255), `email_from` varchar(255), `email_to` varchar(255), `submit_text` varchar(400) NOT NULL, `message` MEDIUMTEXT NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;"); 
+      $message .= "<p>Added contact form widget</p>";
+      increment_update();
 
   }
   return $message;

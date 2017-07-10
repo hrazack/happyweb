@@ -8,5 +8,6 @@
     <li><a data-widget-type="slideshow" data-require-form="true" class="slideshow tooltip" title="An image slideshow with several images rotating one after the other"><i class="material-icons bigger">perm_media</i>A slideshow</a></li>
     <li><a data-widget-type="quote" data-require-form="true" class="quote tooltip" title="A quote with some text and an author"><i class="material-icons bigger">chat</i>A quote</a></li>
     <li><a data-widget-type="audio" data-require-form="true" class="audio tooltip" title="An audio file with a description"><i class="material-icons bigger">music_video</i>An audio file</a></li>
+    <li><a data-widget-type="form" data-require-form="true" class="form tooltip" title="A contact or application form"><i class="material-icons bigger">assignment</i>A form</a></li>
   </ul>
 </div>
