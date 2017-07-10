@@ -85,7 +85,8 @@ i {float: left; margin-right: 5px; position: relative; top: 2px;}
 
 /* widget: slideshow */
 .slideshow-full {margin: 0;}
-#content .slideshow-full div.item {outline: none; width: auto; display: inline-block;}
+#content .slideshow-full div.item {outline: none; width: auto; display: inline-block; text-align: center;}
+#content .slideshow-full div.item img {display: inline-block;}
 
 .slideshow-nav {padding: 20px 0px 10px 0px; background: none;}
 .slideshow-nav div {margin: 0 10px 0 0; outline: none;}
