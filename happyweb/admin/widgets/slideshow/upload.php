@@ -10,10 +10,7 @@ foreach($_FILES as $file) {
   // upload the original image
   $result = upload_image($file, $file_path."originals/");
   if ($result->status == "success") {
-    $obj = new stdClass();
-    $obj->filename = $file["name"];
-    $obj->description = "yeah";
-    $data->files[] = $obj;
+    $data->files[] = $file["name"];
     // resize the image
     resize_image($result->file_name, $file_path."originals/", "large");
   }

@@ -81,14 +81,14 @@ $(document).ready(function() {
       success: function(data) {
         if (data.status != "error") {
           $('#file-upload').val();
-          $.each(data.files, function(key, obj) {
+          $.each(data.files, function(key, filename) {
             //console.log(filename);
-            str = '<li class="dd-item" data-id="'+obj.filename+'||'+htmlEntities(obj.description)+'">';
+            str = '<li class="dd-item" data-id="'+filename+'||">';
             str += '<div class="dd-handle"><i class="material-icons">open_with</i></div>';
             str += '<div class="dd-content">';
-            str += '<div class="cell image"><img src="/your_site/uploaded_files/originals/'+obj.filename+'" width="100" /></div>';
+            str += '<div class="cell image"><img src="/your_site/uploaded_files/originals/'+filename+'" width="100" /></div>';
             str += '<div class="cell delete large"><a href=""><i class="material-icons md-24">clear</i> remove</a></div>';
-            str += '<div class="cell"><input type="text" class="text" placeholder="Optional description" value="'+obj.description+'" /></div>';
+            str += '<div class="cell"><input type="text" class="text" placeholder="Optional description" value="" /></div>';
             str += '</div>';
             str += '</li>';
             $('#uploaded-images').append(str);
@@ -120,6 +120,18 @@ $(document).ready(function() {
     new_description = htmlEntities($(this).val());
     new_str = filename+"||"+new_description;
     li.attr("data-id", new_str);
+  });
+  
+  // when submitting the form
+  $("form[name=widget]").submit(function() {
+    str = "[";
+    $("#uploaded-images li").each(function() {
+      id = $(this).attr("data-id");
+      str += '{"id":"'+id+'"},';
+    });
+    str = str.replace(/,\s*$/, ""); // remove last character if comma
+    str += "]";
+    $("#filenames").val(str);
   });
 
 });
