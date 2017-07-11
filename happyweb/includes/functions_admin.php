@@ -164,7 +164,7 @@ function save_pages_order($pages, $parent) {
 /**
  * returns a tree of all pages (in hierarchical order)
  */
-function get_pages_tree(&$pages_full, &$pages_url=array(), $page_id=0, $level=0) {
+function get_pages_tree(&$pages_full, $page_id=0, &$pages_url=array(), $level=0) {
   global $db;
   if ($pages = $db->get_results("SELECT * FROM page WHERE parent=".$page_id." ORDER BY display_order ASC")) {
     foreach($pages as $page) {
@@ -175,7 +175,7 @@ function get_pages_tree(&$pages_full, &$pages_url=array(), $page_id=0, $level=0)
       $obj->id = $page->id;
       $pages_full[] = $obj;
       $pages_url[] = "/".$page->url;
-      get_pages_tree($pages_full, $pages_url, $page->id, $level+1);
+      get_pages_tree($pages_full, $page->id, $pages_url, $level+1);
     }
   }
 } // page_tree

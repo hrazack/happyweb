@@ -1,6 +1,6 @@
 <?php
 $filenames = ($action == "edit")?$data->filenames:"";
-$checked_disable_slideshow = ($data->disable_slideshow == 1)?"checked":"";
+$checked_disable_slideshow = ($action == "edit" && $data->disable_slideshow == 1)?"checked":"";
 ?>
 
 <div class="dd slideshow">

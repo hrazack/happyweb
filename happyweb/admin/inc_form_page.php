@@ -30,8 +30,28 @@
         <option value="-1" <?php print $selected_nowhere; ?>>* No parent, it's a standalone page</option>
         <option value="0" <?php print $selected_top; ?>>* In the top navigation</option>
         <?php
+        // pages in the navigation
         $pages = array();
         get_pages_tree($pages);
+        foreach($pages as $p) {
+          if ($p->id != $page_id) {
+            if (!isset($page)) {
+              $selected = "";
+            }
+            else {
+              $selected = ($page->parent == $p->id)?"selected":"";
+            }
+            ?>
+            <option value="<?php print $p->id; ?>" <?php print $selected; ?>><?php print $p->text; ?></option>
+            <?php
+          }
+        }
+        // pages outside of the navigation
+        ?>
+        <option value="-2">----------------------------------------</option>
+        <?php
+        $pages = array();
+        get_pages_tree($pages, -1);
         foreach($pages as $p) {
           if ($p->id != $page_id) {
             if (!isset($page)) {
