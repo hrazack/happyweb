@@ -82,13 +82,12 @@ $(document).ready(function() {
         if (data.status != "error") {
           $('#file-upload').val();
           $.each(data.files, function(key, filename) {
-            //console.log(filename);
             str = '<li class="dd-item" data-id="'+filename+'||">';
             str += '<div class="dd-handle"><i class="material-icons">open_with</i></div>';
             str += '<div class="dd-content">';
             str += '<div class="cell image"><img src="/your_site/uploaded_files/originals/'+filename+'" width="100" /></div>';
             str += '<div class="cell delete large"><a href=""><i class="material-icons md-24">clear</i> remove</a></div>';
-            str += '<div class="cell"><input type="text" class="text" placeholder="Optional description" value="" /></div>';
+            str += '<div class="cell"><input type="text" class="text slideshow-description" placeholder="Optional description" /></div>';
             str += '</div>';
             str += '</li>';
             $('#uploaded-images').append(str);
@@ -109,7 +108,7 @@ $(document).ready(function() {
   });
   
   // when updating the description
-  $(".slideshow-description").keyup(function() {
+  $(document).on("keyup", ".slideshow-description", function() {
     // the id format is filename||description
     li = $(this).closest("li");
     str = li.attr("data-id");
@@ -117,7 +116,8 @@ $(document).ready(function() {
     filename = part[0];
     description = part[1];
     // we replace the description with the new one
-    new_description = htmlEntities($(this).val());
+    new_description = $(this).val();
+    new_description = new_description.replace('"', "'");
     new_str = filename+"||"+new_description;
     li.attr("data-id", new_str);
   });
@@ -142,7 +142,4 @@ function update_nestable() {
   $("#filenames").val(filenames);
 }
 
-function htmlEntities(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
 </script>
