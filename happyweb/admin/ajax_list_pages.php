@@ -3,18 +3,10 @@ $pages_full = array();
 $pages_url = array();
 
 // get pages that are in the hierarchy
-get_pages_tree($pages_full, $pages_url);
+get_pages_tree($pages_full, 0, $pages_url);
 
 // get other pages
-if ($pages = $db->get_results("SELECT * FROM page WHERE parent=-1 AND id!=2 ORDER BY display_order ASC")) {
-  foreach($pages as $page) {
-    $obj = new stdClass();
-    $obj->text = $page->title;
-    $obj->value = "/".$page->url;
-    $pages_full[] = $obj;
-    $pages_url[] = "/".$page->url;
-  }
-}
+get_pages_tree($pages_full, -1, $pages_url);
   
 // output the data
 $data = new stdClass();
