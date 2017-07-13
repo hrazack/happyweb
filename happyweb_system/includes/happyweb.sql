@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1:33067
--- Generation Time: Feb 04, 2017 at 08:44 PM
+-- Generation Time: Jul 13, 2017 at 08:53 PM
 -- Server version: 5.5.48-log
--- PHP Version: 5.6.19
+-- PHP Version: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -49,6 +49,19 @@ INSERT INTO `col` (`id`, `row_id`, `col_index`) VALUES
 (10, 4, 1),
 (11, 4, 2),
 (12, 4, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logs`
+--
+
+CREATE TABLE IF NOT EXISTS `logs` (
+  `id` int(11) NOT NULL,
+  `date` int(11) NOT NULL,
+  `description` mediumtext NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -120,12 +133,12 @@ CREATE TABLE IF NOT EXISTS `settings` (
 
 INSERT INTO `settings` (`name`, `value`) VALUES
 ('404_page_id', '2'),
-('current_update', '15'),
-('footer_text', 'Copyright 2017 Happy site'),
+('current_update', '18'),
+('footer_text', 'Copyright 2017 Happy Web'),
 ('home_page_id', '1'),
 ('side_nav_heading', 'Also see:'),
-('site_name', 'Happy site'),
-('theme', 'basic');
+('site_name', 'Happy Web'),
+('theme', 'happy_web');
 
 -- --------------------------------------------------------
 
@@ -138,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(400) NOT NULL,
   `password` varchar(400) NOT NULL,
   `email` varchar(400) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
@@ -155,7 +168,7 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`) VALUES
 
 CREATE TABLE IF NOT EXISTS `widget` (
   `id` int(11) NOT NULL,
-  `col_id` varchar(11) NOT NULL,
+  `col_id` varchar(11) NOT NULL DEFAULT '0',
   `widget_index` int(2) NOT NULL DEFAULT '0',
   `type` varchar(200) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
@@ -165,10 +178,10 @@ CREATE TABLE IF NOT EXISTS `widget` (
 --
 
 INSERT INTO `widget` (`id`, `col_id`, `widget_index`, `type`) VALUES
-(1, 1, 1, 'text'),
-(2, 4, 1, 'text'),
-(3, 7, 1, 'text'),
-(4, 10, 1, 'text');
+(1, '1', 1, 'text'),
+(2, '4', 1, 'text'),
+(3, '7', 1, 'text'),
+(4, '10', 1, 'text');
 
 -- --------------------------------------------------------
 
@@ -181,6 +194,21 @@ CREATE TABLE IF NOT EXISTS `widget_audio` (
   `file` varchar(400) NOT NULL DEFAULT '',
   `title` varchar(400) NOT NULL DEFAULT '',
   `description` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `widget_form`
+--
+
+CREATE TABLE IF NOT EXISTS `widget_form` (
+  `widget_id` int(11) NOT NULL,
+  `name_from` varchar(255) DEFAULT NULL,
+  `email_from` varchar(255) DEFAULT NULL,
+  `email_to` varchar(255) DEFAULT NULL,
+  `submit_text` varchar(400) NOT NULL,
+  `message` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -290,6 +318,12 @@ ALTER TABLE `col`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `page`
 --
 ALTER TABLE `page`
@@ -372,6 +406,11 @@ ALTER TABLE `widget_video`
 ALTER TABLE `col`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
@@ -385,7 +424,7 @@ ALTER TABLE `row`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `widget`
 --

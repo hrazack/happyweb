@@ -41,6 +41,7 @@
       $selected_navigation = (arg(1) == "navigation")?"selected":"";
       $selected_users = (arg(1) == "users")?"selected":"";
       $selected_settings = (arg(1) == "settings")?"selected":"";
+      $selected_logs = (arg(1) == "logs")?"selected":"";
       ?>
       <ul class="side-navigation">
         <li class="<?php print $selected_pages; ?>"><a href="/admin"><i class="material-icons">library_books</i> Pages</a></li>

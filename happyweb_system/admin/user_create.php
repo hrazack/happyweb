@@ -7,7 +7,7 @@ if (isset($_POST["action"])) {
   
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $username = $db->escape($_POST["username"]);
-  $db->query("INSERT INTO user (username, password) VALUES ('".$username."', '".password."')");
+  $db->query("INSERT INTO user (username, password) VALUES ('".$username."', '".$password."')");
   set_message('The user <em>"'.$username.'"</em> has been created, woohoo!');
   redirect('admin/users');
   

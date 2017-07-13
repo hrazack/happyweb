@@ -453,3 +453,16 @@ function sanitize_string($unformatted) {
   $uri = preg_replace($find, $replace, $url);
   return $uri;
 } // sanitize_string
+
+
+
+
+/**
+ * record a log
+ */
+function record_log($description) { 
+  global $db;
+  $user_id = $_SESSION["happyweb"]["user"]->id;
+  $db->query("INSERT INTO logs (date, description, user_id) VALUES (".time().", '".$db->escape($description)."', ".$user_id.")");
+}  // log
+

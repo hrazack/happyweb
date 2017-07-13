@@ -12,7 +12,12 @@ if (isset($_POST["action"])) {
   else {
     // check password
     if (password_verify($_POST["password"], $user->password)) {
+      // sign the user in
       $_SESSION["happyweb"]["user"] = $user;
+      // record logs
+      // $log_description = "signed in";
+      // record_log($log_description);
+      // redirects
       redirect('admin');
     } 
     else {
