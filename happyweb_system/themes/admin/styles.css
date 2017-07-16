@@ -114,7 +114,8 @@ ul.widget-list li a.imagelink {background: #ba83f5;}
 ul.widget-list li a.slideshow {background: #d28c8c;}
 ul.widget-list li a.quote {background: #99b348;}
 ul.widget-list li a.audio {background: #6269d0;}
-ul.widget-list li a.form {background: #888;}
+ul.widget-list li a.form {background: #a94242;}
+ul.widget-list li a.code {background: #888;}
 ul.widget-list li i {float: none; margin: 0 0 5px 0; display: block;}
 ul.widget-list.extra {display: none;}
 

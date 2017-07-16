@@ -153,6 +153,12 @@ function perform_update($index) {
       $db->query("CREATE TABLE IF NOT EXISTS `logs` (`id` INT(11) NOT NULL AUTO_INCREMENT, `date` INT(11) NOT NULL, `description` MEDIUMTEXT NOT NULL, `user_id` INT(11) NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;"); 
       $message .= "<p>Added logs</p>";
       increment_update();
+      
+    // Add widget_code table
+    case 19:
+      $db->query("CREATE TABLE IF NOT EXISTS `widget_code` (`widget_id` int(11) NOT NULL, `filename` varchar(255) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;"); 
+      $message .= "<p>Added custom code widget</p>";
+      increment_update();
 
   }
   return $message;

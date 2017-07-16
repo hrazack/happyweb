@@ -16,6 +16,7 @@ i {float: left; margin-right: 5px; position: relative; top: 2px;}
 #admin-tools:hover {opacity: 1;}
 #admin-tools li {margin: 0 5px 0 5px; padding: 0; list-style: none; background: none; display: inline-block;}
 #admin-tools i {float: none; margin: 0; top: 0;}
+#admin-tools a {color: #333;}
 
 /* columns */
 .column {min-height: 10px;}

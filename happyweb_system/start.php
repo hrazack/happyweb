@@ -116,6 +116,22 @@ switch(arg(0)) {
     else {
       $css .= '<link rel="stylesheet" href="/my_website/themes/'.$theme.'/styles.css" media="all" />';
     }
+    
+    // add custom colours
+    if ($theme != "admin") {
+      $css .= '<style type="text/css">';
+      if (get_setting("colour_h1")) $css .= 'h1 {color: '.get_setting("colour_h1").';}';
+      if (get_setting("colour_h2")) $css .= 'h2 {color: '.get_setting("colour_h2").';}';
+      if (get_setting("colour_h3")) $css .= 'h3 {color: '.get_setting("colour_h3").';}';
+      if (get_setting("colour_links")) $css .= 'a {color: '.get_setting("colour_links").';}';
+      if (get_setting("colour_header_text")) $css .= 'header h1 {color: '.get_setting("colour_header_text").';}';
+      if (get_setting("colour_header_bg")) $css .= 'header {background-color: '.get_setting("colour_header_bg").';}';
+      if (get_setting("colour_nav_text")) $css .= 'nav a {color: '.get_setting("colour_nav_text").';}';
+      if (get_setting("colour_nav_bg")) $css .= 'nav {background-color: '.get_setting("colour_nav_bg").';}';
+      if (get_setting("colour_footer_text")) $css .= 'footer {color: '.get_setting("colour_footer_text").';}';
+      if (get_setting("colour_footer_bg")) $css .= 'footer {background-color: '.get_setting("colour_footer_bg").';}';
+      $css .= '</style>';
+    }
 
     // display the template
     $path_theme = ($theme == "basic" || $theme == "admin")?"happyweb_system/themes/":"my_website/themes/";
