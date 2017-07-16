@@ -105,16 +105,16 @@ switch(arg(0)) {
     
     // print css
     $css = '
-      <link rel="stylesheet" href="/happyweb_system/includes/happyweb.css" media="all" />
+      <link rel="stylesheet" href="/happyweb_system/includes/happyweb.css?v='.time().'" media="all" />
       <link rel="stylesheet" href="/happyweb_system/includes/colorbox/colorbox.css" media="all" />';
     foreach($_SESSION['happyweb']['css'] as $c) {
       $css .= "\n".$c;
     }
     if ($theme == "basic") {
-      $css .= '<link rel="stylesheet" href="/happyweb_system/themes/basic/styles.css" media="all" />';
+      $css .= '<link rel="stylesheet" href="/happyweb_system/themes/basic/styles.css?v='.time().'" media="all" />';
     }
     else {
-      $css .= '<link rel="stylesheet" href="/my_website/themes/'.$theme.'/styles.css" media="all" />';
+      $css .= '<link rel="stylesheet" href="/my_website/themes/'.$theme.'/styles.css?v='.time().'" media="all" />';
     }
     
     // add custom colours
