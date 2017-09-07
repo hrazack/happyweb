@@ -13,7 +13,16 @@
   <p><a class="more"><i class="material-icons icon-open">arrow_right</i><i class="material-icons icon-close">arrow_drop_down</i> More mind-blasting options for this page</a></p>
 
   <div id="page-options">
-
+    
+    <?php
+    $checked_hidden = ($page->hidden == 1)?"checked":"";
+    ?>
+    
+    <div class="form-item">
+      <input type="checkbox" name="hidden" value="1" <?php print $checked_hidden; ?> />
+      <label class="inline">Let's hide this page, it's not ready!</label>
+    </div>
+    
     <div class="form-item">
       <label>Select the parent of the page:</label>
       <select name="parent">

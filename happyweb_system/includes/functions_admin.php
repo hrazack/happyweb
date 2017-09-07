@@ -54,7 +54,8 @@ function display_page_list_row($page) {
   if (strlen($page->title) > $max_length) {
     $title = substr($page->title, 0, $max_length)."...";
   }
-  $link_page = '<a href="/'.$page->url.'">'.$title.'</a>';
+  $hidden = ($page->hidden == 1)?" (hidden)":"";
+  $link_page = '<a href="/'.$page->url.'">'.$title.'</a>'.$hidden;
   $link_edit = '<a href="/admin/page_edit/'.$page->id.'"><i class="material-icons md-24">edit</i> edit</a>';
   if ($page->id == 1 || $page->id == 2) {
     $link_delete = '<span class="disabled"><i class="material-icons md-24">clear</i> delete</span>';
@@ -226,14 +227,15 @@ function save_page($var, $page_id = 0) {
   $description = $db->escape($var["description"]);
   $browser_title = $db->escape($var["browser_title"]);
   $parent = $var["parent"];
+  $hidden = isset($var["hidden"])?1:0;
   if ($page_id == 0) {
     // create new page
-    $db->query("INSERT INTO page (title, url, description, browser_title, parent) VALUES ('".$title."', '".$url."', '".$description."', '".$browser_title."', ".$parent.")");
+    $db->query("INSERT INTO page (title, url, description, browser_title, parent, hidden) VALUES ('".$title."', '".$url."', '".$description."', '".$browser_title."', ".$parent.", ".$hidden.")");
     $page_id = $db->insert_id;
   }
   else {
     // update existing page
-    $db->query("UPDATE page SET title='".$title."', url='".$url."', description='".$description."', browser_title='".$browser_title."', parent=".$parent." WHERE id=".$page_id);
+    $db->query("UPDATE page SET title='".$title."', url='".$url."', description='".$description."', browser_title='".$browser_title."', parent=".$parent.", hidden=".$hidden." WHERE id=".$page_id);
   }
   // save rows
   if (isset($var["rows"])) {
@@ -290,9 +292,10 @@ function save_row($row, $page_id, &$var) {
   $heading = $db->escape($row["heading"]);
   $no_padding = (isset($row["options"]["no_padding"]))?1:0;
   $center_heading = (isset($row["options"]["center_heading"]))?1:0;
+  $hidden = (isset($row["options"]["hidden"]))?1:0;
   if (strpos($row["id"], "new") !== false) {
     // this is a new row
-    $db->query("INSERT INTO row (page_id, row_index, columns_size, number_of_columns, heading, no_padding, center_heading) VALUES (".$page_id.", ".$row["row_index"].", '".$row["columns_size"]."', ".$row["number_of_columns"].", '".$heading."', ".$no_padding.", ".$center_heading.")");
+    $db->query("INSERT INTO row (page_id, row_index, columns_size, number_of_columns, heading, no_padding, center_heading, hidden) VALUES (".$page_id.", ".$row["row_index"].", '".$row["columns_size"]."', ".$row["number_of_columns"].", '".$heading."', ".$no_padding.", ".$center_heading.", ".$hidden.")");
     $row_id = $db->insert_id;
     // let's update all the columns in that row with the new row id
     foreach($var["cols"] as $key => $col) {
@@ -303,7 +306,7 @@ function save_row($row, $page_id, &$var) {
   }
   else { 
   // updating an existing row
-    $db->query("UPDATE row SET row_index=".$row["row_index"].", columns_size='".$row["columns_size"]."', number_of_columns=".$row["number_of_columns"].", heading='".$heading."', no_padding=".$no_padding.", center_heading=".$center_heading." WHERE id=".$row_id);
+    $db->query("UPDATE row SET row_index=".$row["row_index"].", columns_size='".$row["columns_size"]."', number_of_columns=".$row["number_of_columns"].", heading='".$heading."', no_padding=".$no_padding.", center_heading=".$center_heading.", hidden=".$hidden." WHERE id=".$row_id);
   }
 } // save_row
 

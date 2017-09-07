@@ -10,14 +10,19 @@
     <?php
     $checked_padding = ($row->no_padding == 1)?"checked":"";
     $checked_heading = ($row->center_heading == 1)?"checked":"";
+    $checked_hidden = ($row->hidden == 1)?"checked":"";
     ?>
     <div class="form-item-radio">
       <input type="checkbox" name="rows[<?php print $row->row_index; ?>][options][no_padding]" value="1" <?php print $checked_padding; ?> />
       <label class="inline">Remove the top and bottom padding</label>
     </div>
-    <div class="form-item">
+    <div class="form-item-radio">
       <input type="checkbox" name="rows[<?php print $row->row_index; ?>][options][center_heading]" value="1" <?php print $checked_heading; ?> />
       <label class="inline">Center the optional heading</label>
+    </div>
+    <div class="form-item">
+      <input type="checkbox" name="rows[<?php print $row->row_index; ?>][options][hidden]" value="1" <?php print $checked_hidden; ?> />
+      <label class="inline">Hide this row for now</label>
     </div>
   </div>
   

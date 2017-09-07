@@ -159,6 +159,13 @@ function perform_update($index) {
       $db->query("CREATE TABLE IF NOT EXISTS `widget_code` (`widget_id` int(11) NOT NULL, `filename` varchar(255) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;"); 
       $message .= "<p>Added custom code widget</p>";
       increment_update();
+      
+    // Add hidden for a page and a row
+    case 20:
+      $db->query("ALTER TABLE `page` ADD `hidden` INT(2) NOT NULL DEFAULT '0' AFTER `display_order`;");
+      $db->query("ALTER TABLE `row` ADD `hidden` INT(2) NOT NULL DEFAULT '0' AFTER `center_heading`;");
+      $message .= "<p>Added option to hide a page or a row</p>";
+      increment_update();
 
   }
   return $message;
