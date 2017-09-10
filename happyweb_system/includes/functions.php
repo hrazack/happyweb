@@ -309,7 +309,7 @@ function build_page($page) {
               if ($widgets = $db->get_results("SELECT * FROM widget WHERE col_id=".$col->id." ORDER BY widget_index ASC")) {
                 $is_content_in_columns = true;
                 foreach($widgets as $widget) {          
-                  $content_columns .= '<div class="widget '.$widget->type.'">';
+                  $content_columns .= '<div class="widget '.$widget->type.'" id="widget-'.$widget->id.'">';
                   $content_columns .= build_widget($widget);
                   $content_columns .= '</div>';
                 }
