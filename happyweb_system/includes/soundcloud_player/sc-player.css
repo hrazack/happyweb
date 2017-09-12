@@ -1,0 +1,25 @@
+.sc-player {display: flex; background: linear-gradient(135deg, rgb(234, 231, 212) 0%, rgb(224, 216, 184) 100%); position: relative;}
+.sc-player ol.sc-artwork-list {width: 150px; margin: 0;}
+.sc-player ol.sc-artwork-list li {margin: 0; display: block;}
+.sc-container {position: relative; flex: 1; margin: 15px; min-height: 120px;}
+
+.sc-player .sc-info {}
+.sc-player .sc-info h4 {display: none;}
+.sc-player .sc-info a {}
+.sc-player .sc-info p {display: none;}
+.sc-player .sc-info-close {display: none;}
+
+.sc-playback {display: flex; position: absolute; bottom: 0; left: 0; width: 100%}
+.sc-controls {z-index: 500; width: 40px; height: 40px; background: -webkit-linear-gradient(top, #999, #777); display: flex; margin-right: 2px;}
+.sc-controls a {display: block; width: 30px; height: 30px; color: transparent; background: url(/happyweb_system/includes/images/play_circle_filled.svg); background-size: 100%; margin: auto;}
+.sc-controls a.sc-pause {display: none; background: url(/happyweb_system/includes/images/pause_circle_filled.svg); background-size: 100%;}
+.sc-player.playing .sc-controls a.sc-play {display: none;}
+.sc-player.playing .sc-controls a.sc-pause {display: block;}
+.sc-scrubber {flex: 1; height: 40px; z-index: 500; background: -webkit-linear-gradient(top, #999, #777); cursor: pointer;}
+.sc-scrubber .sc-waveform-container {z-index: 800; width: 100%; position: absolute; opacity: 0;}
+.sc-scrubber .sc-played {height: 40px; position: absolute; top: 0; z-index: 799; background-color: #aaa;}
+.sc-scrubber .sc-buffer {height: 40px; position: absolute; top: 0;}
+.sc-time-indicators {position: absolute; top: -30px; right: 0px; color: #444; background: #fff; padding: 4px; opacity: 0.77; border-radius: 2px; font-family: monospace; font-size: 13px; line-height: 13px;}
+.sc-player ol.sc-trackslist {display: none;}
+.sc-player .sc-info-toggle {display: none;}
+.sc-volume-slider {display: none;}

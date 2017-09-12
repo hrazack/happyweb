@@ -166,6 +166,13 @@ function perform_update($index) {
       $db->query("ALTER TABLE `row` ADD `hidden` INT(2) NOT NULL DEFAULT '0' AFTER `center_heading`;");
       $message .= "<p>Added option to hide a page or a row</p>";
       increment_update();
+      
+    // Add url and type for audio widget
+    case 21:
+      $db->query("ALTER TABLE `widget_audio` ADD `url` VARCHAR(400) NOT NULL DEFAULT '' AFTER `description`;");
+      $db->query("ALTER TABLE `widget_audio` ADD `type` VARCHAR(255) NOT NULL DEFAULT 'upload' AFTER `url`;");
+      $message .= "<p>Added url and type for audio widget</p>";
+      increment_update();
 
   }
   return $message;
