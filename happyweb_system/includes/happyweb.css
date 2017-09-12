@@ -126,6 +126,7 @@ i {float: left; margin-right: 5px; position: relative; top: 2px;}
 /* widget: audio */
 .widget.audio h4 {margin: 0; padding: 0;}
 .widget.audio .description {margin: 0 0 10px 0;}
+.widget.audio .description.url {margin: 0 0 20px 0; padding: 20px; background: #eee; color: #333; font-size: 0.9em;}
 .widget.audio .audioplayer {max-width: 500px;}
 
 /* widget: form */

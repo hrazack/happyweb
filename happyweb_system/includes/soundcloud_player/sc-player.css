@@ -1,4 +1,4 @@
-.sc-player {display: flex; background: linear-gradient(135deg, rgb(234, 231, 212) 0%, rgb(224, 216, 184) 100%); position: relative;}
+.sc-player {display: flex; background: #eee; position: relative;}
 .sc-player ol.sc-artwork-list {width: 150px; margin: 0;}
 .sc-player ol.sc-artwork-list li {margin: 0; display: block;}
 .sc-container {position: relative; flex: 1; margin: 15px; min-height: 120px;}

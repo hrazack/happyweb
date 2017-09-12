@@ -45,11 +45,11 @@ $description = ($action == "edit")?$data->description:"";
     <input name="title" class="text" value="<?php print $title; ?>" />
   </div>
 
-  <div class="form-item">
-    <label>Description</label />
-    <textarea name="description"><?php print $description; ?></textarea>
-  </div>
+</div>
 
+<div class="form-item">
+  <label>Description</label />
+  <textarea name="description"><?php print $description; ?></textarea>
 </div>
 
 <script>

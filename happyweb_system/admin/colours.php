@@ -19,7 +19,7 @@ if (isset($_POST["action"])) {
 }   
 ?>
 
-<p class="help"><i class="material-icons">info_outline</i>By default your website comes with some predefined amazing colours.<br />However you can change them here if you wish.<br />(When one of the colours below is transparent it means it will be using the predefined colour)</p>
+<p class="help"><i class="material-icons">info_outline</i>By default your website comes with some mind-blowing predefined colours.<br />However you can change them here if you wish.<br />(When one of the colours below is transparent it means it will be using the predefined colour)</p>
 
 <form action="<?php print $url_info["path"];?>" method="post">
   

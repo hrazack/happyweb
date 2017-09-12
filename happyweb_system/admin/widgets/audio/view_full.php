@@ -8,7 +8,13 @@
   ?>
 
   <a href="<?php print $data->url; ?>" class="sc-player"></a>
-
+  
+  <?php if ($data->description != "") { ?>
+  <div class="description url">
+    <?php print $data->description; ?>
+  </div>
+  <?php } ?>
+  
 <?php } else { ?>
 
   <?php
