@@ -45,7 +45,7 @@ i {float: left; margin-right: 5px; position: relative; top: 2px;}
 .admin .three .column3 {width: 32%;}
 
 /* messages */
-.messages {display: block; background: #eaf4e7; border: solid 1px #2fbc03; color: #2fbc03; padding: 20px; margin: 0 0 30px 0; max-width: 700px; position: absolute; top: 20px; right: 20px; border-radius: 5px;}
+.messages {display: block; background: #eaf4e7; border: solid 1px #2fbc03; color: #2fbc03; padding: 20px; margin: 0 0 30px 0; max-width: 700px; position: absolute; top: 20px; right: 20px; border-radius: 5px; z-index: 10; box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);}
 .messages ul {margin: 0 0 0 10px;}
 .messages.errors {background: #ffd4d4; border: solid 1px #f00; color: #f00;}
 .messages .close {position: absolute; top: 2px; right: 2px; cursor: pointer;}

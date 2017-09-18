@@ -20,6 +20,7 @@
   <script src='//cdnjs.cloudflare.com/ajax/libs/tinymce/4.4.3/tinymce.min.js'></script>
   <script src="/happyweb_system/includes/tooltipster/tooltipster.min.js"></script>
   <script src="/happyweb_system/includes/spectrum/spectrum.min.js"></script>
+  <script src="/happyweb_system/includes/scripts_admin.js"></script>
 </head>
 
 <body class="admin">
