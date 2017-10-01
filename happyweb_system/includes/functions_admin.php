@@ -56,12 +56,12 @@ function display_page_list_row($page) {
   }
   $hidden = ($page->hidden == 1)?" (hidden)":"";
   $link_page = '<a href="/'.$page->url.'">'.$title.'</a>'.$hidden;
-  $link_edit = '<a href="/admin/page_edit/'.$page->id.'"><i class="material-icons md-24">edit</i> edit</a>';
+  $link_edit = '<a href="/admin/page_edit/'.$page->id.'"><i class="material-icons md-24">edit</i><span class="text">edit</span></a>';
   if ($page->id == 1 || $page->id == 2) {
-    $link_delete = '<span class="disabled"><i class="material-icons md-24">clear</i> delete</span>';
+    $link_delete = '<span class="disabled"><i class="material-icons md-24">clear</i><span class="text">delete</span></span>';
   }
   else {
-    $link_delete = '<a href="/admin/page_delete/'.$page->id.'"><i class="material-icons md-24">clear</i> delete</a>';
+    $link_delete = '<a href="/admin/page_delete/'.$page->id.'"><i class="material-icons md-24">clear</i><span class="text">delete</span></a>';
   }
   $output = '
     <div class="cell page">'.$link_page.'</div>

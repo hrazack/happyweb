@@ -22,15 +22,15 @@ foreach($users as $user) {
     continue;
   }
   if ($user->id == 1 || $user->id == 2) {
-    $link_delete = '<span class="disabled"><i class="material-icons md-24">clear</i> delete</span>';
+    $link_delete = '<span class="disabled"><i class="material-icons md-24">clear</i><span class="text">delete</span></span>';
   }
   else {
-      $link_delete = '<a href="/admin/user_delete/'.$user->id.'"><i class="material-icons md-24">clear</i> delete</a>';
+    $link_delete = '<a href="/admin/user_delete/'.$user->id.'"><i class="material-icons md-24">clear</i><span class="text">delete</span></a>';
   }
   print '<tr>';
   print '<td>'.$user->username.'</td>';
-  print '<td><a href="/admin/user_edit/'.$user->id.'"><i class="material-icons md-24">edit</i> edit</a></td>';
-  print '<td>'.$link_delete.'</td>';
+  print '<td class="icon"><a href="/admin/user_edit/'.$user->id.'"><i class="material-icons md-24">edit</i><span class="text">edit</span></a></td>';
+  print '<td class="icon">'.$link_delete.'</td>';
   print '</tr>';
 }
 ?>

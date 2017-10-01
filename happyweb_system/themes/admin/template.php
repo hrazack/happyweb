@@ -34,9 +34,12 @@
   <div id="content">
     <div class="container">
       
-      <?php if ($messages != "") print $messages; ?>
-
-      <?php print $content; ?>
+      <div id="main">
+      
+        <?php if ($messages != "") print $messages; ?>
+        <?php print $content; ?>
+      
+      </div>
       
       <?php if (isset($display_navigation) && $display_navigation) { ?>
       <?php

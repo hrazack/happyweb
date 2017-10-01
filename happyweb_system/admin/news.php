@@ -5,6 +5,11 @@ $display_navigation = true;
 
 <p class="help"><i class="material-icons">info_outline</i>Here is a handy list of the latest updates we've done to Happy Web.</p>
 
+<h3>1 October 2017</h3>
+<p>You can now use HappyWeb from your mobile phone! If you're on the go and need to quickly edit one of your pages, hop on to your admin site and edit the relevant page - everything will be accessible and will display properly.</p>
+<p>Note that on a mobile phone the columns on a page wrap around and are displayed one under the other (rather then next to each other, because mobile phones have a narrow screen). So when you edit a page and change the amount of columns, don't be surprised if you don't see the columns one next to the other. On a regular screen they will display normally.</p>
+<br />
+
 <h3>12 September 2017</h3>
 <p>We're on a roll! There is now a new option when creating audio file content. You can choose between uploading your own MP3 file, or you can simply enter the address of a SoundCloud page. Hurray! (If you have no idea what that means, not to worry, you probably don't need it. If you do need it it's really handy, though.)</p>
 <br />
