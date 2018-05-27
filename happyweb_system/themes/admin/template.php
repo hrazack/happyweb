@@ -48,14 +48,16 @@
       $selected_users = (arg(1) == "users")?"selected":"";
       $selected_settings = (arg(1) == "settings")?"selected":"";
       $selected_colours = (arg(1) == "colours")?"selected":"";
+      $selected_fonts = (arg(1) == "fonts")?"selected":"";
       $selected_news = (arg(1) == "news")?"selected":"";
       ?>
       <ul class="side-navigation">
         <li class="<?php print $selected_pages; ?>"><a href="/admin"><i class="material-icons">library_books</i> Pages</a></li>
         <li class="<?php print $selected_users; ?>"><a href="/admin/users"><i class="material-icons">account_circle</i> Users</a></li>
         <li class="<?php print $selected_settings; ?>"><a href="/admin/settings"><i class="material-icons">settings</i>Settings</a></li>
+        <li class="<?php print $selected_colours; ?>"><a href="/admin/colours"><i class="material-icons">format_paint</i>Colours</a></li>
+        <li class="<?php print $selected_fonts; ?>"><a href="/admin/fonts"><i class="material-icons">font_download</i>Fonts</a></li>
         <li class="<?php print $selected_news; ?>"><a href="/admin/news"><i class="material-icons">help_outline</i>What's new</a></li>
-        <!--<li class="<?php print $selected_colours; ?>"><a href="/admin/colours"><i class="material-icons">format_paint</i>Colours</a></li>-->
         <li class="new-section"><a href="/admin/logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
         <li><a href="/"><i class="material-icons">forward</i> Go to your site</a></li>
       </ul>

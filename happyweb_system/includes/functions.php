@@ -385,4 +385,42 @@ function build_widget_overview($widget) {
 } // build_widget_overview
 
 
-?>
+
+/**
+ * return the css for custom heading fonts
+ */
+function get_custom_fonts_css_for_headings() { 
+  $h1_size = get_setting("size_heading");
+  $h1_line_height = $h1_size + 10;
+  $h2_size = $h1_size - 10;
+  $h2_line_height = $h2_size + 10;
+  $h3_size = $h2_size - 10;
+  $h3_line_height = $h3_size + 10;
+  $css = '';
+  // call Google Font
+  $css .= '<link href="https://fonts.googleapis.com/css?family='.str_replace(" ", "+", get_setting("font_headings")).'" rel="stylesheet">';
+  // add custom CSS
+  $css .= '<style type="text/css">';
+  $css .= 'h1, h2, h3 {font-family: '.get_setting("font_headings").';}';
+  $css .= 'h1 {font-size: '.$h1_size.'px; line-height: '.$h1_line_height.'px;}';
+  $css .= 'h2 {font-size: '.$h2_size.'px; line-height: '.$h2_line_height.'px;}';
+  $css .= 'h3 {font-size: '.$h3_size.'px; line-height: '.$h3_line_height.'px;}';
+  $css .= '</style>';
+  return $css;
+} // get_custom_fonts_css_for_headings
+
+
+/**
+ * return the css for custom text fonts
+ */
+function get_custom_fonts_css_for_text() { 
+  $line_height = get_setting("size_text") + 10;
+  $css = '';
+  // call Google Font
+  $css .= '<link href="https://fonts.googleapis.com/css?family='.str_replace(" ", "+", get_setting("font_text")).'" rel="stylesheet">';
+  // add custom CSS
+  $css .= '<style type="text/css">';
+  $css .= 'body {font-family: '.get_setting("font_text").'; font-size: '.get_setting("size_text").'px; line-height: '.$line_height.'px;}';
+  $css .= '</style>';
+  return $css;
+} // get_custom_fonts_css_for_text

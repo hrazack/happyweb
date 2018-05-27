@@ -104,7 +104,8 @@ switch(arg(0)) {
     }
     
     // print css
-    $css = '
+    $css = '';
+    $css .= '
       <link rel="stylesheet" href="/happyweb_system/includes/happyweb.css?v='.time().'" media="all" />
       <link rel="stylesheet" href="/happyweb_system/includes/colorbox/colorbox.css" media="all" />';
     foreach($_SESSION['happyweb']['css'] as $c) {
@@ -117,8 +118,16 @@ switch(arg(0)) {
       $css .= '<link rel="stylesheet" href="/my_website/themes/'.$theme.'/styles.css?v='.time().'" media="all" />';
     }
     
-    // add custom colours
+    // add custom colours and custom fonts
     if ($theme != "admin") {
+      // custom fonts
+      if (get_setting("font_headings") != "") {
+        $css .= get_custom_fonts_css_for_headings();
+      }
+      if (get_setting("font_text") != "") {
+        $css .= get_custom_fonts_css_for_text();
+      }
+      // custom colours
       $css .= '<style type="text/css">';
       if (get_setting("colour_h1")) $css .= 'h1 {color: '.get_setting("colour_h1").';}';
       if (get_setting("colour_h2")) $css .= 'h2 {color: '.get_setting("colour_h2").';}';

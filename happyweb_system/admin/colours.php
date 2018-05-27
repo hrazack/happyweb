@@ -15,7 +15,7 @@ if (isset($_POST["action"])) {
   update_setting("colour_footer_bg", $_POST["colour_footer_bg"]);
   set_message('The colours have been updated!');
   redirect('admin/colours');
-  
+
 }   
 ?>
 
@@ -67,11 +67,35 @@ if (isset($_POST["action"])) {
   </table>
   <br />
   
-  <input type="submit" class="submit" value="Save" />
+  <input type="submit" class="submit" value="Save colours" />
   <input type="hidden" name="action" value="save_colours" />
   
+  <!--
+  <br /><br /><br />
+  <p>Here is a little preview of what it will look like if you change the default colours:</p>
+  
+  <div class="colours-preview">
+    <div class="colours-preview-header" style="background: <?php print get_setting("colour_header_bg"); ?>; color: <?php print get_setting("colour_header_text"); ?>">Header</div>
+    <div class="colours-preview-nav" style="background: <?php print get_setting("colour_nav_bg"); ?>;">
+      <a style="color: <?php print get_setting("colour_nav_text"); ?>;">Link 1</a>
+      <a style="color: <?php print get_setting("colour_nav_text"); ?>;">Link 2</a>
+      <a style="color: <?php print get_setting("colour_nav_text"); ?>;">Link 3</a>
+    </div>
+    <div class="colours-preview-content">
+      <div class="colours-preview-section">
+        <h2>Row heading</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="">Aenean leo dolor</a>, consectetur non maximus at, consequat vitae nibh. Morbi a metus vel magna ultricies ultricies.</p>
+      </div>
+      <div class="colours-preview-section">
+        <h2>Row heading</h2>
+        <p>Praesent vel dignissim ante. Fusce fringilla tortor quis ipsum aliquet finibus. Nam ac sem turpis. Nunc bibendum commodo lorem. Aenean dictum enim ac nunc malesuada, vulputate efficitur tortor commodo.</p>
+      </div>
+    </div>
+    <div class="colours-preview-footer">Footer</div>
+  </div>
+  -->
+  
 </form>
-
 
 <script>
   $(document).ready(function() {

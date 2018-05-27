@@ -10,7 +10,7 @@
   <?php print $scripts; ?>
   <meta name="description" content="<?php print $page->description; ?>">
 	<meta property="og:title" content="<?php print $page->title; ?>">
-	<meta property="og:site_name" content="<?php print $page->title; ?>">
+	<meta property="og:site_name" content="<?php print $site_name; ?>">
 	<meta property="og:description" content="<?php print $page->description; ?>">
 	<meta property="og:url" content="<?php print $_SERVER['REQUEST_URI']; ?>">
 </head>
