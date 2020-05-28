@@ -5,6 +5,10 @@ $display_navigation = true;
 
 <p class="help"><i class="material-icons">info_outline</i>Here is a handy list of the latest updates we've done to Happy Web.</p>
 
+<h3>28 May 2020</h3>
+<p>There is a new option to export the whole website. It will create a zip file that you can download, and that contains all pages for your website. This way even if you prefer not to use HappyWeb, you can still have all your pages!</p>
+<br />
+
 <h3>27 May 2018</h3>
 <p>If you have an eye for design and like to play with the visual aspect of your site, you can now change the colours and fonts of your website. The site comes with a pre-defined set of colours and fonts, but you can now override them if you so wish. More freedom = more web happiness!</p>
 <br />

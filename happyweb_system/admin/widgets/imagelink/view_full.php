@@ -1,5 +1,9 @@
+<?php
+$path = ($is_export)?"/images/":"/my_website/uploaded_files/";
+?>
+
 <div class="image">
-  <img src="/my_website/uploaded_files/thumbnail/<?php print $data->file; ?>" />
+  <img src="<?php print $path; ?>thumbnail/<?php print $data->file; ?>" />
 </div>
 
 <div class="heading">

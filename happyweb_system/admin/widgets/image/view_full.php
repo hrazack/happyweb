@@ -1,9 +1,10 @@
 <?php
 $class_align = $data->align;
+$path = ($is_export)?"/images/":"/my_website/uploaded_files/";
 ?>
 
 <div class="image align-<?php print $class_align; ?>">
-  <img src="/my_website/uploaded_files/<?php print $data->size; ?>/<?php print $data->file; ?>" />
+  <img src="<?php print $path.$data->size; ?>/<?php print $data->file; ?>" />
 </div>
 
 <?php if ($data->description != "") { ?>

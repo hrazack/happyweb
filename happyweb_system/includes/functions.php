@@ -282,7 +282,7 @@ function get_page($page_id) {
 /**
  * builds the page content
  */
-function build_page($page) {
+function build_page($page, $is_export = false) {
   global $db;
   $content = "";
   $content .= '<div class="sections">';
@@ -310,7 +310,7 @@ function build_page($page) {
                 $is_content_in_columns = true;
                 foreach($widgets as $widget) {          
                   $content_columns .= '<div class="widget '.$widget->type.'" id="widget-'.$widget->id.'">';
-                  $content_columns .= build_widget($widget);
+                  $content_columns .= build_widget($widget, $is_export, $page->id);
                   $content_columns .= '</div>';
                 }
               }
@@ -337,7 +337,7 @@ function build_page($page) {
 /**
  * builds the navigation
  */
-function build_navigation($current_page) {
+function build_navigation($current_page, $is_export = false) {
   global $db;
   $output = "";
   $pages = $db->get_results("SELECT * FROM page WHERE parent=0 ORDER BY display_order");
@@ -346,7 +346,14 @@ function build_navigation($current_page) {
     foreach($pages as $page) {
       if ($page->hidden == 0) {
         $selected = ($page->id == $current_page->id || $page->id == $current_page->parent)?"selected":"";
-        $output .= '<li class="'.$selected.'"><a href="/'.$page->url.'">'.$page->title.'</a></li>';
+        $url = $page->url;
+        if ($is_export) {
+          if ($page->url == "home") {
+            $page->url = "index";
+          }
+          $url = $page->url.".html";
+        }
+        $output .= '<li class="'.$selected.'"><a href="/'.$url.'">'.$page->title.'</a></li>';
       }
     }
   }
@@ -359,7 +366,7 @@ function build_navigation($current_page) {
 /**
  * builds the full content of a widget
  */
-function build_widget($widget) {
+function build_widget($widget, $is_export = false, $page_id = 0) {
   global $db;
   $data = $db->get_row("SELECT * FROM widget_".$widget->type." WHERE widget_id=".$widget->id);
   $output = "";
